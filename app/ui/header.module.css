@@ -1,0 +1,8 @@
+.wrapper {
+  font-family: inherit;
+}
+
+.logo {
+  /* color: var(--foreground); */
+  filter: invert(900%);
+}
