@@ -34,38 +34,40 @@ const RandomLines: React.FC<RandomLinesProps> = ({
     // Generate random color
     const color = `rgb(${Math.floor(Math.random() * 135 + 120)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 135 + 120)})`;
     
-
     const drawRandomLines = () => {
       for (let y = 0; y <= hAmount; y++) {
         for (let x = 0; x <= wAmount; x++) {
           const xPos = x * chunkWidth;
           const yPos = y * chunkHeight;
-          const dir = Math.floor(Math.random() * 7);
-
+          const dir = Math.floor(Math.random() * 6);
+    
           ctx.beginPath();
           ctx.strokeStyle = color;
           ctx.lineWidth = 1;
-
+    
+          const controlX = xPos + chunkWidth / 2 + (Math.random() * 20 - 10); // Random offset for organic curve
+          const controlY = yPos + chunkHeight / 2 + (Math.random() * 20 - 10);
+    
           if (dir === 0) {
             ctx.moveTo(xPos, yPos);
-            ctx.lineTo(xPos + chunkWidth, yPos);
+            ctx.quadraticCurveTo(controlX, controlY, xPos + chunkWidth, yPos);
           } else if (dir === 1) {
             ctx.moveTo(xPos + chunkWidth, yPos);
-            ctx.lineTo(xPos + chunkWidth, yPos + chunkHeight);
+            ctx.quadraticCurveTo(controlX, controlY, xPos + chunkWidth, yPos + chunkHeight);
           } else if (dir === 2) {
             ctx.moveTo(xPos, yPos + chunkHeight);
-            ctx.lineTo(xPos + chunkWidth, yPos + chunkHeight);
+            ctx.quadraticCurveTo(controlX, controlY, xPos + chunkWidth, yPos + chunkHeight);
           } else if (dir === 3) {
             ctx.moveTo(xPos, yPos);
-            ctx.lineTo(xPos, yPos + chunkHeight);
+            ctx.quadraticCurveTo(controlX, controlY, xPos, yPos + chunkHeight);
           } else if (dir === 4) {
             ctx.moveTo(xPos, yPos);
-            ctx.lineTo(xPos + chunkWidth, yPos + chunkHeight);
+            ctx.quadraticCurveTo(controlX, controlY, xPos + chunkWidth, yPos + chunkHeight);
           } else if (dir === 5) {
             ctx.moveTo(xPos, yPos + chunkHeight);
-            ctx.lineTo(xPos + chunkWidth, yPos);
+            ctx.quadraticCurveTo(controlX, controlY, xPos + chunkWidth, yPos);
           }
-
+    
           ctx.stroke();
         }
       }

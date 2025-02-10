@@ -1,0 +1,21 @@
+.page {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 3rem;
+
+}
+
+.categoryWrapper {
+  width: 90%;
+  max-width: 65ch;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: left;
+}
+
+.entryTitle {
+  font-style: italic;
+}

@@ -69,6 +69,12 @@ export default function Header() {
           <Link href="/" className={styles.link}>Home</Link>
         </li>
         <li>
+          <Link href="/objects" className={styles.link}>objects</Link>
+        </li>
+        <li>
+          <Link href="/sounds" className={styles.link}>sounds</Link>
+        </li>
+        <li>
           <Link href="/videos" className={styles.link}>videos</Link>
         </li>
         <li>

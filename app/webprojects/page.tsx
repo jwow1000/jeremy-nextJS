@@ -1,9 +1,13 @@
 import Image from "next/image";
-import { getPostsByCategory } from "@/app/lib/api/fetch";
+import { getWebprojectsPosts } from "@/app/lib/api/fetch";
 import styles from "@/app/ui/subPage.module.css";
 
-export default async function Videos() {
-  const posts = await getPostsByCategory( 'video' ); // Fetch data in an async component 
+
+
+
+export default async function Webprojects() {
+  const posts = await getWebprojectsPosts(); // Fetch data in an async component 
+  console.log("possssttss", posts[0].featuredImage.node);
   return (
     <div className={styles.page}>
       {

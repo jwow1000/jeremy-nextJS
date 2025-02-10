@@ -2,8 +2,11 @@ import Image from "next/image";
 import { getPostsByCategory } from "@/app/lib/api/fetch";
 import styles from "@/app/ui/subPage.module.css";
 
-export default async function Videos() {
-  const posts = await getPostsByCategory( 'video' ); // Fetch data in an async component 
+
+
+
+export default async function Sounds() {
+  const posts = await getPostsByCategory( 'sound' ); // Fetch data in an async component 
   return (
     <div className={styles.page}>
       {

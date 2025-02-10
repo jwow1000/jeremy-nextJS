@@ -1,60 +1,20 @@
+import { Entry, WordPressAPIResponse, WordPressCVEntry,  } from "@/app/types/cvEntryTypes";
+import {MediaDetails, FeaturedImage, ACFPost, Post, PostResponse} from "@/app/types/postTypes";
+
 const API_URL = process.env.WORDPRESS_GRAPHQL_ENDPOINT || "https://jeremywy.com/graphql";
-// const API_URL = process.env.WORDPRESS_REST_API_ENDPOINT || "https://jeremywy.com/wp-json/wp/v2";
 
-// export async function getPosts() {
-//   const res = await fetch(`${API_URL}/posts?_fields=id,title,excerpt,slug,date`, {
-//     method: "GET",
-//     headers: { "Content-Type": "application/json" },
-//     next: { revalidate: 60 }, // ISR (Incremental Static Regeneration)
-//   });
-
-//   if (!res.ok) {
-//     throw new Error("Failed to fetch posts");
-//   }
-
-//   const posts = await res.json();
-//   return posts;
-// }
-
-// export async function getVideoPosts() {
-//   // First, get the category ID for "video"
-//   const categoryRes = await fetch(`${API_URL}/categories?slug=video`, {
-//     method: "GET",
-//     headers: { "Content-Type": "application/json" },
-//   });
-
-//   if (!categoryRes.ok) {
-//     throw new Error("Failed to fetch category ID");
-//   }
-
-//   const categoryData = await categoryRes.json();
-//   const videoCategoryId = categoryData[0]?.id;
-
-//   if (!videoCategoryId) {
-//     throw new Error("Category 'video' not found");
-//   }
-
-//   // Fetch posts in the "video" category
-//   const res = await fetch(
-//     `${API_URL}/posts?categories=${videoCategoryId}&_fields=id,title,excerpt,slug,date`,
-//     {
-//       method: "GET",
-//       headers: { "Content-Type": "application/json" },
-//       next: { revalidate: 60 }, // ISR (Incremental Static Regeneration)
-//     }
-//   );
-
-//   if (!res.ok) {
-//     throw new Error("Failed to fetch video posts");
-//   }
-
-//   const posts = await res.json();
-//   return posts;
-// }
-
-
-
-
+// local use functions
+function transformExpoData(json: WordPressAPIResponse): Entry[] {
+  return json.data.cvEntries.nodes.map((item) => ({
+    title: item.title,
+    type: item.cvEntryFields.type[0] ?? "undefined", // Use ?? instead of |
+    date: item.cvEntryFields.date,
+    location: item.cvEntryFields.location,
+    description: item.cvEntryFields.description,
+    renderDate: item.cvEntryFields.renderDate,
+    link: item.cvEntryFields.link,
+  }));
+}
 
 export async function getPosts() {
   const res = await fetch(API_URL, {
@@ -84,15 +44,15 @@ export async function getPosts() {
   return json.data.posts.nodes;
 }
 
-export async function getVideoPosts() {
+export async function getPostsByCategory(category: string): Promise<Post[]> {
   const res = await fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       query: `
-        query GetVideoPosts {
+        query GetPostsByCategory {
           posts(
-            where: { categoryName: "video" }
+            where: { categoryName: "${category}" }
           ) {
             nodes {
               id
@@ -112,7 +72,7 @@ export async function getVideoPosts() {
                   }
                 }
               }
-              acfPosts{
+              acfPosts {
                date
               }
             }
@@ -123,15 +83,15 @@ export async function getVideoPosts() {
     next: { revalidate: 60 },
   });
 
-  const json = await res.json();
+  const json: PostResponse = await res.json();
+
   // Ensure acfPosts.date exists before sorting
-  return json.data.posts.nodes.sort((a: any, b: any) => {
-    const dateA = new Date(a.acfPosts?.date || "1970-01-01");
-    const dateB = new Date(b.acfPosts?.date || "1970-01-01");
-  
+  return json.data.posts.nodes.sort((a, b) => {
+    const dateA = new Date(a.acfPosts.date || "1970-01-01");
+    const dateB = new Date(b.acfPosts.date || "1970-01-01");
+
     return dateB.getTime() - dateA.getTime();
   });
-  
 }
 
 export async function getCVEntries() {
@@ -151,6 +111,7 @@ export async function getCVEntries() {
                 renderDate
                 location
                 description
+                link
               }
  
             }
@@ -162,6 +123,8 @@ export async function getCVEntries() {
   });
 
   const json = await res.json();
-  console.log("did we content", json.data)
-  return json.data;
+  // console.log("did we content", json.data.cvEntries.nodes);
+  const expoData: Entry[] = transformExpoData(json);
+  return expoData;
 }
+  
