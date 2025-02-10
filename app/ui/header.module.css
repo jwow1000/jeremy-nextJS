@@ -1,8 +1,30 @@
 .wrapper {
+  position: relative;
   font-family: inherit;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-flow: row wrap;
+}
+.animation-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.navWrapper {
+  width: 100%;
+  display: flex;
+  flex: row;
+  justify-content: space-around;
+}
+.link {
+  color: pink;
 }
 
 .logo {
   /* color: var(--foreground); */
-  filter: invert(900%);
+  filter: invert(70%);
+  position: absolute;
+  top: 0;
+  left: 0;
 }

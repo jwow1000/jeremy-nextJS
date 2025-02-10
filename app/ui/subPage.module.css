@@ -1,0 +1,22 @@
+.page {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.videoPost {
+  width: 18rem;
+  height: 18rem;
+  margin: 0 4rem;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center; 
+  cursor: pointer;
+}
+
+.videoThumb {
+  width: 100%;
+  height: auto;
+}

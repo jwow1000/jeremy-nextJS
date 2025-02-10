@@ -1,9 +1,61 @@
+'use client'
+
 import Image from "next/image";
+import Link from "next/link";
+import RandomLines from "./randomLines";
+import { useEffect, useState, useRef } from "react";
 import styles from "@/app/ui/header.module.css";
 
+interface WindowSize {
+  width: number
+  height: number
+}
+
 export default function Header() {
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const [viewSize, setViewSize] = useState<WindowSize>({
+    width: window.innerWidth,
+    height: window.innerHeight
+  }) 
+  
+  useEffect(() => {
+    
+    // Handler to call on window resize
+    function handleResize() {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+  
+      timeoutRef.current = setTimeout(() => {
+        setViewSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        })
+      }, 300);
+      
+      
+    }
+    
+    // Add event listener
+    window.addEventListener('resize', handleResize)
+    
+    // Call handler right away so state gets updated with initial window size
+    handleResize()
+    
+    // Remove event listener on cleanup
+    return () => window.removeEventListener('resize', handleResize)
+  }, []);
+
   return (
     <header className={styles.wrapper}>
+      <RandomLines  
+        width={viewSize.width}
+        height={200}
+        wAmount={20}
+        hAmount={5}
+      />
+
       <Image
         className={styles.logo}
         src="/jwy_logo_24.svg"
@@ -12,7 +64,18 @@ export default function Header() {
         height={150}
         priority
       />
-      Jeremy Wiles-Young
+      <ul className={styles.navWrapper}>
+        <li>
+          <Link href="/" className={styles.link}>Home</Link>
+        </li>
+        <li>
+          <Link href="/videos" className={styles.link}>videos</Link>
+        </li>
+        <li>
+          <Link href="/cv" className={styles.link}>cv</Link>
+        </li>
+        
+      </ul>
     
     </header>
   );
