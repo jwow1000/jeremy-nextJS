@@ -66,7 +66,7 @@ export default function Header() {
       />
       <ul className={styles.navWrapper}>
         <li>
-          <Link href="/" className={styles.link}>Home</Link>
+          <Link href="/" className={styles.link}>home</Link>
         </li>
         <li>
           <Link href="/objects" className={styles.link}>objects</Link>
