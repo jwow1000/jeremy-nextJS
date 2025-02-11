@@ -1,5 +1,5 @@
-import { Entry, WordPressAPIResponse, WordPressCVEntry,  } from "@/app/types/cvEntryTypes";
-import {MediaDetails, FeaturedImage, ACFPost, Post, PostResponse} from "@/app/types/postTypes";
+import { Entry, WordPressAPIResponse } from "@/app/types/cvEntryTypes";
+import { Post, PostResponse } from "@/app/types/postTypes";
 
 const API_URL = process.env.WORDPRESS_GRAPHQL_ENDPOINT || "https://jeremywy.com/graphql";
 

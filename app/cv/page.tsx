@@ -1,6 +1,5 @@
 // cv page
 
-import Image from "next/image";
 import { getCVEntries } from "@/app/lib/api/fetch";
 import { Entry, EntryCategory, PostDictionary } from "../types/cvEntryTypes";
 
