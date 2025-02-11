@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getPostsByCategory } from "@/app/lib/api/fetch";
+import { Post } from "../types/postTypes";
 import styles from "@/app/ui/subPage.module.css";
 
 
@@ -12,7 +13,7 @@ export default async function Webprojects() {
   return (
     <div className={styles.page}>
       {
-        posts.map((post: any) => {
+        posts.map((post: Post) => {
           const img = post.featuredImage.node;
           return (
             <Link 
