@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { getPostBySlug } from "@/app/lib/api/fetch";
 import YouTubeEmbed from "@/app/lib/youtube";
-import type { Metadata, ResolvingMetadata } from 'next';
+import type { Metadata } from 'next';
 import styles from "@/app/ui/page.module.css";
 
 type Props = {
