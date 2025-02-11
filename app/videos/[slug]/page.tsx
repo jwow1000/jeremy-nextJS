@@ -6,11 +6,10 @@ import styles from "@/app/ui/page.module.css";
 
 type Props = {
   params: Promise<{ slug: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 export async function generateMetadata(
-  { params, searchParams }: Props,
+  { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
     // read route params
@@ -36,7 +35,7 @@ export async function generateMetadata(
     <main className="container mx-auto p-4">
       <div className={styles.infoWrapper}>
         <h1 className="text-3xl font-bold white">{post.title}</h1>
-        <p className="text-gray-500">{post.acfPosts.date}</p>
+        <p className="text-gray-500">date: {post.acfPosts.date}</p>
         <p className={styles.description}>{post.acfPosts.description}</p>
       </div>
       <div className={styles.videoWrapper}>

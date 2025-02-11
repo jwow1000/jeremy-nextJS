@@ -19,7 +19,7 @@ export default async function Sounds() {
               <Image 
                 className={styles.videoThumb}
                 src={img.sourceUrl}
-                alt={img.alt}
+                alt={img.alt ? img.alt : `${post.slug} thumbnail`}
                 width={img.mediaDetails.sizes[2].width}
                 height={img.mediaDetails.sizes[2].height}
               />
