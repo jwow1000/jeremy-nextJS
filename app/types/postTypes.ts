@@ -21,8 +21,6 @@ export interface ACFPost {
   image2: string;
   image3: string;
   image4: string;
-  
-
 }
 
 export interface Post {

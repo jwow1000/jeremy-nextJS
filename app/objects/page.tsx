@@ -1,29 +1,34 @@
 import Image from "next/image";
+import Link from "next/link";
 import { getPostsByCategory } from "@/app/lib/api/fetch";
+import { Post } from "../types/postTypes";
 import styles from "@/app/ui/subPage.module.css";
-
-
-
 
 export default async function Objects() {
   const posts = await getPostsByCategory( 'things' ); // Fetch data in an async component 
   return (
     <div className={styles.page}>
       {
-        posts.map((post: any) => {
+        posts.map((post: Post) => {
           const img = post.featuredImage.node;
           return (
-            <div key={post.id} className={styles.videoPost}>
+            <Link 
+              key={post.id} 
+              className={styles.videoPost}
+              href={`/objects/${post.slug}`}
+            >
               {post.title}
               
               <Image 
                 className={styles.videoThumb}
                 src={img.sourceUrl}
-                alt={img.alt ? img.alt : `${post.slug} thumbnail`}
+                alt={img.altText ? img.altText : `${post.slug} thumbnail`}
                 width={img.mediaDetails.sizes[2].width}
                 height={img.mediaDetails.sizes[2].height}
               />
-            </div>
+
+
+            </Link>
           )
         })
       }
