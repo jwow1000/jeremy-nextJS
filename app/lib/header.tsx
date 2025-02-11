@@ -78,6 +78,9 @@ export default function Header() {
           <Link href="/videos" className={styles.link}>videos</Link>
         </li>
         <li>
+          <Link href="/webprojects" className={styles.link}>web projects</Link>
+        </li>
+        <li>
           <Link href="/cv" className={styles.link}>cv</Link>
         </li>
         

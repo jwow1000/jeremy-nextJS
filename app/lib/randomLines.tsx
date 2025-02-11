@@ -16,7 +16,6 @@ const RandomLines: React.FC<RandomLinesProps> = ({
   height = 600,
   wAmount = 10,
   hAmount = 10,
-  containerId = 'header-animation'
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -77,8 +76,8 @@ const RandomLines: React.FC<RandomLinesProps> = ({
   }, [width, height, wAmount, hAmount]);
 
   return (
-    <div id={containerId} style={{ width, height }}>
-      <canvas ref={canvasRef} width={width} height={height} className={styles.animationWrapper} />
+    <div id={styles.animationWrapper} style={{ width, height }}>
+      <canvas ref={canvasRef} width={width} height={height} className={styles.animationCanvas} />
     </div>
   );
 };

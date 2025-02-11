@@ -12,6 +12,16 @@ export interface FeaturedImage {
 
 export interface ACFPost {
   date: string;
+  youtubeId: string;
+  description: string;
+  soundcloudId: string;
+  webportfolioLink: string;
+  customVideoSource: string;
+  image1: string;
+  image2: string;
+  image3: string;
+  image4: string;
+  
 
 }
 

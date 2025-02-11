@@ -94,6 +94,65 @@ export async function getPostsByCategory(category: string): Promise<Post[]> {
   });
 }
 
+export async function getPostBySlug(slug: string): Promise<Post> {
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
+        query GetPostBySlug($slug: String!) {
+          postBy(slug: $slug) {
+            id
+            title
+            excerpt 
+            slug
+            date
+            featuredImage {
+              node {
+                sourceUrl
+                altText
+                mediaDetails {
+                  sizes {
+                    width
+                    height
+                  }
+                }
+              }
+            }
+            acfPosts {
+              date
+              youtubeId
+              description
+              soundcloudId
+              webportfolioLink
+              customVideoSource  
+              imageGallery1 {
+                node {
+                  sourceUrl
+                  altText
+                  mediaDetails {
+                    width
+                    height
+                  }
+                }  
+              }
+            }
+          }
+        }
+      `,
+      variables: { slug },
+    }),
+    next: {revalidate: 60},
+  });
+
+  const json = await res.json();
+  console.log("lkfds", json)
+  return json.data.postBy || null;
+  
+}
+
+
+
 export async function getCVEntries() {
   const res = await fetch(API_URL, {
     method: "POST",

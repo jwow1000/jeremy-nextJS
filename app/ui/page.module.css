@@ -108,6 +108,26 @@ a.secondary {
   flex-shrink: 0;
 }
 
+.infoWrapper {
+  margin: 2rem;
+  display: flex;
+  flex-flow: column;
+  justify-content: start;
+  align-items: start;
+  gap: 2rem;
+}
+.videoWrapper {
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 800px;
+}
+.customVidWrapper {
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 800px;
+
+}
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {

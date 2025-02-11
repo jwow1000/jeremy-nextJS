@@ -5,20 +5,36 @@
   height: 200px;
   display: flex;
   flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: end;
 }
-.animation-wrapper {
+#animationWrapper {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 0;
 }
+
+.wrapper > ul {
+  text-decoration: none;
+  list-style: none;
+}
+
 .navWrapper {
   width: 100%;
+  height: 2rem;
   display: flex;
   flex: row;
   justify-content: space-around;
+  z-index: 1;
 }
 .link {
+  font-size: 1.3rem;
+  font-style: italic;
   color: pink;
+  padding: 0.3rem;
+  border: 1px solid pink;
+  background-color: rgba(50, 3, 126, 0.9);
 }
 
 .logo {
