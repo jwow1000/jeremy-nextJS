@@ -11,7 +11,6 @@ type Props = {
 
 export async function generateMetadata(
   { params }: Props,
-  parent: ResolvingMetadata
 ): Promise<Metadata> {
     // read route params
     const slug = (await params).slug
