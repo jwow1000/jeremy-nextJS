@@ -7,42 +7,36 @@ import { getImageGallery } from "@/app/lib/helperFunctions";
 import type { Metadata } from 'next';
 import styles from "@/app/ui/page.module.css";
 
-
-type Props = {
+interface PageProps {
   params: {
-    slug: string
-  }
+    slug: string;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 export async function generateMetadata(
-  { params }: Props,
+  { params }: PageProps
 ): Promise<Metadata> {
-    // read route params
-    const slug = params.slug;
+  const slug = params.slug;
+  const post = await getPostBySlug(slug);
   
-    // fetch data
-    const post = await getPostBySlug( slug );
-  
-    return {
-      title: post.title,
-      description: post.excerpt,
-      
-    }
+  return {
+    title: post.title,
+    description: post.excerpt,
   }
+}
 
+export default async function PostDetailPage({
+  params,
+}: PageProps) {
+  const post = await getPostBySlug(params.slug);
+  if (!post) return notFound();
   
-  export default async function PostDetailPage({ params }: Props) {
-    const post = await getPostBySlug(params.slug);
-    if (!post) return notFound();
-    console.log("look at post", post);
-    const videoId = post.acfPosts.youtubeId !== "null" ? post.acfPosts.youtubeId : null;
-    const customVidSrc = post.acfPosts.customVideoSource !== "null" ? post.acfPosts.customVideoSource : null;
-    const webLink = post.acfPosts.webportfolioLink !== "null" ? post.acfPosts.webportfolioLink : null; 
-    console.log("weblinkl", webLink)
-    // console.log('acf stuff', post.acfPosts.imageGallery1) 
-    // gallery array
-    const imageGallery = getImageGallery( post.acfPosts )
-  
+  const videoId = post.acfPosts.youtubeId !== "null" ? post.acfPosts.youtubeId : null;
+  const customVidSrc = post.acfPosts.customVideoSource !== "null" ? post.acfPosts.customVideoSource : null;
+  const webLink = post.acfPosts.webportfolioLink !== "null" ? post.acfPosts.webportfolioLink : null;
+  const imageGallery = getImageGallery(post.acfPosts);
+
   return (
     <main className="container mx-auto p-4">
       <div className={styles.infoWrapper}>
@@ -54,9 +48,7 @@ export async function generateMetadata(
         )}
       </div>
       
-      
       <Gallery images={imageGallery}/>
-
       {customVidSrc && (
         <div className={styles.customVidWrapper}>
           <CustomVideoPlayer 
@@ -66,13 +58,11 @@ export async function generateMetadata(
           />
         </div>
       )}
-
       {videoId && (
         <div className={styles.videoWrapper}>
           <YouTubeEmbed videoId={videoId} />
         </div>
       )}
-      
     </main>
   );
 }
