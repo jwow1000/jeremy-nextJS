@@ -34,6 +34,8 @@ export async function generateMetadata(
     console.log("look at post", post);
     const videoId = post.acfPosts.youtubeId !== "null" ? post.acfPosts.youtubeId : null;
     const customVidSrc = post.acfPosts.customVideoSource !== "null" ? post.acfPosts.customVideoSource : null;
+    const webLink = post.acfPosts.webportfolioLink !== "null" ? post.acfPosts.webportfolioLink : null; 
+    console.log("weblinkl", webLink)
     // console.log('acf stuff', post.acfPosts.imageGallery1) 
     // gallery array
     const imageGallery = getImageGallery( post.acfPosts )
@@ -44,7 +46,12 @@ export async function generateMetadata(
         <h1 className="text-3xl font-bold white">{post.title}</h1>
         <p className="text-gray-500">{post.acfPosts.date}</p>
         <p className={styles.description}>{post.acfPosts.description}</p>
+        {webLink && (
+          <a className={styles.customLink} href={webLink}>link to website</a>
+        )}
       </div>
+      
+      
       <Gallery images={imageGallery}/>
 
       {customVidSrc && (

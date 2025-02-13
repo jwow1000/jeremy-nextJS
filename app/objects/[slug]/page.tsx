@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { getPostBySlug } from "@/app/lib/api/fetch";
 import YouTubeEmbed from "@/app/lib/youtube";
 import CustomVideoPlayer from "@/app/lib/customVideo";
+import Gallery from "@/app/lib/gallery";
+import { getImageGallery } from "@/app/lib/helperFunctions";
 import type { Metadata } from 'next';
 import styles from "@/app/ui/page.module.css";
 
@@ -32,15 +34,25 @@ export async function generateMetadata(
     console.log("look at post", post);
     const videoId = post.acfPosts.youtubeId !== "null" ? post.acfPosts.youtubeId : null;
     const customVidSrc = post.acfPosts.customVideoSource !== "null" ? post.acfPosts.customVideoSource : null;
-    console.log("customvidsrc", customVidSrc)
+    const webLink = post.acfPosts.webportfolioLink !== "null" ? post.acfPosts.webportfolioLink : null; 
+    console.log("weblinkl", webLink)
+    // console.log('acf stuff', post.acfPosts.imageGallery1) 
+    // gallery array
+    const imageGallery = getImageGallery( post.acfPosts )
+  
   return (
     <main className="container mx-auto p-4">
       <div className={styles.infoWrapper}>
         <h1 className="text-3xl font-bold white">{post.title}</h1>
         <p className="text-gray-500">{post.acfPosts.date}</p>
         <p className={styles.description}>{post.acfPosts.description}</p>
+        {webLink && (
+          <a className={styles.customLink} href={webLink}>link to website</a>
+        )}
       </div>
       
+      
+      <Gallery images={imageGallery}/>
 
       {customVidSrc && (
         <div className={styles.customVidWrapper}>
@@ -51,6 +63,7 @@ export async function generateMetadata(
           />
         </div>
       )}
+
       {videoId && (
         <div className={styles.videoWrapper}>
           <YouTubeEmbed videoId={videoId} />
