@@ -15,7 +15,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
     <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
       {
         images.map((image) => (
-          <div className={styles.imageGalleryWrapper}>
+          <div className={styles.imageGalleryWrapper} key={image.node.altText}>
             <img 
               src={image.node.sourceUrl} 
               alt={image.node.altText}

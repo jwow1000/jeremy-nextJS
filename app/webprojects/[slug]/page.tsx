@@ -6,7 +6,6 @@ import Gallery from "@/app/lib/gallery";
 import { getImageGallery } from "@/app/lib/helperFunctions";
 import type { Metadata } from 'next';
 import styles from "@/app/ui/page.module.css";
-import { FeaturedImage, ACFPost } from "@/app/types/postTypes";
 
 type Props = {
   params: Promise<{ slug: string }>
