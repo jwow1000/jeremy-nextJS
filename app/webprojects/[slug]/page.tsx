@@ -8,14 +8,14 @@ import type { Metadata } from 'next';
 import styles from "@/app/ui/page.module.css";
 
 type Props = {
-  params: Promise<{ slug: string }>
+  params: { slug: string }
 }
 
 export async function generateMetadata(
   { params }: Props,
 ): Promise<Metadata> {
     // read route params
-    const slug = (await params).slug
+    const slug = params.slug;
   
     // fetch data
     const post = await getPostBySlug( slug );
