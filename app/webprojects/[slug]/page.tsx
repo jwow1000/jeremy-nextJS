@@ -7,8 +7,11 @@ import { getImageGallery } from "@/app/lib/helperFunctions";
 import type { Metadata } from 'next';
 import styles from "@/app/ui/page.module.css";
 
+
 type Props = {
-  params: { slug: string }
+  params: {
+    slug: string
+  }
 }
 
 export async function generateMetadata(
@@ -28,7 +31,7 @@ export async function generateMetadata(
   }
 
   
-  export default async function PostDetailPage({ params }: { params: { slug: string } }) {
+  export default async function PostDetailPage({ params }: Props) {
     const post = await getPostBySlug(params.slug);
     if (!post) return notFound();
     console.log("look at post", post);
