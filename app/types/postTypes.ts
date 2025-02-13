@@ -17,10 +17,10 @@ export interface ACFPost {
   soundcloudId: string;
   webportfolioLink: string;
   customVideoSource: string;
-  image1: string;
-  image2: string;
-  image3: string;
-  image4: string;
+  imageGallery1?: FeaturedImage;
+  imageGallery2?: FeaturedImage;
+  imageGallery3?: FeaturedImage;
+  imageGallery4?: FeaturedImage;
 }
 
 export interface Post {

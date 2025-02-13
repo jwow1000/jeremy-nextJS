@@ -152,6 +152,23 @@ a.secondary {
   opacity: 70%;
   filter: invert(100%);
 }
+.main > a {
+  border: 1px solid white;
+  padding: 0.3rem;
+  width: 100%;
+  display: inline-block;
+}
+.imageGalleryWrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.imageGalleryItem {
+  width: 30rem;
+
+}
+
 @keyframes spinY {
   0% {
     transform:  rotateZ( 0deg ) ;

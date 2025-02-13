@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <div className={styles.logoWrapper}>
+        {/* <div className={styles.logoWrapper}>
           <Image
             className={styles.animateLogo}
             src="/jwy_logo_24.svg"
@@ -22,8 +22,10 @@ export default function Home() {
             height={150}
             priority
           />
-        </div>
+        </div> */}
         <p>Jeremy Wiles-Young is an artist and software engineer working with installation and sound. They are currently based in NYC.</p>
+        <a href="https://github.com/jwow1000">github profile</a>
+        <a href="https://www.instagram.com/jeremy__wy/">instagram</a>
       </main> 
     </div>
   );

@@ -9,7 +9,6 @@ import styles from "@/app/ui/subPage.module.css";
 
 export default async function Webprojects() {
   const posts = await getPostsByCategory('webportfolio'); // Fetch data in an async component 
-  console.log("possssttss", posts[0].featuredImage.node);
   return (
     <div className={styles.page}>
       {
@@ -26,7 +25,7 @@ export default async function Webprojects() {
               <Image 
                 className={styles.videoThumb}
                 src={img.sourceUrl}
-                alt={img.alt ? img.alt : `${post.slug} thumbnail`}
+                alt={img.altText ? img.altText : `${post.slug} thumbnail`}
                 width={img.mediaDetails.sizes[2].width}
                 height={img.mediaDetails.sizes[2].height}
               />

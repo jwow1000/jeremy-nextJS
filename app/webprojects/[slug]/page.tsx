@@ -2,8 +2,11 @@ import { notFound } from "next/navigation";
 import { getPostBySlug } from "@/app/lib/api/fetch";
 import YouTubeEmbed from "@/app/lib/youtube";
 import CustomVideoPlayer from "@/app/lib/customVideo";
+import Gallery from "@/app/lib/gallery";
+import { getImageGallery } from "@/app/lib/helperFunctions";
 import type { Metadata } from 'next';
 import styles from "@/app/ui/page.module.css";
+import { FeaturedImage, ACFPost } from "@/app/types/postTypes";
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -32,7 +35,10 @@ export async function generateMetadata(
     console.log("look at post", post);
     const videoId = post.acfPosts.youtubeId !== "null" ? post.acfPosts.youtubeId : null;
     const customVidSrc = post.acfPosts.customVideoSource !== "null" ? post.acfPosts.customVideoSource : null;
-    console.log("customvidsrc", customVidSrc)
+    // console.log('acf stuff', post.acfPosts.imageGallery1) 
+    // gallery array
+    const imageGallery = getImageGallery( post.acfPosts )
+  
   return (
     <main className="container mx-auto p-4">
       <div className={styles.infoWrapper}>
@@ -40,7 +46,7 @@ export async function generateMetadata(
         <p className="text-gray-500">{post.acfPosts.date}</p>
         <p className={styles.description}>{post.acfPosts.description}</p>
       </div>
-      
+      <Gallery images={imageGallery}/>
 
       {customVidSrc && (
         <div className={styles.customVidWrapper}>
@@ -51,6 +57,7 @@ export async function generateMetadata(
           />
         </div>
       )}
+
       {videoId && (
         <div className={styles.videoWrapper}>
           <YouTubeEmbed videoId={videoId} />
