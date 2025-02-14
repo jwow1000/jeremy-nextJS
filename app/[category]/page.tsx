@@ -3,8 +3,8 @@ import Link from "next/link";
 import { getPostsByCategory } from "@/app/lib/api/fetch";
 import { Post } from "../types/postTypes";
 // import { getCategoryBySlug } from "@/app/lib/api/fetch";
-import styles from "@/app/ui/subPage.module.css";
 import { translateSlugs } from "../lib/helperFunctions";
+import styles from "@/app/ui/subPage.module.css";
 
 // export async function generateMetadata({
 //   params,
@@ -37,13 +37,13 @@ export default async function CategoryPage({
           return (
             <Link 
               key={post.id} 
-              className={styles.videoPost}
+              className={styles.imageContainer}
               href={`/objects/${post.slug}`}
             >
               {post.title}
               
               <Image 
-                className={styles.videoThumb}
+                className={styles.thumb}
                 src={img.sourceUrl}
                 alt={img.altText ? img.altText : `${post.slug} thumbnail`}
                 width={img.mediaDetails.sizes[2].width}
