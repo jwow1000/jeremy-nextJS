@@ -3,7 +3,7 @@ import { getPostBySlug } from "@/app/lib/api/fetch";
 import YouTubeEmbed from "@/app/lib/youtube";
 import CustomVideoPlayer from "@/app/lib/customVideo";
 import Gallery from "@/app/lib/gallery";
-import { getImageGallery } from "@/app/lib/helperFunctions";
+import { getImageGallery, translateSlugs } from "@/app/lib/helperFunctions";
 import { PageProps } from "@/app/types/pages";
 import type { Metadata } from 'next';
 import styles from "@/app/ui/page.module.css";
@@ -14,8 +14,7 @@ export async function generateMetadata(
   { params }: PageProps
 ): Promise<Metadata> {
   const slug = params.post;
-  const post = await getPostBySlug(slug);
-  
+  const post = await getPostBySlug( translateSlugs(slug) );
   return {
     title: post.title,
     description: post.excerpt,
@@ -25,7 +24,7 @@ export async function generateMetadata(
 export default async function PostDetailPage({
   params,
 }: PageProps) {
-  const post = await getPostBySlug(params.slug);
+  const post = await getPostBySlug( translateSlugs(params.post) );
   if (!post) return notFound();
   
   const videoId = post.acfPosts.youtubeId !== "null" ? post.acfPosts.youtubeId : null;

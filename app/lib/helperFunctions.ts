@@ -14,3 +14,26 @@ export const getImageGallery = (post: ACFPost): FeaturedImage[] => {
 
   return images;
 };
+
+
+export function translateSlugs( slug: string ): string {
+  let newSlug = '';
+  switch( slug ) {
+    case 'objects': 
+      newSlug = 'things';
+      break;
+    case 'sounds':
+      newSlug = 'sound';
+      break;
+    case 'videos':
+      newSlug = 'video';
+      break;  
+    case 'webprojects':
+      newSlug = 'webportfolio';
+      break;
+    default:
+      newSlug = slug;
+  }
+  return newSlug;
+}
+

@@ -6,40 +6,25 @@ import { PageProps } from "../types/pages";
 import { Metadata } from "next";
 import { getCategoryBySlug } from "@/app/lib/api/fetch";
 import styles from "@/app/ui/subPage.module.css";
+import { translateSlugs } from "../lib/helperFunctions";
 
 export async function generateMetadata(
   { params }: PageProps
 ): Promise<Metadata> {
   const slug = params.category;
   // get category
-  const post = await getCategoryBySlug( slug );
-  console.log("category by slug: ", post)
+  const category = await getCategoryBySlug( slug );
+  console.log("category by slug: ", category, slug)
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: category.title,
+    description: category.excerpt,
   }
 }
 
 export default async function CategoryPage({params}: PageProps) {
-  let getCat = '';
-  switch( params.category ) {
-    case 'objects': 
-      getCat = 'things';
-      break;
-    case 'sounds':
-      getCat = 'sound';
-      break;
-    case 'videos':
-      getCat = 'video';
-      break;  
-    case 'webprojects':
-      getCat = 'webportfolio';
-      break;
-    default:
-      getCat = params.category;
-  }
- 
-  const posts = await getPostsByCategory( getCat ); // Fetch data in an async component 
+
+  const category = translateSlugs(params.category);
+  const posts = await getPostsByCategory(category); // Fetch data in an async component 
   // console.log("the posts", posts, params.category)
   return (
     <div className={styles.page}>
