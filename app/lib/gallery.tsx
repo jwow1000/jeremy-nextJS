@@ -1,6 +1,7 @@
 
 
 import React from "react";
+import Image from "next/image";
 import { FeaturedImage } from "../types/postTypes";
 import styles from "@/app/ui/page.module.css";
 
@@ -15,7 +16,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
     <div className={styles.imageGalleryWrapper}>
       {
         images.map((image) => (
-          <img 
+          <Image
             key={image.node.altText}
             src={image.node.sourceUrl} 
             alt={image.node.altText}

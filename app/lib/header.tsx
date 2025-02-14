@@ -15,26 +15,27 @@ export default function Header() {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const [viewSize, setViewSize] = useState<WindowSize>({
-    width: window.innerWidth,
-    height: window.innerHeight
+    width: 800,
+    height: 100
   }) 
   
   useEffect(() => {
     
     // Handler to call on window resize
     function handleResize() {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
+      if (typeof window !== "undefined") {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+    
+        timeoutRef.current = setTimeout(() => {
+          
+          setViewSize({
+            width: window.innerWidth,
+            height: window.innerHeight,
+          })
+        }, 300);
       }
-  
-      timeoutRef.current = setTimeout(() => {
-        setViewSize({
-          width: window.innerWidth,
-          height: window.innerHeight,
-        })
-      }, 300);
-      
-      
     }
     
     // Add event listener
@@ -44,7 +45,9 @@ export default function Header() {
     handleResize()
     
     // Remove event listener on cleanup
-    return () => window.removeEventListener('resize', handleResize)
+    if (typeof window !== "undefined") {
+      return () => window.removeEventListener('resize', handleResize)
+    }
   }, []);
 
   return (

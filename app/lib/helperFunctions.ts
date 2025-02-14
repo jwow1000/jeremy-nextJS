@@ -17,7 +17,7 @@ export const getImageGallery = (post: ACFPost): FeaturedImage[] => {
 
 
 export function translateSlugs( slug: string ): string {
-  let newSlug = '';
+  let newSlug: string | undefined;
   switch( slug ) {
     case 'objects': 
       newSlug = 'things';

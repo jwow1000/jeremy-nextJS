@@ -2,8 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPostsByCategory } from "@/app/lib/api/fetch";
 import { Post } from "../types/postTypes";
-import { Metadata } from "next";
-import { getCategoryBySlug } from "@/app/lib/api/fetch";
+// import { getCategoryBySlug } from "@/app/lib/api/fetch";
 import styles from "@/app/ui/subPage.module.css";
 import { translateSlugs } from "../lib/helperFunctions";
 
@@ -20,10 +19,13 @@ import { translateSlugs } from "../lib/helperFunctions";
 //     title: categoryObj.name,
 //     description: categoryObj.description,
 //   }
-// }
 
-export default async function CategoryPage({params}) {
-  const {category} = await params;
+export default async function CategoryPage({
+  params,
+}: {
+  params: Promise<{ category: string }>
+}) {
+  const category = (await params).category;
   const categoryTrans = translateSlugs(category);
   const posts = await getPostsByCategory(categoryTrans); // Fetch data in an async component 
   // console.log("the posts", posts, params.category)

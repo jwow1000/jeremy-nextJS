@@ -1,10 +1,8 @@
-import { notFound } from "next/navigation";
 import { getPostBySlug } from "@/app/lib/api/fetch";
 import YouTubeEmbed from "@/app/lib/youtube";
 import CustomVideoPlayer from "@/app/lib/customVideo";
 import Gallery from "@/app/lib/gallery";
 import { getImageGallery, translateSlugs } from "@/app/lib/helperFunctions";
-import type { Metadata } from 'next';
 import styles from "@/app/ui/page.module.css";
 
 
@@ -20,10 +18,15 @@ import styles from "@/app/ui/page.module.css";
 //   }
 // }
 
-export default async function PostDetailPage({params}){
-  const p = await params;
-  const post = await getPostBySlug( translateSlugs(p.post) );
-  if (!post) return notFound();
+
+export default async function PostDetailPage({
+  params,
+}: {
+  params: Promise<{ post: string }>
+}) {
+  const getPost = (await params).post;
+  const post = await getPostBySlug( translateSlugs(getPost) );
+  
   
   const videoId = post.acfPosts.youtubeId !== "null" ? post.acfPosts.youtubeId : null;
   const customVidSrc = post.acfPosts.customVideoSource !== "null" ? post.acfPosts.customVideoSource : null;
