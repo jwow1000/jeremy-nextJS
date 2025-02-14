@@ -4,14 +4,19 @@ import YouTubeEmbed from "@/app/lib/youtube";
 import CustomVideoPlayer from "@/app/lib/customVideo";
 import Gallery from "@/app/lib/gallery";
 import { getImageGallery, translateSlugs } from "@/app/lib/helperFunctions";
-import { PageProps } from "@/app/types/pages";
 import type { Metadata } from 'next';
 import styles from "@/app/ui/page.module.css";
 
-
+type Props = {
+  params: {
+    category: string
+    post: string
+  }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
 
 export async function generateMetadata(
-  { params }: PageProps
+  { params }: Props
 ): Promise<Metadata> {
   const slug = params.post;
   const post = await getPostBySlug( translateSlugs(slug) );
@@ -23,7 +28,7 @@ export async function generateMetadata(
 
 export default async function PostDetailPage({
   params,
-}: PageProps) {
+}: Props) {
   const post = await getPostBySlug( translateSlugs(params.post) );
   if (!post) return notFound();
   
