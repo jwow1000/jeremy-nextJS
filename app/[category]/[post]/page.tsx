@@ -4,19 +4,16 @@ import YouTubeEmbed from "@/app/lib/youtube";
 import CustomVideoPlayer from "@/app/lib/customVideo";
 import Gallery from "@/app/lib/gallery";
 import { getImageGallery } from "@/app/lib/helperFunctions";
+import { PageProps } from "@/app/types/pages";
 import type { Metadata } from 'next';
 import styles from "@/app/ui/page.module.css";
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
+
 
 export async function generateMetadata(
   { params }: PageProps
 ): Promise<Metadata> {
-  const slug = params.slug;
+  const slug = params.post;
   const post = await getPostBySlug(slug);
   
   return {

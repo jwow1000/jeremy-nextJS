@@ -186,4 +186,29 @@ export async function getCVEntries() {
   const expoData: Entry[] = transformExpoData(json);
   return expoData;
 }
-  
+
+// get category info, use getPostsByCategory to get posts
+export async function getCategoryBySlug(slug: string): Promise<Post> {
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
+        query GetCategoryBySlug($slug: ID!) {
+          category(id: $slug, idType: SLUG) {
+            id
+            name
+            slug
+            description
+          }
+        }
+      `,
+      variables: { slug },
+    }),
+    next: { revalidate: 60 }, // ISR (Incremental Static Regeneration)
+  });
+
+  const json = await res.json();
+  // console.log("did we content", json.data.posts.nodes)
+  return json.data;
+}
