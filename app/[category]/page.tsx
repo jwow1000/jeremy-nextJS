@@ -2,14 +2,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPostsByCategory } from "@/app/lib/api/fetch";
 import { Post } from "../types/postTypes";
-import { PageProps } from "../types/pages";
 import { Metadata } from "next";
 import { getCategoryBySlug } from "@/app/lib/api/fetch";
 import styles from "@/app/ui/subPage.module.css";
 import { translateSlugs } from "../lib/helperFunctions";
 
+
+type Props = {
+  params: {
+    category: string
+    post: string
+  }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
 export async function generateMetadata(
-  { params }: PageProps
+  { params }: Props
 ): Promise<Metadata> {
   const slug = params.category;
   // get category
@@ -21,7 +29,7 @@ export async function generateMetadata(
   }
 }
 
-export default async function CategoryPage({params}: PageProps) {
+export default async function CategoryPage({params}: Props) {
 
   const category = translateSlugs(params.category);
   const posts = await getPostsByCategory(category); // Fetch data in an async component 
