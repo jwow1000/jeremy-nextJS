@@ -16,8 +16,8 @@ export async function generateMetadata(
   const category = await getCategoryBySlug( slug );
   console.log("category by slug: ", category, slug)
   return {
-    title: category.title,
-    description: category.excerpt,
+    title: category.name,
+    description: category.description,
   }
 }
 

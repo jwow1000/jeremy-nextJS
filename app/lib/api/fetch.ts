@@ -1,5 +1,5 @@
 import { Entry, WordPressAPIResponse } from "@/app/types/cvEntryTypes";
-import { Post, PostResponse } from "@/app/types/postTypes";
+import { Post, PostResponse, PostCategory } from "@/app/types/postTypes";
 import { translateSlugs } from "../helperFunctions";
 
 const API_URL = process.env.WORDPRESS_GRAPHQL_ENDPOINT || "https://jeremywy.com/graphql";
@@ -189,7 +189,7 @@ export async function getCVEntries() {
 }
 
 // get category info, use getPostsByCategory to get posts
-export async function getCategoryBySlug(slug: string): Promise<Post> {
+export async function getCategoryBySlug(slug: string): Promise<PostCategory> {
   
   const newSlug = translateSlugs( slug );
   const res = await fetch(API_URL, {

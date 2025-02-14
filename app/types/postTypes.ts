@@ -40,3 +40,10 @@ export interface PostResponse {
     };
   };
 }
+
+export interface PostCategory {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+}
