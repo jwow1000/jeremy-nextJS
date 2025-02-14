@@ -9,22 +9,23 @@ import styles from "@/app/ui/page.module.css";
 
 
 
-export async function generateMetadata({ params }: { 
-  params: Promise<{post: string}>
-}) {
-  const p = await params;
-  const slug = p.post;
-  const post = await getPostBySlug( translateSlugs(slug) );
+export async function generateMetadata({
+  params,
+}: {
+  params: { category: string; post: string }
+}): Promise<Metadata> {
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: `${params.category} - ${params.post}`,
+    
   }
 }
 
-export default async function PostDetailPage({ params }: { 
-  params: Promise<{post: string}>
+export default async function PostDetailPage({
+  params,
+}: {
+  params: { category: string; post: string }
 }) {
-  const p = await params;
+  const p = params;
   const post = await getPostBySlug( translateSlugs(p.post) );
   if (!post) return notFound();
   

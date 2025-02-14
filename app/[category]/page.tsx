@@ -7,13 +7,12 @@ import { getCategoryBySlug } from "@/app/lib/api/fetch";
 import styles from "@/app/ui/subPage.module.css";
 import { translateSlugs } from "../lib/helperFunctions";
 
-
-
-
-export async function generateMetadata({ params }: { 
-    params: Promise<{category: string}>
-}) { 
-  const {category} = await params;
+export async function generateMetadata({
+  params,
+}: {
+  params: { category: string; post: string }
+}): Promise<Metadata> {
+  const {category} = params;
   // get category
   const categoryObj = await getCategoryBySlug( category );
   console.log("category by slug: ", categoryObj, category)
@@ -23,8 +22,10 @@ export async function generateMetadata({ params }: {
   }
 }
 
-export default async function CategoryPage({params}: {
-  params: Promise<{category: string}>
+export default async function CategoryPage({
+  params,
+}: {
+  params: { category: string; post: string }
 }) {
   const p = await params;
   const category = translateSlugs(p.category);
