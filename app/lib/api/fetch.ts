@@ -2,7 +2,7 @@ import { Entry, WordPressAPIResponse } from "@/app/types/cvEntryTypes";
 import { Post, PostResponse, PostCategory } from "@/app/types/postTypes";
 import { translateSlugs } from "../helperFunctions";
 
-const API_URL = process.env.WORDPRESS_GRAPHQL_ENDPOINT || "https://jeremywy.com/graphql";
+const API_URL = process.env.WORDPRESS_GRAPHQL_ENDPOINT || "https://wp.jeremywy.com/graphql";
 
 // local use functions
 function transformExpoData(json: WordPressAPIResponse): Entry[] {
