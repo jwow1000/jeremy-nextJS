@@ -40,7 +40,7 @@ export default async function PostDetailPage({
         <p className="text-gray-500">{post.acfPosts.date}</p>
         <p className={styles.description}>{post.acfPosts.description}</p>
         {webLink && (
-          <a className={styles.customLink} href={webLink}>link to website</a>
+          <a className={styles.customLink} href={webLink} target="_blank" rel="noopener norefferer ">link to website</a>
         )}
       </div>
       
