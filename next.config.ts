@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "www.wp.jeremywy.com",
+        hostname: "wp.jeremywy.com",
       },
     ],
   },
