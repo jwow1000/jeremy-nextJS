@@ -9,23 +9,19 @@ import styles from "@/app/ui/page.module.css";
 
 
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { category: string; post: string }
-}): Promise<Metadata> {
-  return {
-    title: `${params.category} - ${params.post}`,
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: { category: string; post: string }
+// }): Promise<Metadata> {
+//   return {
+//     title: `${params.category} - ${params.post}`,
     
-  }
-}
+//   }
+// }
 
-export default async function PostDetailPage({
-  params,
-}: {
-  params: { category: string; post: string }
-}) {
-  const p = params;
+export default async function PostDetailPage({params}){
+  const p = await params;
   const post = await getPostBySlug( translateSlugs(p.post) );
   if (!post) return notFound();
   

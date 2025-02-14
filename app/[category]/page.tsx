@@ -7,29 +7,25 @@ import { getCategoryBySlug } from "@/app/lib/api/fetch";
 import styles from "@/app/ui/subPage.module.css";
 import { translateSlugs } from "../lib/helperFunctions";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { category: string; post: string }
-}): Promise<Metadata> {
-  const {category} = params;
-  // get category
-  const categoryObj = await getCategoryBySlug( category );
-  console.log("category by slug: ", categoryObj, category)
-  return {
-    title: categoryObj.name,
-    description: categoryObj.description,
-  }
-}
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: { category: string; post: string }
+// }): Promise<Metadata> {
+//   const {category} = params;
+//   // get category
+//   const categoryObj = await getCategoryBySlug( category );
+//   console.log("category by slug: ", categoryObj, category)
+//   return {
+//     title: categoryObj.name,
+//     description: categoryObj.description,
+//   }
+// }
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: { category: string; post: string }
-}) {
-  const p = await params;
-  const category = translateSlugs(p.category);
-  const posts = await getPostsByCategory(category); // Fetch data in an async component 
+export default async function CategoryPage({params}) {
+  const {category} = await params;
+  const categoryTrans = translateSlugs(category);
+  const posts = await getPostsByCategory(categoryTrans); // Fetch data in an async component 
   // console.log("the posts", posts, params.category)
   return (
     <div className={styles.page}>
