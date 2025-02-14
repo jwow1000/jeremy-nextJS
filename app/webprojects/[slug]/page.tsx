@@ -7,14 +7,17 @@ import { getImageGallery } from "@/app/lib/helperFunctions";
 import type { Metadata } from 'next';
 import styles from "@/app/ui/page.module.css";
 
-interface PageProps {
+// Define the params type
+type Props = {
   params: {
     slug: string;
   };
-}
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
 
 export async function generateMetadata(
-  { params }: PageProps
+  { params }: Props
 ): Promise<Metadata> {
   const slug = params.slug;
   const post = await getPostBySlug(slug);
@@ -25,9 +28,8 @@ export async function generateMetadata(
   }
 }
 
-export default async function PostDetailPage({
-  params,
-}: PageProps) {
+export default async function PostDetailPage(
+  {params}: Props) {
   const post = await getPostBySlug(params.slug);
   if (!post) return notFound();
   
