@@ -7,18 +7,13 @@ import { getImageGallery, translateSlugs } from "@/app/lib/helperFunctions";
 import type { Metadata } from 'next';
 import styles from "@/app/ui/page.module.css";
 
-type Props = {
-  params: {
-    category: string
-    post: string
-  }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
 
-export async function generateMetadata(
-  { params }: Props
-): Promise<Metadata> {
-  const slug = params.post;
+
+export async function generateMetadata({ params }: { 
+  params: Promise<{post: string}>
+}) {
+  const p = await params;
+  const slug = p.post;
   const post = await getPostBySlug( translateSlugs(slug) );
   return {
     title: post.title,
@@ -26,10 +21,11 @@ export async function generateMetadata(
   }
 }
 
-export default async function PostDetailPage({
-  params,
-}: Props) {
-  const post = await getPostBySlug( translateSlugs(params.post) );
+export default async function PostDetailPage({ params }: { 
+  params: Promise<{post: string}>
+}) {
+  const p = await params;
+  const post = await getPostBySlug( translateSlugs(p.post) );
   if (!post) return notFound();
   
   const videoId = post.acfPosts.youtubeId !== "null" ? post.acfPosts.youtubeId : null;

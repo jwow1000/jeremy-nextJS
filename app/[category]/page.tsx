@@ -8,30 +8,26 @@ import styles from "@/app/ui/subPage.module.css";
 import { translateSlugs } from "../lib/helperFunctions";
 
 
-type Props = {
-  params: {
-    category: string
-    post: string
-  }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
 
-export async function generateMetadata(
-  { params }: Props
-): Promise<Metadata> {
-  const slug = params.category;
+
+export async function generateMetadata({ params }: { 
+    params: Promise<{category: string}>
+}) { 
+  const {category} = await params;
   // get category
-  const category = await getCategoryBySlug( slug );
-  console.log("category by slug: ", category, slug)
+  const categoryObj = await getCategoryBySlug( category );
+  console.log("category by slug: ", categoryObj, category)
   return {
-    title: category.name,
-    description: category.description,
+    title: categoryObj.name,
+    description: categoryObj.description,
   }
 }
 
-export default async function CategoryPage({params}: Props) {
-
-  const category = translateSlugs(params.category);
+export default async function CategoryPage({params}: {
+  params: Promise<{category: string}>
+}) {
+  const p = await params;
+  const category = translateSlugs(p.category);
   const posts = await getPostsByCategory(category); // Fetch data in an async component 
   // console.log("the posts", posts, params.category)
   return (
