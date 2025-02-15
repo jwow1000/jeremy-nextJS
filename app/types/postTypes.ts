@@ -1,5 +1,10 @@
+export interface MediaSize {
+  width: number;
+  height: number;
+}
+
 export interface MediaDetails {
-  sizes: { width: number; height: number }[];
+  sizes: MediaSize[] | MediaSize;
 }
 
 export interface FeaturedImage {
@@ -21,14 +26,24 @@ export interface ACFPost {
   imageGallery2?: FeaturedImage;
   imageGallery3?: FeaturedImage;
   imageGallery4?: FeaturedImage;
+  
+}
+export interface WPTag {
+  id: string;
+  name: string;
+  slug: string;
 }
 
+export interface WPTags {
+  nodes: WPTag[];
+}
 export interface Post {
   id: string;
   title: string;
   excerpt: string;
   slug: string;
   date: string;
+  tags: WPTags;
   featuredImage: FeaturedImage;
   acfPosts: ACFPost;
 }

@@ -61,6 +61,13 @@ export async function getPostsByCategory(category: string): Promise<Post[]> {
               excerpt
               slug
               date
+              tags {
+                nodes {
+                  id
+                  name
+                  slug
+                }
+              }
               featuredImage {
                 node {
                   sourceUrl
@@ -75,6 +82,7 @@ export async function getPostsByCategory(category: string): Promise<Post[]> {
               }
               acfPosts {
                date
+               description
               }
             }
           }
@@ -128,6 +136,36 @@ export async function getPostBySlug(slug: string): Promise<Post> {
               webportfolioLink
               customVideoSource  
               imageGallery1 {
+                node {
+                  sourceUrl
+                  altText
+                  mediaDetails {
+                    width
+                    height
+                  }
+                }  
+              }
+              imageGallery2 {
+                node {
+                  sourceUrl
+                  altText
+                  mediaDetails {
+                    width
+                    height
+                  }
+                }  
+              }
+              imageGallery3 {
+                node {
+                  sourceUrl
+                  altText
+                  mediaDetails {
+                    width
+                    height
+                  }
+                }  
+              }
+              imageGallery4 {
                 node {
                   sourceUrl
                   altText

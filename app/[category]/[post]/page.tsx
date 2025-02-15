@@ -32,9 +32,11 @@ export default async function PostDetailPage({
   const customVidSrc = post.acfPosts.customVideoSource !== "null" ? post.acfPosts.customVideoSource : null;
   const webLink = post.acfPosts.webportfolioLink !== "null" ? post.acfPosts.webportfolioLink : null;
   const imageGallery = getImageGallery(post.acfPosts);
+  // an array of featured images
+  console.log("image gallery get", imageGallery)
 
   return (
-    <main className="container mx-auto p-4">
+    <main className={styles.main}>
       <div className={styles.infoWrapper}>
         <h1 className="text-3xl font-bold white">{post.title}</h1>
         <p className="text-gray-500">{post.acfPosts.date}</p>
@@ -44,7 +46,8 @@ export default async function PostDetailPage({
         )}
       </div>
       
-      <Gallery images={imageGallery}/>
+      <Gallery images={ imageGallery }/>
+
       {customVidSrc && (
         <div className={styles.customVidWrapper}>
           <CustomVideoPlayer 

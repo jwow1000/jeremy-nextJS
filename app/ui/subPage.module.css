@@ -7,16 +7,57 @@
   margin: 6rem 0;
   gap: 5rem;
 }
-
-.imageContainer {
-  width: 18rem;
-  height: 18rem;
+.postContainer {
+  position: relative;
+  width: 24rem;
+  height: 24rem;
   margin: 0 4rem;
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center; 
   cursor: pointer;
+}
+.imageContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center; 
+  padding: 2rem;
+  gap: 1rem;
+}
+.postDate {
+  position: absolute;
+  left: -10%;
+  top: 50%;
+  transform: rotate(-90deg);
+}
+.postDescription {
+  font-size: 1rem;
+  position: absolute;
+  text-align: left; 
+  width: 100%;
+  max-width: 55ch;
+  bottom: -10%;
+  left: 0%;
+}
+.postTagWrapper {
+  position: absolute;
+  top: 50%;
+  right: -40%;
+  width: 80%;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.postTag {
+
 }
 
 .thumb {
