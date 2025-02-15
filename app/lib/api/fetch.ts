@@ -135,6 +135,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
               soundcloudId
               webportfolioLink
               customVideoSource  
+              soundUrl
               imageGallery1 {
                 node {
                   sourceUrl

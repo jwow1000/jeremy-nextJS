@@ -2,6 +2,7 @@ import { getPostBySlug } from "@/app/lib/api/fetch";
 import YouTubeEmbed from "@/app/lib/youtube";
 import CustomVideoPlayer from "@/app/lib/customVideo";
 import Gallery from "@/app/lib/gallery";
+import SoundEmbed from "@/app/lib/embedSound";
 import { getImageGallery, translateSlugs } from "@/app/lib/helperFunctions";
 import styles from "@/app/ui/page.module.css";
 
@@ -30,10 +31,14 @@ export default async function PostDetailPage({
   
   const videoId = post.acfPosts.youtubeId !== "null" ? post.acfPosts.youtubeId : null;
   const customVidSrc = post.acfPosts.customVideoSource !== "null" ? post.acfPosts.customVideoSource : null;
-  const webLink = post.acfPosts.webportfolioLink !== "null" ? post.acfPosts.webportfolioLink : null;
+  const webLink = post.acfPosts.webportfolioLink !== "null" ? post.acfPosts.webportfolioLink : null;  
+  const sounds = post.acfPosts.soundUrl !== "null" ? 
+    post.acfPosts.soundUrl.split(", ")
+    : null;
+  
   const imageGallery = getImageGallery(post.acfPosts);
   // an array of featured images
-  console.log("image gallery get", imageGallery)
+  console.log("image gallery get", imageGallery, sounds)
 
   return (
     <main className={styles.main}>
@@ -46,22 +51,32 @@ export default async function PostDetailPage({
         )}
       </div>
       
-      <Gallery images={ imageGallery }/>
+      <section className={styles.imageSection}>
 
-      {customVidSrc && (
-        <div className={styles.customVidWrapper}>
-          <CustomVideoPlayer 
-            src={customVidSrc} 
-            autoplay={true}
-            loop={true}
-          />
-        </div>
-      )}
-      {videoId && (
-        <div className={styles.videoWrapper}>
-          <YouTubeEmbed videoId={videoId} />
-        </div>
-      )}
+        <Gallery images={ imageGallery }/>
+        {sounds &&
+          <div className={styles.mixcloudWrapper}>
+            {sounds.map((sound, idx) => (
+                <SoundEmbed key={`embed-${idx}`} url={sound}/> 
+            ))}
+          </div>
+          
+        }  
+        {customVidSrc && (
+          <div className={styles.customVidWrapper}>
+            <CustomVideoPlayer 
+              src={customVidSrc} 
+              autoplay={true}
+              loop={true}
+            />
+          </div>
+        )}
+        {videoId && (
+          <div className={styles.videoWrapper}>
+            <YouTubeEmbed videoId={videoId} />
+          </div>
+        )}
+      </section>
     </main>
   );
 }

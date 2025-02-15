@@ -29,6 +29,7 @@
 }
 
 .main {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -161,19 +162,45 @@ a.secondary {
   display: inline-block;
 }
 .imageGalleryWrapper {
-  width: 100%;
+  width: 90%;
   height: auto;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
   align-items: center;
-  margin: 1rem 0 8rem 0;
+  margin: 1rem auto 8rem auto;
+  gap: 2rem;
 }
 .imageGalleryItem {
   width: 100%;
   height: 100%;
+  max-width: 900px;
   object-fit: contain;
 }
+.mixcloudWrapper {
+  position: absolute;
+  top: 0;
+  right: 50%;
+  width: 20rem;
+  transform: translateX(50%);
+  display: flex;
+  flex-flow: column wrap;
+  gap: 4rem;
+  justify-content: center;
+  align-items: center;
+}
+.imageSection {
+  width: 100%;
+  position: relative;
+
+}
+.embedIframe {
+  opacity: 0.7;
+}
+.embedIframe:focus, .embedIframe:hover {
+  opacity: 1;
+}
+
 
 @keyframes spinY {
   0% {
