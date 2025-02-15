@@ -7,7 +7,6 @@ const CustomVideoPlayer = ({ src, autoplay = false, loop = false }: { src: strin
         src={src}
         autoPlay={autoplay}
         loop={loop}
-        controls
         style={{
           width: "100%",
           height: "auto",
