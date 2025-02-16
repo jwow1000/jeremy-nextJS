@@ -14,7 +14,7 @@ export default async function CategoryPage({
   const category = (await params).category;
   const categoryTrans = translateSlugs(category);
   const posts = await getPostsByCategory(categoryTrans); // Fetch data in an async component 
-  console.log("the posts", posts)
+  // console.log("the posts", posts)
   return (
     <div className={styles.page}>
       {

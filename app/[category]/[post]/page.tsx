@@ -32,13 +32,13 @@ export default async function PostDetailPage({
   const videoId = post.acfPosts.youtubeId !== "null" ? post.acfPosts.youtubeId : null;
   const customVidSrc = post.acfPosts.customVideoSource !== "null" ? post.acfPosts.customVideoSource : null;
   const webLink = post.acfPosts.webportfolioLink !== "null" ? post.acfPosts.webportfolioLink : null;  
-  const sounds = post.acfPosts.soundUrl !== "null" ? 
+  const sounds = post.acfPosts.soundUrl !== null ? 
     post.acfPosts.soundUrl.split(", ")
     : null;
   
   const imageGallery = getImageGallery(post.acfPosts);
   // an array of featured images
-  console.log("image gallery get", imageGallery, sounds)
+  // console.log("image gallery get", imageGallery, sounds)
 
   return (
     <main className={styles.main}>
