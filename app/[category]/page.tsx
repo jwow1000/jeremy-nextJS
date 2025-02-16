@@ -17,6 +17,7 @@ export default async function CategoryPage({
   // console.log("the posts", posts)
   return (
     <div className={styles.page}>
+      <div className={styles.label}>{category}</div>
       {
         posts.map((post: Post) => {
           const img = post.featuredImage.node;

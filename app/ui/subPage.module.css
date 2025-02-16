@@ -1,5 +1,5 @@
 .page {
-
+  position: relative;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
@@ -56,7 +56,16 @@
   align-items: center;
   gap: 1rem;
 }
-
+.label {
+  position: fixed;
+  color: black;
+  top: 14rem;
+  left: 1rem;
+  padding: 0.3rem;
+  border: 1px white solid;
+  backdrop-filter: invert(80%);
+  z-index: 100;
+}
 
 .thumb {
   width: 100%;
@@ -64,3 +73,11 @@
   object-fit: contain;
 }
 
+@media( max-width: 500px) {
+  .label {
+    left: 50%;
+    transform: translateX(-50%);
+    top: auto;
+    bottom: 4rem;
+  }
+}
