@@ -65,5 +65,12 @@
   .navWrapper {
     width: 70%;
     height: 4rem;
+    margin-bottom: 2rem;
+  }
+  .logo {
+    width: 7rem;
+    left: 50%;
+    
+    transform: translate(-50%, -18%);
   }
 }
