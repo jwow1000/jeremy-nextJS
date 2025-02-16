@@ -14,6 +14,16 @@
   left: 0;
   z-index: 0;
 }
+.animationWrapper {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.animationWrapper.visible {
+  opacity: 1;
+}
+
+
 
 .wrapper > ul {
   text-decoration: none;

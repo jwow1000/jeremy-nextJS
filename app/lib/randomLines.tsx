@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from "@/app/ui/header.module.css";
 
 interface RandomLinesProps {
@@ -18,6 +18,7 @@ const RandomLines: React.FC<RandomLinesProps> = ({
   hAmount = 10,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [visible, setVisible] = useState(false); // State to trigger fade-in
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -43,6 +44,7 @@ const RandomLines: React.FC<RandomLinesProps> = ({
           ctx.beginPath();
           ctx.strokeStyle = color;
           ctx.lineWidth = 1;
+          
     
           const controlX = xPos + chunkWidth / 2 + (Math.random() * 20 - 10); // Random offset for organic curve
           const controlY = yPos + chunkHeight / 2 + (Math.random() * 20 - 10);
@@ -73,10 +75,18 @@ const RandomLines: React.FC<RandomLinesProps> = ({
     };
 
     drawRandomLines();
+
+    // Trigger fade-in after drawing
+    setTimeout(() => setVisible(true), 100);
+
   }, [width, height, wAmount, hAmount]);
 
   return (
-    <div id={styles.animationWrapper} style={{ width, height }}>
+    <div 
+      id={styles.animationWrapper}
+      className={`${styles.animationWrapper} ${visible ? styles.visible : ""}`} 
+      style={{ width, height }}
+    >
       <canvas ref={canvasRef} width={width} height={height} className={styles.animationCanvas} />
     </div>
   );
