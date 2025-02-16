@@ -31,14 +31,17 @@
 }
 
 .navWrapper {
-  width: 100%;
+  width: 90%;
   height: 2rem;
   display: flex;
-  flex: row;
+  flex-flow: row wrap;
   justify-content: space-around;
+  align-items: center;
   z-index: 1;
+  gap: 1rem;
 }
 .link {
+  display: block;
   font-size: 1.3rem;
   font-style: italic;
   color: pink;
@@ -58,5 +61,9 @@
 @media( max-width: 600px) {
   .link {
     font-size: 0.9rem;
+  }
+  .navWrapper {
+    width: 70%;
+    height: 4rem;
   }
 }
