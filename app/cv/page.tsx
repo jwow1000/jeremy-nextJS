@@ -2,7 +2,7 @@
 
 import { getCVEntries } from "@/app/lib/api/fetch";
 import { Entry, EntryCategory, PostDictionary } from "../types/cvEntryTypes";
-
+import stylesSub from "@/app/ui/subPage.module.css";
 import styles from "@/app/ui/cvPage.module.css";
 
 
@@ -42,16 +42,19 @@ export default async function CV() {
   
   return (
     <main className={styles.page}>
-      
+      <div className={stylesSub.label}>CV</div>
       {
         Object.entries(organizedEntries).map(([category, data]: [string, EntryCategory]) => (
           <div key={category} className={styles.categoryWrapper}>
             <h2 className={styles.categoryTitle}>{category}</h2>
             <ul className={styles.categoryUL}>
               {data.children.map((entry) => (
-                <li key={entry.title} className={styles.entryTitle}>
-                  <strong className={styles.entryTitle}>{entry.title}</strong> - {entry.renderDate} ({entry.location})
-                  {entry.description && entry.description}
+                <li key={entry.title} className={styles.entryWrapper}>
+                  <strong className={styles.entryTitle}>{entry.title}</strong>  {entry.renderDate} -- {entry.location}
+                  {entry.description && 
+                    <div className={styles.entryDescription}>{entry.description}</div>
+                  }
+
                   {entry.link && 
                     <a 
                       className={styles.entryLink}
