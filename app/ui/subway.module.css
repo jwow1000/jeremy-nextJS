@@ -11,7 +11,7 @@
 #returnLink {
   position: fixed;
   margin-left: 1rem;
-  top: 80%;
+  bottom: 2rem;
   left: 0%;
   font-size: 1rem;
 }
