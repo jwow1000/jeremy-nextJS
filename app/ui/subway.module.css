@@ -1,0 +1,59 @@
+.mainContainer {
+  position: relative;
+  width: 100vw;
+  margin: 20vh 0 0 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 0;
+
+}
+#returnLink {
+  position: fixed;
+  margin-left: 1rem;
+  top: 80%;
+  left: 0%;
+  font-size: 1rem;
+}
+
+.videos {
+  width: 33.33333%;
+  height: 33.3333%;
+  margin: 0;
+  width: 120px;
+  height: 67.5px;
+  border: none;
+  
+}
+@media (min-width: 480px) and (max-width: 599px){
+  .mainContainer {
+    width: 80vw;
+    height: 35vw;
+    margin: 5rem 10vw;
+  } 
+ 
+}
+
+@media (min-width: 600px) and (max-width: 1199px) {
+  .mainContainer {
+    width: 80vw;
+    height: 45vw;
+    margin: 5rem 10vw;
+  } 
+  .videos {
+    width: 33.3333%;
+    height: 33.3333%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .mainContainer {
+    width: 80vw;
+    height: 45vw;
+    margin: 3rem 10vw;
+  } 
+  .videos {
+    width: 33.3333%;
+    height: 33.3333%;
+  }
+}
