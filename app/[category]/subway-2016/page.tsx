@@ -79,16 +79,16 @@ function Subway() {
 
     <div className={styles.mainContainer}>
       <div id={styles.buttonWrapper}>
-        <button id={styles.button} onClick={muteAllVideos}>
+        <button className={styles.button} onClick={muteAllVideos}>
           Mute All
         </button>
-        <button id={styles.button} onClick={unmuteAllVideos}>
+        <button className={styles.button} onClick={unmuteAllVideos}>
           Unmute All
         </button>
-        <button id={styles.button} onClick={playAllVideos}>
+        <button className={styles.button} onClick={playAllVideos}>
           Play All
         </button>
-        <button id={styles.button} onClick={pauseAllVideos}>
+        <button className={styles.button} onClick={pauseAllVideos}>
           Pause All
         </button>
       </div>

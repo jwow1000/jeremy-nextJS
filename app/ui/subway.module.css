@@ -1,12 +1,20 @@
 .mainContainer {
   position: relative;
   width: 100vw;
-  margin: 20vh 0 0 0;
+  margin: 2rem 0 0 0;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   gap: 0;
 
+}
+.button {
+  font-family: inherit;
+  padding: 0.2rem;
+  border-radius: none;
+  background: none;
+  color: rgb(170, 103, 215);
+  border: 1px solid rgb(170, 103, 215);;
 }
 
 #buttonWrapper {
@@ -16,7 +24,9 @@
   position: absolute;
   top: -2rem;
   left: 50%;
-  width: auto;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
   transform: translateX(-50%);
 
 }
