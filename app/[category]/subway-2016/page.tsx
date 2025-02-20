@@ -48,6 +48,9 @@ function Subway() {
           mute: 1,
           rel: 0,
           controls: 0,
+          modestbranding: 1,
+          disablekb: 1,
+          fs: 0,
         },
         events: {
           onReady: (event: YT.PlayerEvent) => event.target.playVideo(),
