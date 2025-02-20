@@ -8,6 +8,19 @@
   gap: 0;
 
 }
+
+#buttonWrapper {
+  display: flex;
+  flex-flow: row;
+  gap: 2rem;
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+  width: auto;
+  transform: translateX(-50%);
+
+}
+
 #returnLink {
   position: fixed;
   margin-left: 1rem;

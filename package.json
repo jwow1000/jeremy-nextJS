@@ -16,13 +16,16 @@
     "pixi.js": "^8.7.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-konva": "^19.0.2"
+    "react-konva": "^19.0.2",
+    "react-youtube": "^10.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/youtube": "^0.1.0",
+    "@types/youtube-player": "^5.5.11",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "typescript": "^5"
