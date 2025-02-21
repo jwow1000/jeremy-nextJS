@@ -27,6 +27,7 @@ export interface ACFPost {
   imageGallery3?: FeaturedImage;
   imageGallery4?: FeaturedImage;
   soundUrl: string;
+  immixLinks: string;
   
 }
 export interface WPTag {

@@ -136,6 +136,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
               webportfolioLink
               customVideoSource  
               soundUrl
+              immixLinks
               imageGallery1 {
                 node {
                   sourceUrl

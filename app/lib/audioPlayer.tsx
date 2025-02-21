@@ -1,7 +1,13 @@
+'use client'
 import React, { useRef, useState, useEffect } from "react";
 import styles from "@/app/ui/audioPlayer.module.css";
 
-const AudioPlayer: React.FC = () => {
+interface AudioPlayerProps {
+  audioSrc: string;
+  title: string;
+}
+
+const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title}) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressRef = useRef<HTMLInputElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -56,12 +62,13 @@ const AudioPlayer: React.FC = () => {
 
   return (
     <div className={styles.audioPlayer}>
-      <audio ref={audioRef} src="/audio/sample.mp3"></audio>
+      <div className={styles.title}>{title}</div>
+      <audio ref={audioRef} src={audioSrc}></audio>
       
       <button className={styles.playPause} onClick={togglePlayPause}>
-        {isPlaying ? "⏸️" : "▶️"}
+        {isPlaying ? "||" : ">"}
       </button>
-
+      track
       <input
         ref={progressRef}
         type="range"
@@ -71,7 +78,7 @@ const AudioPlayer: React.FC = () => {
         onChange={handleProgressChange}
         className={styles.progressBar}
       />
-
+      volume
       <input
         type="range"
         min="0"
