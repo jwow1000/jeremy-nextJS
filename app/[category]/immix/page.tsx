@@ -1,6 +1,5 @@
 import { getPostBySlug } from "@/app/lib/api/fetch";
 import AudioPlayer from "@/app/lib/audioPlayer";
-import { translateSlugs } from "@/app/lib/helperFunctions";
 import styles from "@/app/ui/page.module.css";
 
 
@@ -21,11 +20,7 @@ interface Sound {
 }
 
 
-export default async function ImmixCollection({
-  params,
-}: {
-  params: Promise<{ post: string }>
-}) {
+export default async function ImmixCollection() {
   const post = await getPostBySlug( 'immix' );
   console.log("looke at that", post)
   
