@@ -12,9 +12,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "allowSyntheticDefaultImports": true,
     "incremental": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     "types": [
-      "@types/youtube"
+      "youtube"
     ],
     "plugins": [
       {
@@ -25,6 +27,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "global.d.ts", "src/**/*"],
   "exclude": ["node_modules"]
 }

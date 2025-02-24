@@ -17,13 +17,15 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-konva": "^19.0.2",
-    "react-youtube": "^10.1.0"
+    "react-youtube": "^10.1.0",
+    "three": "^0.173.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.173.0",
     "@types/youtube": "^0.1.0",
     "@types/youtube-player": "^5.5.11",
     "eslint": "^9",

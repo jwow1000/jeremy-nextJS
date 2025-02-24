@@ -1,5 +1,6 @@
 'use client'
 import React, { useRef, useState, useEffect } from "react";
+// import AudioVisualizer from "@/app/lib/audioVisualizer";
 import styles from "@/app/ui/audioPlayer.module.css";
 
 interface AudioPlayerProps {
@@ -63,7 +64,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title}) => {
   return (
     <div className={styles.audioPlayer}>
       <div className={styles.title}>{title}</div>
-      <div className={styles.animationWrapper}></div>
+      {/* <div className={styles.animationWrapper}>
+        <AudioVisualizer audioRef={audioRef} width={200} height={200} />
+      </div> */}
       <audio ref={audioRef} src={audioSrc}></audio>
       
       <button className={styles.playPause} onClick={togglePlayPause}>
