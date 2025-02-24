@@ -39,8 +39,8 @@ export default async function ImmixCollection() {
   return (
     <main className={styles.main}>
       <div className={styles.infoWrapper}>
-        <h1 className="text-3xl font-bold white">{post.title}</h1>
-        <p className="text-gray-500">{post.acfPosts.date}</p>
+        <h1 className={styles.postTitle}>{post.title}</h1>
+        <p className={styles.postDate}>{post.acfPosts.date}</p>
         <p className={styles.description}>{post.acfPosts.description}</p>
         
       </div>
