@@ -1,176 +1,74 @@
-"use client";
-import { useEffect, useRef, useState } from "react";
-import * as THREE from "three";
-import styles from "@/app/ui/audioVisualizer.module.css";
+'use client';
+
+import React, { useEffect, useRef } from 'react';
+import * as THREE from 'three';
 
 interface AudioVisualizerProps {
-  audioRef: React.RefObject<HTMLAudioElement | null>;
+  audioRef: React.RefObject<HTMLAudioElement>;
   width: number;
   height: number;
 }
 
 const AudioVisualizer: React.FC<AudioVisualizerProps> = ({ audioRef, width, height }) => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const audioContextRef = useRef<AudioContext | null>(null);
-  const analyserRef = useRef<AnalyserNode | null>(null);
-  const dataArrayRef = useRef<Uint8Array | null>(null);
-  const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
-  const [isAudioSetup, setIsAudioSetup] = useState(false);
+  const mountRef = useRef<HTMLDivElement>(null);
 
-  // Setup Web Audio API once when the component mounts or when audio element is available
   useEffect(() => {
-    if (!audioRef.current || isAudioSetup) return;
+    if (!audioRef.current) return;
 
-    const setupAudio = () => {
-      try {
-        // Create audio context
-        const audioContext = new (window.AudioContext || 
-          (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
-        audioContextRef.current = audioContext;
-
-        // Create analyzer
-        const analyser = audioContext.createAnalyser();
-        analyser.fftSize = 256;
-        const bufferLength = analyser.frequencyBinCount;
-        const dataArray = new Uint8Array(bufferLength);
-        
-        analyserRef.current = analyser;
-        dataArrayRef.current = dataArray;
-
-        // Create and connect source
-        const source = audioContext.createMediaElementSource(audioRef.current);
-        sourceRef.current = source;
-        
-        // Connect nodes: source -> analyser -> destination
-        source.connect(analyser);
-        analyser.connect(audioContext.destination);
-        
-        setIsAudioSetup(true);
-        console.log("Audio setup completed successfully");
-      } catch (error) {
-        console.error("Error setting up audio:", error);
-      }
-    };
-
-    // We'll set up audio on first user interaction or play event
-    const handleInteraction = () => {
-      if (!isAudioSetup) {
-        setupAudio();
-      }
-    };
-
-    // Set up on play event
-    audioRef.current.addEventListener("play", handleInteraction);
-    
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.removeEventListener("play", handleInteraction);
-      }
-      
-      // Clean up audio context and connections when component unmounts
-      if (audioContextRef.current) {
-        audioContextRef.current.close();
-      }
-    };
-  }, [audioRef, isAudioSetup]);
-
-  // Setup Three.js visualization
-  useEffect(() => {
-    if (!canvasRef.current) return;
-
-    // Setup Three.js
     const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
-    camera.position.z = 1;
-    
-    const renderer = new THREE.WebGLRenderer({ 
-      canvas: canvasRef.current,
-      alpha: true 
-    });
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
     renderer.setSize(width, height);
+    mountRef.current?.appendChild(renderer.domElement);
 
-    // Shader uniforms
-    const uniforms = {
-      uAudioData: { value: new Float32Array(128) },
-      uTime: { value: 0.0 },
+    const geometry = new THREE.BoxGeometry();
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    camera.position.z = 5;
+
+    const audioContext = new AudioContext();
+    const source = audioContext.createMediaElementSource(audioRef.current);
+    const analyser = audioContext.createAnalyser();
+    source.connect(analyser);
+    analyser.connect(audioContext.destination);
+
+    // Resume the AudioContext on user interaction
+    const handleUserInteraction = async () => {
+      if (audioContext.state === 'suspended') {
+        await audioContext.resume();
+      }
     };
 
-    // Shader material
-    const material = new THREE.ShaderMaterial({
-      uniforms,
-      vertexShader: `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        uniform float uAudioData[128];
-        uniform float uTime;
-        varying vec2 vUv;
-        
-        void main() {
-          float intensity = 0.0;
-          float index = floor(vUv.x * 128.0);
-          
-          // Get audio intensity for this pixel
-          if (index >= 0.0 && index < 128.0) {
-            intensity = uAudioData[int(index)];
-          }
-          
-          // Create wave effect based on y-coordinate and time
-          float wave = sin(vUv.y * 10.0 + uTime) * 0.05;
-          intensity = max(intensity, wave);
-          
-          // Create a gradient from purple to orange
-          vec3 color = mix(
-            vec3(0.3, 0.0, 0.5),  // dark purple
-            vec3(1.0, 0.5, 0.2),  // orange
-            intensity
-          );
-          
-          gl_FragColor = vec4(color, 1.0);
-        }
-      `,
-    });
+    // Add event listeners to resume the AudioContext
+    window.addEventListener('click', handleUserInteraction);
+    window.addEventListener('touchstart', handleUserInteraction);
 
-    // Fullscreen Quad
-    const geometry = new THREE.PlaneGeometry(2, 2);
-    const mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
+    const dataArray = new Uint8Array(analyser.frequencyBinCount);
 
-    // Animation loop
     const animate = () => {
       requestAnimationFrame(animate);
-      
-      // Update audio data
-      if (analyserRef.current && dataArrayRef.current) {
-        analyserRef.current.getByteFrequencyData(dataArrayRef.current);
-        
-        // Update shader uniforms with audio data
-        for (let i = 0; i < 128; i++) {
-          uniforms.uAudioData.value[i] = dataArrayRef.current[i] / 255.0;
-        }
-        
-        // Update time for animations
-        uniforms.uTime.value += 0.01;
-      }
-      
+
+      analyser.getByteFrequencyData(dataArray);
+
+      const average = dataArray.reduce((acc, val) => acc + val, 0) / dataArray.length;
+      cube.scale.set(1, 1 + average / 50, 1);
+
       renderer.render(scene, camera);
     };
 
     animate();
 
-    // Cleanup function
     return () => {
+      mountRef.current?.removeChild(renderer.domElement);
       renderer.dispose();
-      geometry.dispose();
-      material.dispose();
+      window.removeEventListener('click', handleUserInteraction);
+      window.removeEventListener('touchstart', handleUserInteraction);
     };
-  }, [width, height]); // Only re-run if dimensions change
+  }, [audioRef, width, height]);
 
-  return <canvas ref={canvasRef} className={styles.canvasWrapper} />;
+  return <div ref={mountRef} />;
 };
 
 export default AudioVisualizer;
