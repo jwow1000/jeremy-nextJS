@@ -63,13 +63,15 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title}) => {
   return (
     <div className={styles.audioPlayer}>
       <div className={styles.title}>{title}</div>
+      <div className={styles.animationWrapper}></div>
       <audio ref={audioRef} src={audioSrc}></audio>
       
       <button className={styles.playPause} onClick={togglePlayPause}>
         {isPlaying ? "||" : ">"}
       </button>
-      track
+      <label htmlFor="trackScrub" className={styles.labels}>Track</label>
       <input
+        id="trackScrub"
         ref={progressRef}
         type="range"
         min="0"
@@ -78,8 +80,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title}) => {
         onChange={handleProgressChange}
         className={styles.progressBar}
       />
-      volume
+      <label htmlFor="volume" className={styles.labels}>Volume</label>
       <input
+        id="volume"
         type="range"
         min="0"
         max="1"
