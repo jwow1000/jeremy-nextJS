@@ -1,9 +1,3 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-
 
 html,
 body {
@@ -31,12 +25,5 @@ a {
   text-decoration: none;
 }
 
-.widget-cloudcast-image {
-  opacity: 0.2;
-}
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
+
