@@ -4,7 +4,7 @@ import CustomVideoPlayer from "@/app/lib/customVideo";
 import Gallery from "@/app/lib/gallery";
 import SoundEmbed from "@/app/lib/embedSound";
 import { getImageGallery, translateSlugs } from "@/app/lib/helperFunctions";
-import styles from "@/app/ui/page.module.css";
+import styles from "@/app/ui/detailPage.module.css";
 
 
 
@@ -43,8 +43,8 @@ export default async function PostDetailPage({
   return (
     <main className={styles.main}>
       <div className={styles.infoWrapper}>
-        <h1 className="text-3xl font-bold white">{post.title}</h1>
-        <p className="text-gray-500">{post.acfPosts.date}</p>
+        <h1 className={styles.title}>{post.title}</h1>
+        <p className={styles.date}>{post.acfPosts.date}</p>
         <p className={styles.description}>{post.acfPosts.description}</p>
         {webLink && (
           <a className={styles.customLink} href={webLink} target="_blank" rel="noopener norefferer ">link to website</a>

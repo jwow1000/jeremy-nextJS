@@ -1,0 +1,29 @@
+.main {
+  padding: 2rem;
+  margin-bottom: 5rem;
+  width: 100%;
+}
+
+.infoWrapper {
+  width: 100%;
+
+  display: flex;
+  flex-flow: column;
+  gap: 2rem;
+}
+
+.main p {
+  max-width: 55ch;
+}
+
+.mixcloudWrapper {
+  width: 90%;
+  max-width: 20rem;
+
+  margin: 2rem auto;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 4rem;
+  justify-content: center;
+  align-items: center;
+}

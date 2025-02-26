@@ -4,8 +4,8 @@
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  margin: 6rem 0;
   gap: 5rem;
+  padding: 2rem;
 }
 .postContainer {
   position: relative;

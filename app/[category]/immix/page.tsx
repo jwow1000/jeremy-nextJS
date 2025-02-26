@@ -1,6 +1,6 @@
 import { getPostBySlug } from "@/app/lib/api/fetch";
 import AudioPlayer from "@/app/lib/audioPlayer";
-import styles from "@/app/ui/page.module.css";
+import styles from "@/app/ui/detailPage.module.css";
 
 
 
