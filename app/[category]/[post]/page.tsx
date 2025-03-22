@@ -25,8 +25,8 @@ export default async function PostDetailPage({
 }: {
   params: Promise<{ post: string }>
 }) {
-  const getPost = (await params).post;
-  const post = await getPostBySlug( translateSlugs(getPost) );
+  const getPost = await params;
+  const post = await getPostBySlug( translateSlugs(getPost.post) );
   
   
   const videoId = post.acfPosts.youtubeId !== "null" ? post.acfPosts.youtubeId : null;

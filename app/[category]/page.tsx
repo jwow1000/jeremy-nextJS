@@ -11,16 +11,17 @@ export default async function CategoryPage({
 }: {
   params: Promise<{ category: string }>
 }) {
-  const category = (await params).category;
-  const categoryTrans = translateSlugs(category);
+  const pageParams = await params;
+  const categoryTrans = translateSlugs(pageParams.category);
   const posts = await getPostsByCategory(categoryTrans); // Fetch data in an async component 
   // console.log("the posts", posts)
   return (
     <div className={styles.page}>
-      <div className={styles.label}>{category}</div>
+      <div className={styles.label}>{categoryTrans}</div>
       {
         posts.map((post: Post) => {
-          const img = post.featuredImage.node;
+          console.log("tjhe post", post)
+          const img = post.featuredImage.node ? post.featuredImage.node : null;
           return (
             <Link 
               key={post.id} 
@@ -31,20 +32,23 @@ export default async function CategoryPage({
               <div className={styles.postDate}>{post.acfPosts.date}</div> 
               <div className={styles.postTagWrapper}>
                 {
-                  post.tags &&
+                  post.tags.nodes &&
                     post.tags.nodes.map((tag) => (
                       <div key={tag.name}className={styles.postTag}>{tag.name}</div>
                     ))
                 }
               </div>
               <div className={styles.imageContainer}>
-                <Image 
-                  className={styles.thumb}
-                  src={img.sourceUrl}
-                  alt={img.altText ? img.altText : `${post.slug} thumbnail`}
-                  width={Array.isArray(img.mediaDetails.sizes) ? img.mediaDetails.sizes[2]?.width : img.mediaDetails.sizes?.width}
-                  height={Array.isArray(img.mediaDetails.sizes) ? img.mediaDetails.sizes[2]?.height : img.mediaDetails.sizes?.height}
-                />
+                {
+                  img &&
+                    <Image 
+                      className={styles.thumb}
+                      src={img.sourceUrl}
+                      alt={img.altText ? img.altText : `${post.slug} thumbnail`}
+                      width={Array.isArray(img.mediaDetails.sizes) ? img.mediaDetails.sizes[2]?.width : img.mediaDetails.sizes?.width}
+                      height={Array.isArray(img.mediaDetails.sizes) ? img.mediaDetails.sizes[2]?.height : img.mediaDetails.sizes?.height}
+                    />
+                }
               </div> 
 
 
