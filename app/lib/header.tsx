@@ -31,8 +31,11 @@ export default function Header() {
         timeoutRef.current = setTimeout(() => {
           
           setViewSize({
-            width: window.innerWidth,
-            height: window.innerHeight,
+            // width: window.innerWidth,
+            // height: window.innerHeight,
+            width: document.documentElement.clientWidth,
+            height: document.documentElement.clientHeight
+
           })
         }, 300);
       }
