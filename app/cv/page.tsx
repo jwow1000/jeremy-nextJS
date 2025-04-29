@@ -50,7 +50,7 @@ export default async function CV() {
             <ul className={styles.categoryUL}>
               {data.children.map((entry) => (
                 <li key={entry.title} className={styles.entryWrapper}>
-                  <strong className={styles.entryTitle}>{entry.title}</strong>  {entry.renderDate} -- {entry.location}
+                  <strong className={styles.entryTitle}>{entry.title}</strong>  {entry.renderDate} -- {`${entry.location} ~ `}
                   {entry.description && 
                     <div className={styles.entryDescription}>{entry.description}</div>
                   }
