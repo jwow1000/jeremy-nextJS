@@ -13,7 +13,7 @@ export default async function BikeMap() {
   return (
     <main className={styles.main}>
       <div className={styles.infoWrapper}>
-        poop
+        
       </div>
 
       <section className={styles.imageSection}>
