@@ -61,15 +61,16 @@ export default function Header() {
         wAmount={20}
         hAmount={5}
       />
-
-      <Image
-        className={styles.logo}
-        src="/jwy_logo_24.svg"
-        alt="handwritten style logo Jeremy Wiles-Young"
-        width={150}
-        height={150}
-        priority
-      />
+      <Link href="/">
+        <Image
+          className={styles.logo}
+          src="/jwy_logo_24.svg"
+          alt="handwritten style logo Jeremy Wiles-Young"
+          width={150}
+          height={150}
+          priority
+        />
+      </Link>
       <ul className={styles.navWrapper}>
         <li>
           <Link href="/" className={styles.link}>home</Link>
