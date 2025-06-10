@@ -75,6 +75,15 @@
 }
 
 @media( max-width: 500px) {
+  .postContainer {
+    padding: 0;
+    margin: 0;
+
+  }
+  .imageContainer {
+    width: 100%;
+    margin: 0 1rem;
+  }
   .label {
     left: 50%;
     transform: translateX(-50%);

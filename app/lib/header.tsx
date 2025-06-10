@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import RandomLines from "./randomLines";
+import RandomLines from "./randomLinesD3";
 import { useEffect, useState, useRef } from "react";
 import styles from "@/app/ui/header.module.css";
 
