@@ -61,7 +61,7 @@ export default function Header() {
         wAmount={20}
         hAmount={5}
       />
-      <Link href="/">
+      <Link href="/" className={styles.logoWrapper}>
         <Image
           className={styles.logo}
           src="/jwy_logo_24.svg"

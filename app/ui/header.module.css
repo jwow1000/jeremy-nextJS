@@ -13,6 +13,8 @@
   top: 0;
   left: 0;
   z-index: 0;
+  display: flex;
+  align-items: center;
 }
 .animationWrapper {
   width: 100%;
@@ -50,13 +52,14 @@
   border: 1px solid pink;
   background-color: rgba(50, 3, 126, 0.9);
 }
-
-.logo {
-  /* color: var(--foreground); */
-  filter: invert(90%);
+.logoWrapper {
   position: absolute;
   top: 0;
   left: 0;
+}
+.logo {
+  filter: invert(90%);
+  width: 100%;
 }
 
 @media( max-width: 600px) {
@@ -68,10 +71,11 @@
     height: 4rem;
     margin-bottom: 2rem;
   }
-  .logo {
+  .logoWrapper {
     width: 7rem;
     left: 50%;
-    
     transform: translate(-50%, -18%);
+
   }
+  
 }
