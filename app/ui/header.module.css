@@ -52,6 +52,10 @@
   border: 1px solid pink;
   background-color: rgba(50, 3, 126, 0.9);
 }
+.activeLink {
+  background-color: pink;
+  color:rgba(50, 3, 126, 0.9); 
+}
 .logoWrapper {
   position: absolute;
   top: 0;

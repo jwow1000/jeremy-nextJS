@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import NavLink from "./navLink";
 import RandomLines from "./randomLinesD3";
 import { useEffect, useState, useRef } from "react";
 import styles from "@/app/ui/header.module.css";
@@ -73,22 +74,22 @@ export default function Header() {
       </Link>
       <ul className={styles.navWrapper}>
         <li>
-          <Link href="/" className={styles.link}>home</Link>
+          <NavLink href="/" className={styles.link} activeClassName={styles.activeLink}>home</NavLink>
         </li>
         <li>
-          <Link href="/objects" className={styles.link}>objects</Link>
+          <NavLink href="/objects" className={styles.link} activeClassName={styles.activeLink}>objects</NavLink>
         </li>
         <li>
-          <Link href="/sounds" className={styles.link}>sounds</Link>
+          <NavLink href="/sounds" className={styles.link} activeClassName={styles.activeLink}>sounds</NavLink>
         </li>
         <li>
-          <Link href="/videos" className={styles.link}>videos</Link>
+          <NavLink href="/videos" className={styles.link} activeClassName={styles.activeLink}>videos</NavLink>
         </li>
         <li>
-          <Link href="/webprojects" className={styles.link}>web projects</Link>
+          <NavLink href="/webprojects" className={styles.link} activeClassName={styles.activeLink}>web projects</NavLink>
         </li>
         <li>
-          <Link href="/cv" className={styles.link}>cv</Link>
+          <NavLink href="/cv" className={styles.link} activeClassName={styles.activeLink}>cv</NavLink>
         </li>
         
       </ul>
