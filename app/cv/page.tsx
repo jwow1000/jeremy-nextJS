@@ -52,7 +52,7 @@ export default async function CV() {
                 <li key={entry.title} className={styles.entryWrapper}>
                   <strong className={styles.entryTitle}>{entry.title}</strong>  {entry.renderDate} 
                   <br/>
-                  {`${entry.location} ~ `}
+                  {`${entry.location}. `}
                   {entry.description && 
                     <div className={styles.entryDescription}>{entry.description}</div>
                   }
