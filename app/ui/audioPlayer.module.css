@@ -9,6 +9,9 @@
   align-items: left;
   gap: 0.5rem;
 }
+.canvas {
+  background-color: rgba(133, 196, 252, 0.596);
+}
 .animationWrapper {
   display: flex;
   justify-content: center;

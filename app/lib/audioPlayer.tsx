@@ -1,6 +1,6 @@
 'use client'
 import React, { useRef, useState, useEffect } from "react";
-// import AudioVisualizer from "@/app/lib/audioVisualizer";
+import { visualizeAudio } from "./visualizeAudioFunction";
 import styles from "@/app/ui/audioPlayer.module.css";
 
 interface AudioPlayerProps {
@@ -11,9 +11,35 @@ interface AudioPlayerProps {
 const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title}) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressRef = useRef<HTMLInputElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(1);
+
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    const canvas = canvasRef.current;
+    if (!audio || !canvas) return;
+
+    const audioContext = new AudioContext();
+    const source = audioContext.createMediaElementSource(audio);
+    const analyser = audioContext.createAnalyser();
+
+    analyser.fftSize = 256; // you can adjust this
+    source.connect(analyser);
+    analyser.connect(audioContext.destination);
+
+    analyserRef.current = analyser;
+
+    // clean up
+    return () => {
+      analyser.disconnect();
+      source.disconnect();
+      audioContext.close();
+    };
+  }, []);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -38,6 +64,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title}) => {
     if (isPlaying) {
       audio.pause();
     } else {
+      // Start visualization here
+      visualizeAudio({ canvasRef, analyserRef });
       audio.play();
     }
     setIsPlaying(!isPlaying);
@@ -64,9 +92,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title}) => {
   return (
     <div className={styles.audioPlayer}>
       <div className={styles.title}>{title}</div>
-      {/* <div className={styles.animationWrapper}>
-        <AudioVisualizer audioRef={audioRef} width={200} height={200} />
-      </div> */}
+      
+      <canvas
+        ref={canvasRef}
+        width={200}
+        height={100}
+        className={styles.canvas}
+      />
       <audio ref={audioRef} src={audioSrc}></audio>
       
       <button className={styles.playPause} onClick={togglePlayPause}>

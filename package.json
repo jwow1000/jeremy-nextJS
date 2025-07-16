@@ -19,7 +19,8 @@
     "react-dom": "^19.0.0",
     "react-konva": "^19.0.2",
     "react-youtube": "^10.1.0",
-    "three": "^0.173.0"
+    "three": "^0.173.0",
+    "wrangler": "^4.24.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

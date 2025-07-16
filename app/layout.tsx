@@ -18,8 +18,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${icono.className} antialiased`}>
-        <Header />
-        {children}
+          <Header />
+          {children}
       </body>
     </html>
   );
