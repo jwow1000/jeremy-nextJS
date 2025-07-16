@@ -21,28 +21,28 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title, imageSrc, ima
   const [volume, setVolume] = useState(1);
 
 
-  useEffect(() => {
-    const audio = audioRef.current;
-    const canvas = canvasRef.current;
-    if (!audio || !canvas) return;
+  // useEffect(() => {
+  //   const audio = audioRef.current;
+  //   const canvas = canvasRef.current;
+  //   if (!audio || !canvas) return;
 
-    const audioContext = new AudioContext();
-    const source = audioContext.createMediaElementSource(audio);
-    const analyser = audioContext.createAnalyser();
+  //   const audioContext = new AudioContext();
+  //   const source = audioContext.createMediaElementSource(audio);
+  //   const analyser = audioContext.createAnalyser();
 
-    analyser.fftSize = 256; // you can adjust this
-    source.connect(analyser);
-    analyser.connect(audioContext.destination);
+  //   analyser.fftSize = 256; // you can adjust this
+  //   source.connect(analyser);
+  //   analyser.connect(audioContext.destination);
 
-    analyserRef.current = analyser;
+  //   analyserRef.current = analyser;
 
-    // clean up
-    return () => {
-      analyser.disconnect();
-      source.disconnect();
-      audioContext.close();
-    };
-  }, []);
+  //   // clean up
+  //   return () => {
+  //     analyser.disconnect();
+  //     source.disconnect();
+  //     audioContext.close();
+  //   };
+  // }, []);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -59,20 +59,56 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title, imageSrc, ima
       audio.removeEventListener("timeupdate", updateProgress);
     };
   }, []);
-
-  const togglePlayPause = () => {
+  const togglePlayPause = async () => {
     const audio = audioRef.current;
-    if (!audio) return;
+    const canvas = canvasRef.current;
+    if (!audio || !canvas) return;
 
-    if (isPlaying) {
-      audio.pause();
-    } else {
-      // Start visualization here
-      visualizeAudio({ canvasRef, analyserRef });
+    // If not playing, start audio + setup AudioContext
+    if (!isPlaying) {
+      // Create context if not already created
+      if (!analyserRef.current) {
+        const audioContext = new AudioContext();
+
+        // Resume the context if it's suspended (for mobile Safari)
+        if (audioContext.state === "suspended") {
+          await audioContext.resume();
+        }
+
+        const source = audioContext.createMediaElementSource(audio);
+        const analyser = audioContext.createAnalyser();
+
+        analyser.fftSize = 256;
+        source.connect(analyser);
+        analyser.connect(audioContext.destination);
+
+        analyserRef.current = analyser;
+
+        // Start visualization
+        visualizeAudio({ canvasRef, analyserRef });
+      }
+
       audio.play();
+      setIsPlaying(true);
+    } else {
+      audio.pause();
+      setIsPlaying(false);
     }
-    setIsPlaying(!isPlaying);
   };
+
+  // const togglePlayPause = () => {
+  //   const audio = audioRef.current;
+  //   if (!audio) return;
+
+  //   if (isPlaying) {
+  //     audio.pause();
+  //   } else {
+  //     // Start visualization here
+  //     visualizeAudio({ canvasRef, analyserRef });
+  //     audio.play();
+  //   }
+  //   setIsPlaying(!isPlaying);
+  // };
 
   const handleProgressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const audio = audioRef.current;

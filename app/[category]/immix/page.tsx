@@ -33,13 +33,13 @@ export default async function ImmixCollection() {
           <div className={styles.mixcloudWrapper}>
             
             {tracks.map((track, idx) => (
-                <AudioPlayer 
-                  audioSrc={`/audio/immix-soundfiles/${track.acfPosts.immixInternalLink}`} 
-                  imageAlt={track.featuredImage.node.altText}
-                  imageSrc={track.featuredImage.node.sourceUrl}
-                  key={`immix-track${idx}`}
-                  title={track.title}
-                />
+              <AudioPlayer 
+                audioSrc={`/audio/immix-soundfiles/${track.acfPosts.immixInternalLink}`} 
+                imageAlt={track.featuredImage.node.altText}
+                imageSrc={track.featuredImage.node.sourceUrl}
+                key={`immix-track${idx}`}
+                title={track.title}
+              />
             ))}
           </div>
           
