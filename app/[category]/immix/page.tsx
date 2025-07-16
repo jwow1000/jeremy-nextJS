@@ -51,7 +51,7 @@ export default async function ImmixCollection() {
           <div className={styles.mixcloudWrapper}>
             {sounds.map((sound, idx) => (
               <AudioPlayer 
-                audioSrc={`audio/immix-soundfiles/${sound.link}`} 
+                audioSrc={`/audio/immix-soundfiles/${sound.link}`} 
                 key={`immix-track${idx}`}
                 title={sound.title}
               />
