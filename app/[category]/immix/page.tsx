@@ -1,11 +1,6 @@
 import { getPostBySlug, getImmixTracks } from "@/app/lib/api/fetch";
 import AudioPlayer from "@/app/lib/audioPlayer";
-import Image from "next/image";
-import { formatDate } from "@/app/lib/helperFunctions";
 import styles from "@/app/ui/detailPage.module.css";
-import { div } from "three/tsl";
-
-
 
 // export async function generateMetadata({
 //   params,
@@ -17,11 +12,6 @@ import { div } from "three/tsl";
     
 //   }
 // }
-interface Sound {
-  title: string;
-  link: string;
-}
-
 
 export default async function ImmixCollection() {
   const post = await getPostBySlug( 'immix' );
