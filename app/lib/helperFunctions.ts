@@ -16,6 +16,13 @@ export const getImageGallery = (post: ACFPost): FeaturedImage[] => {
   return images;
 };
 
+export const formatDate = (dateString?: string) => {
+  if (!dateString) return "";
+  return new Intl.DateTimeFormat("en-US", {
+    dateStyle: "long",
+  }).format(new Date(dateString));
+};
+
 
 export function translateSlugs( slug: string ): string {
   let newSlug: string | undefined;

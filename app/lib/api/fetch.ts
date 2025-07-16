@@ -45,6 +45,67 @@ export async function getPosts() {
   return json.data.posts.nodes;
 }
 
+// use to get immix-tracks
+export async function getImmixTracks(): Promise<Post[]> {
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
+        query GetPostsByCategory {
+          posts(
+            where: { categoryName: "immix-tracks" }
+          ) {
+            nodes {
+              id
+              title
+              excerpt
+              slug
+              date
+              tags {
+                nodes {
+                  id
+                  name
+                  slug
+                }
+              }
+              featuredImage {
+                node {
+                  sourceUrl
+                  altText
+                  mediaDetails {
+                    sizes {
+                      width
+                      height
+                    }
+                  }
+                }
+              }
+              acfPosts {
+                date
+                description
+                immixInternalLink
+              }
+              
+            }
+          }
+        }
+      `,
+    }),
+    next: { revalidate: 60 },
+  });
+
+  const json: PostResponse = await res.json();
+
+  // Ensure acfPosts.date exists before sorting
+  return json.data.posts.nodes.sort((a, b) => {
+    const dateA = new Date(a.acfPosts.date || "1970-01-01");
+    const dateB = new Date(b.acfPosts.date || "1970-01-01");
+
+    return dateB.getTime() - dateA.getTime();
+  });
+}
+
 export async function getPostsByCategory(category: string): Promise<Post[]> {
   const res = await fetch(API_URL, {
     method: "POST",
@@ -81,8 +142,8 @@ export async function getPostsByCategory(category: string): Promise<Post[]> {
                 }
               }
               acfPosts {
-               date
-               description
+                date
+                description
               }
             }
           }
@@ -136,7 +197,6 @@ export async function getPostBySlug(slug: string): Promise<Post> {
               webportfolioLink
               customVideoSource  
               soundUrl
-              immixLinks
               imageGallery1 {
                 node {
                   sourceUrl

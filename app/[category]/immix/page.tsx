@@ -1,6 +1,9 @@
-import { getPostBySlug } from "@/app/lib/api/fetch";
+import { getPostBySlug, getImmixTracks } from "@/app/lib/api/fetch";
 import AudioPlayer from "@/app/lib/audioPlayer";
+import Image from "next/image";
+import { formatDate } from "@/app/lib/helperFunctions";
 import styles from "@/app/ui/detailPage.module.css";
+import { div } from "three/tsl";
 
 
 
@@ -22,39 +25,31 @@ interface Sound {
 
 export default async function ImmixCollection() {
   const post = await getPostBySlug( 'immix' );
-  console.log("looke at that", post)
-  
-  
-  const sounds: Sound[] | null = post.acfPosts.immixLinks !== 'null' ? 
-    post.acfPosts.immixLinks.split(", ").reduce<Sound[]>((acc, curr, index, array) => {
-        if (index % 2 === 0) {
-            acc.push({ title: curr, link: array[index + 1] || "" });
-        }
-        return acc;
-    }, []) 
-    : null;
- 
-  // an array of featured images
+  const tracks = await getImmixTracks();
+  console.log("looke at that", tracks)
 
   return (
     <main className={styles.main}>
       <div className={styles.infoWrapper}>
         <h1 className={styles.postTitle}>{post.title}</h1>
-        <p className={styles.postDate}>{post.acfPosts.date}</p>
+        {/* <p className={styles.postDate}>{formatDate(post.acfPosts.date)}</p> */}
         <p className={styles.description}>{post.acfPosts.description}</p>
         
       </div>
       
       <section className={styles.imageSection}>
 
-        {sounds &&
+        {tracks &&
           <div className={styles.mixcloudWrapper}>
-            {sounds.map((sound, idx) => (
-              <AudioPlayer 
-                audioSrc={`/audio/immix-soundfiles/${sound.link}`} 
-                key={`immix-track${idx}`}
-                title={sound.title}
-              />
+            
+            {tracks.map((track, idx) => (
+                <AudioPlayer 
+                  audioSrc={`/audio/immix-soundfiles/${track.acfPosts.immixInternalLink}`} 
+                  imageAlt={track.featuredImage.node.altText}
+                  imageSrc={track.featuredImage.node.sourceUrl}
+                  key={`immix-track${idx}`}
+                  title={track.title}
+                />
             ))}
           </div>
           

@@ -2,6 +2,9 @@ export interface MediaSize {
   width: number;
   height: number;
 }
+export interface ImmixTrack {
+  internalLink: string;
+}
 
 export interface MediaDetails {
   sizes: MediaSize[] | MediaSize;
@@ -27,7 +30,7 @@ export interface ACFPost {
   imageGallery3?: FeaturedImage;
   imageGallery4?: FeaturedImage;
   soundUrl: string;
-  immixLinks: string;
+  immixInternalLink: string; 
   
 }
 export interface WPTag {

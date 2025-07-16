@@ -1,4 +1,5 @@
 .audioPlayer {
+  position: relative;
   border: 1px solid white;
   padding: 0.5rem;
   width: 100%;
@@ -12,7 +13,20 @@
 .canvas {
   background-color: rgba(133, 196, 252, 0.596);
 }
+.imageContainer {
+  width: 100%;
+  height: 200px;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 .animationWrapper {
+  position: absolute;
   display: flex;
   justify-content: center;
   width: 100%;

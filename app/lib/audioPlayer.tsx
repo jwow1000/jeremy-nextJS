@@ -1,14 +1,17 @@
 'use client'
 import React, { useRef, useState, useEffect } from "react";
 import { visualizeAudio } from "./visualizeAudioFunction";
+import Image from "next/image";
 import styles from "@/app/ui/audioPlayer.module.css";
 
 interface AudioPlayerProps {
   audioSrc: string;
   title: string;
+  imageSrc: string;
+  imageAlt: string;
 }
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title}) => {
+const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title, imageSrc, imageAlt}) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -92,7 +95,16 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title}) => {
   return (
     <div className={styles.audioPlayer}>
       <div className={styles.title}>{title}</div>
-      
+      <div className={styles.imageContainer}>
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          width="100"
+          height="100"
+          className={styles.image}
+        ></Image> 
+      </div>
+
       <canvas
         ref={canvasRef}
         width={200}
