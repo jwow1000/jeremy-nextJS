@@ -32,19 +32,22 @@ export const visualizeAudio = ({canvasRef, analyserRef}: VisualizeAudioProps) =>
 
     for (let i = 0; i < previousData.length; i++) {
       startX = i * 8;
-      const length = i < 6 ? previousData[i] / 2 : previousData[i];
+      // const length = i < 6 ? previousData[i] / 2 : previousData[i];
+      const norm = (i+1) / previousData.length; // 0 = low, 1 = high
+      const weighting = Math.pow(norm, 0.5); // tweak exponent: <1 boosts highs, >1 boosts lows
+      const length = previousData[i] * weighting;
 
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0.2, "#824cce");
-      gradient.addColorStop(0.5, "#7be26dff");
-      gradient.addColorStop(1.0, "#824cce");
+      gradient.addColorStop(0.2, "#824ccea1");
+      gradient.addColorStop(0.5, "#7be26d94");
+      gradient.addColorStop(1.0, "#824cce63");
 
       ctx.fillStyle = gradient;
       ctx.fillRect(
         startX,
         canvas.height,
         barWidth,
-        -length
+        -length * 3
       );
     }
 
