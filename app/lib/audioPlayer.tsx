@@ -131,22 +131,24 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title, imageSrc, ima
   return (
     <div className={styles.audioPlayer}>
       <div className={styles.title}>{title}</div>
-      <div className={styles.imageContainer}>
-        <Image
-          src={imageSrc}
-          alt={imageAlt}
-          width="100"
-          height="100"
-          className={styles.image}
-        ></Image> 
+      <div className={styles.playerImageContainer}>
+        <div className={styles.imageContainer}>
+          <Image
+            src={imageSrc}
+            alt={imageAlt}
+            width="100"
+            height="100"
+            className={styles.image}
+          ></Image> 
+        </div>
+        <canvas
+          ref={canvasRef}
+          width={200}
+          height={100}
+          className={styles.canvas}
+        />
       </div>
 
-      <canvas
-        ref={canvasRef}
-        width={200}
-        height={100}
-        className={styles.canvas}
-      />
       <audio ref={audioRef} src={audioSrc}></audio>
       
       <button className={styles.playPause} onClick={togglePlayPause}>

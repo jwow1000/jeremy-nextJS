@@ -91,6 +91,9 @@ export default function Header() {
         <li>
           <NavLink href="/cv" className={styles.link} activeClassName={styles.activeLink}>cv</NavLink>
         </li>
+        <li>
+          <NavLink href="/shop" className={styles.link} activeClassName={styles.activeLink}>shop</NavLink>
+        </li>
         
       </ul>
     
