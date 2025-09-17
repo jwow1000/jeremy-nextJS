@@ -3,6 +3,20 @@
   margin-bottom: 5rem;
   width: 100%;
 }
+.webPreviewWrapper {
+  position: relative;
+  width: 500px;
+  height: 20rem;
+  pointer-events: none;
+  margin: 4rem auto;
+}
+.webPreview {
+  width: 1000px;    
+  height: 800px;    
+  transform: scale(0.5);
+  transform-origin: top left;
+  border: none;
+}
 
 .infoWrapper {
   width: 100%;

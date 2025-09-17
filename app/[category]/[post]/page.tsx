@@ -52,7 +52,15 @@ export default async function PostDetailPage({
       </div>
       
       <section className={styles.imageSection}>
-
+        {/* {
+          webLink &&
+          <div className={styles.webPreviewWrapper}>
+            <iframe 
+              src={webLink}
+              className={styles.webPreview}
+            />
+          </div>
+        } */}
         <Gallery images={ imageGallery }/>
         {sounds &&
           <div className={styles.mixcloudWrapper}>
