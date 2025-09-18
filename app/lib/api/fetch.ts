@@ -1,8 +1,15 @@
 import { Entry, WordPressAPIResponse } from "@/app/types/cvEntryTypes";
-import { Post, PostResponse, PostCategory } from "@/app/types/postTypes";
+import {
+  Post,
+  PostResponse,
+  PostCategory,
+  Product,
+  ProductResponse,
+} from "@/app/types/postTypes";
 import { translateSlugs } from "../helperFunctions";
 
-const API_URL = process.env.WORDPRESS_GRAPHQL_ENDPOINT || "https://wp.jeremywy.com/graphql";
+const API_URL =
+  process.env.WORDPRESS_GRAPHQL_ENDPOINT || "https://wp.jeremywy.com/graphql";
 
 // local use functions
 function transformExpoData(json: WordPressAPIResponse): Entry[] {
@@ -243,16 +250,13 @@ export async function getPostBySlug(slug: string): Promise<Post> {
       `,
       variables: { slug },
     }),
-    next: {revalidate: 60},
+    next: { revalidate: 60 },
   });
 
   const json = await res.json();
-  console.log("lkfds", json)
+  console.log("lkfds", json);
   return json.data.postBy || null;
-  
 }
-
-
 
 export async function getCVEntries() {
   const res = await fetch(API_URL, {
@@ -290,8 +294,7 @@ export async function getCVEntries() {
 
 // get category info, use getPostsByCategory to get posts
 export async function getCategoryBySlug(slug: string): Promise<PostCategory> {
-  
-  const newSlug = translateSlugs( slug );
+  const newSlug = translateSlugs(slug);
   const res = await fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -306,12 +309,98 @@ export async function getCategoryBySlug(slug: string): Promise<PostCategory> {
           }
         }
       `,
-      variables: { newSlug }, 
+      variables: { newSlug },
     }),
     next: { revalidate: 60 }, // ISR (Incremental Static Regeneration)
   });
 
   const json = await res.json();
-  console.log("did we get content", json.data)
   return json.data;
+}
+
+// use to get shop products
+
+export async function getProducts(): Promise<Product[]> {
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
+        query GetProducts {
+          products( where: { orderby: { field: DATE, order: DESC } }) {
+            nodes {
+              id
+              slug
+              name
+              ... on SimpleProduct {
+                price(format: RAW)
+                regularPrice(format: RAW)
+                salePrice(format: RAW)
+                
+              }
+              date
+              description
+              featuredImage {
+                cursor
+                node {
+                  altText
+                  caption
+                  file
+                  filePath
+                  sourceUrl
+                }
+              }
+            }
+          }
+        }
+      `,
+    }),
+    next: { revalidate: 60 },
+  });
+
+  const json: ProductResponse = await res.json();
+  return json.data.products.nodes;
+}
+
+// get product by slug
+export async function getProductBySlug(slug: string): Promise<Product> {
+  const newSlug = translateSlugs(slug);
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
+        query GetProduct($slug: [String!]) {
+          products(
+            where: { slugIn: $slug, orderby: { field: DATE, order: DESC } }
+          ) {
+            nodes {
+              id
+              slug
+              name
+              ... on SimpleProduct {
+                price(format: RAW)
+                regularPrice(format: RAW)
+                salePrice(format: RAW)
+              }
+              date
+              description
+              featuredImage {
+                node {
+                  altText
+                  caption
+                  sourceUrl
+                }
+              }
+            }
+          }
+        }
+      `,
+      variables: { slug: newSlug },
+    }),
+    next: { revalidate: 60 }, // ISR (Incremental Static Regeneration)
+  });
+
+  const json = await res.json();
+  return json.data.products.nodes[0] || null;
 }

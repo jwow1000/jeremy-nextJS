@@ -67,3 +67,19 @@ export interface PostCategory {
   slug: string;
   description: string;
 }
+
+export interface ProductResponse {
+  data: {
+    products: {
+      nodes: Product[];
+    }
+  }
+}
+export interface Product {
+  id: string;
+  slug: string;
+  name: string;
+  date: string;
+  featuredImage: FeaturedImage;
+  price: string;
+}
