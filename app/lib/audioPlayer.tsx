@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useRef, useState, useEffect } from "react";
 import { visualizeAudio } from "./visualizeAudioFunction";
 import Image from "next/image";
@@ -11,7 +11,12 @@ interface AudioPlayerProps {
   imageAlt: string;
 }
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title, imageSrc, imageAlt}) => {
+const AudioPlayer: React.FC<AudioPlayerProps> = ({
+  audioSrc,
+  title,
+  imageSrc,
+  imageAlt,
+}) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -19,30 +24,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title, imageSrc, ima
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(1);
-
-
-  // useEffect(() => {
-  //   const audio = audioRef.current;
-  //   const canvas = canvasRef.current;
-  //   if (!audio || !canvas) return;
-
-  //   const audioContext = new AudioContext();
-  //   const source = audioContext.createMediaElementSource(audio);
-  //   const analyser = audioContext.createAnalyser();
-
-  //   analyser.fftSize = 256; // you can adjust this
-  //   source.connect(analyser);
-  //   analyser.connect(audioContext.destination);
-
-  //   analyserRef.current = analyser;
-
-  //   // clean up
-  //   return () => {
-  //     analyser.disconnect();
-  //     source.disconnect();
-  //     audioContext.close();
-  //   };
-  // }, []);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -96,20 +77,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title, imageSrc, ima
     }
   };
 
-  // const togglePlayPause = () => {
-  //   const audio = audioRef.current;
-  //   if (!audio) return;
-
-  //   if (isPlaying) {
-  //     audio.pause();
-  //   } else {
-  //     // Start visualization here
-  //     visualizeAudio({ canvasRef, analyserRef });
-  //     audio.play();
-  //   }
-  //   setIsPlaying(!isPlaying);
-  // };
-
   const handleProgressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -136,10 +103,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title, imageSrc, ima
           <Image
             src={imageSrc}
             alt={imageAlt}
-            width="100"
-            height="100"
-            className={styles.image}
-          ></Image> 
+            fill
+            style={{ objectFit: "contain" }}
+          ></Image>
         </div>
         <canvas
           ref={canvasRef}
@@ -150,11 +116,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title, imageSrc, ima
       </div>
 
       <audio ref={audioRef} src={audioSrc}></audio>
-      
+
       <button className={styles.playPause} onClick={togglePlayPause}>
         {isPlaying ? "||" : ">"}
       </button>
-      <label htmlFor="trackScrub" className={styles.labels}>Track</label>
+      <label htmlFor="trackScrub" className={styles.labels}>
+        Track
+      </label>
       <input
         id="trackScrub"
         ref={progressRef}
@@ -165,7 +133,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioSrc, title, imageSrc, ima
         onChange={handleProgressChange}
         className={styles.progressBar}
       />
-      <label htmlFor="volume" className={styles.labels}>Volume</label>
+      <label htmlFor="volume" className={styles.labels}>
+        Volume
+      </label>
       <input
         id="volume"
         type="range"
