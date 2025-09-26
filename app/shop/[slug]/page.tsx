@@ -17,7 +17,6 @@ export default async function ProductDetail({
 }) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
-  console.log("the product: ", product, slug)
 
   
   return (

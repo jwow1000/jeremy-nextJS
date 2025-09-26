@@ -24,7 +24,9 @@ export default async function Shop() {
               <h2 className={shopStyles.header}
                 style={{border: 'solid 1px white', padding: '0.2rem', lineHeight: '90%'}}
               >{product.name}</h2>
-              <p>{shopStyles.date}</p>
+              <p className={shopStyles.price}>
+                {`$${product.price}`}
+              </p>
               <div className={shopStyles.imageWrapper}>
                 <Image
                   src={product.featuredImage?.node.sourceUrl || noImage}
