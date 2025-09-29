@@ -93,7 +93,7 @@ export interface Product {
   id: string;
   slug: string;
   name: string;
-  short_description: string;
+  shortDescription: string;
   description: string;
   images: Image[];
   date: string;

@@ -399,6 +399,7 @@ export async function getProductBySlug(slug: string): Promise<Product> {
                   sourceUrl
                 }
               }
+              shortDescription
             }
           }
         }

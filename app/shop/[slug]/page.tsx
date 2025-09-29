@@ -1,6 +1,7 @@
 import { getProductBySlug } from "@/app/lib/api/fetch";
 import Cart from "@/app/lib/Cart";
 import Image from "next/image";
+import HTMLParse from "@/app/lib/HtmlParse";
 import shopStyles from "@/app/ui/shop.module.css";
 
 type Params = Promise<{ slug: string }>;
@@ -12,11 +13,11 @@ export async function generateMetadata({ params }: { params: Params }) {
   return {
     title: product.name,
     description:
-      product.short_description || product.description?.slice(0, 160),
+      product.shortDescription || product.description?.slice(0, 160),
     openGraph: {
       title: product.name,
       description:
-        product.short_description || product.description?.slice(0, 160),
+        product.shortDescription || product.description?.slice(0, 160),
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/shop/${slug}`,
       images: [
         {
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: { params: Params }) {
       card: "summary_large_image",
       title: product.name,
       description:
-        product.short_description || product.description?.slice(0, 160),
+        product.shortDescription || product.description?.slice(0, 160),
       images: [product.images?.[0]?.node.sourceUrl || "/default-og.png"],
     },
   };
@@ -38,12 +39,13 @@ export async function generateMetadata({ params }: { params: Params }) {
 export default async function ProductDetail({ params }: { params: Params }) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
-  console.log("product: ", product.galleryImages.nodes);
+  console.log("product: ", product);
 
   return (
     <main className={shopStyles.main}>
       <h1 className={shopStyles.header}>{product.name}</h1>
-      {product.description}
+      <HTMLParse html={product.description}/>
+      <h2>{`$${product.price}`}</h2>
       <div className={shopStyles.galleryWrapper}>
         {product.galleryImages &&
           product.galleryImages.nodes.map((image, idx) => (
