@@ -10,12 +10,18 @@ export interface MediaDetails {
   sizes: MediaSize[] | MediaSize;
 }
 
+export interface Image {
+  sourceUrl: string;
+  altText: string;
+  mediaDetails: MediaDetails;
+}
+
 export interface FeaturedImage {
-  node: {
-    sourceUrl: string;
-    altText: string;
-    mediaDetails: MediaDetails;
-  };
+  node: Image;
+}
+
+export interface GalleryImages {
+  nodes: Image[]
 }
 
 export interface Image {
@@ -92,5 +98,6 @@ export interface Product {
   images: Image[];
   date: string;
   featuredImage: FeaturedImage;
+  galleryImages: GalleryImages;
   price: string;
 }

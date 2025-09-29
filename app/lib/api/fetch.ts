@@ -392,6 +392,13 @@ export async function getProductBySlug(slug: string): Promise<Product> {
                   sourceUrl
                 }
               }
+              galleryImages {
+                nodes {
+                  altText
+                  caption
+                  sourceUrl
+                }
+              }
             }
           }
         }
