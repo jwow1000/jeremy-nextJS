@@ -1,13 +1,20 @@
-import { useRouter } from "next/router";
+import shopStyles from "@/app/ui/shop.module.css";
+import Link from "next/link";
 
 const url = process.env.WOO_URL; 
 
-export function CheckoutButton() {
-  const router = useRouter();
+interface ButtonProps {
+  text: string;
+}
 
-  const goToCheckout = () => {
-    router.push(`${url}/checkout`);
-  };
+export function CheckoutButton({text} : ButtonProps) {
 
-  return <button onClick={goToCheckout}>Checkout</button>;
+  return (
+    <Link
+      href={`${url}/checkout`}
+      className={shopStyles.buyButton}
+    >
+      {text}
+    </Link>
+  )
 }

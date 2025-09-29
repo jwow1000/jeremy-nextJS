@@ -35,6 +35,18 @@
   width: 100%;
   height: 300px;
 }
+.buyButton {
+  border: 0.1px solid white;
+  border-radius: 0;
+  padding: 0.3rem;
+  background-color: rgba(0,0,0,0);
+  color: white;
+  text-decoration: none;
+}
+
+.buyButton:hover {
+  background-color: rgba(50, 3, 126, 0.9);
+}
 
 
 @media( max-width: 500px) {

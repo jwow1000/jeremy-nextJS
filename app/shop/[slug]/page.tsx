@@ -1,28 +1,54 @@
 import { getProductBySlug } from "@/app/lib/api/fetch";
-import styles from "@/app/ui/shopDetail.module.css";
+import Cart from "@/app/lib/Cart";
 import shopStyles from "@/app/ui/shop.module.css";
 
-type Params = Promise<{ slug: string }>
- 
+type Params = Promise<{ slug: string }>;
+
 export async function generateMetadata({ params }: { params: Params }) {
-  const { slug } = await params
-}
- 
-export default async function ProductDetail({
-  children,
-  params,
-}: {
-  children: React.ReactNode
-  params: Params
-}) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
 
-  
+  return {
+    title: product.name,
+    description:
+      product.short_description || product.description?.slice(0, 160),
+    openGraph: {
+      title: product.name,
+      description:
+        product.short_description || product.description?.slice(0, 160),
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/products/${slug}`,
+      images: [
+        {
+          url: product.images?.[0]?.node.sourceUrl || "/default-og.png",
+          alt: product.name,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.name,
+      description:
+        product.short_description || product.description?.slice(0, 160),
+      images: [product.images?.[0]?.node.sourceUrl || "/default-og.png"],
+    },
+  };
+}
+
+export default async function ProductDetail({
+  params,
+}: {
+  params: Params;
+}) {
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
+  console.log("product: ", product);
+
   return (
     <main className={shopStyles.main}>
       <h1 className={shopStyles.header}>{product.name}</h1>
-      <button className={shopStyles.buyButton}></button>
+      { product.description}
+      {/* <CheckoutButton text={'add item to cart'}/> */}
+      {product.id && <Cart productId={product.id} />}
     </main>
-  )
+  );
 }

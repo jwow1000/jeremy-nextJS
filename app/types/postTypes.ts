@@ -18,6 +18,14 @@ export interface FeaturedImage {
   };
 }
 
+export interface Image {
+  node: {
+    sourceUrl: string;
+    altText: string;
+    mediaDetails: MediaDetails;
+  }; 
+}
+
 export interface ACFPost {
   date: string;
   youtubeId: string;
@@ -79,6 +87,9 @@ export interface Product {
   id: string;
   slug: string;
   name: string;
+  short_description: string;
+  description: string;
+  images: Image[];
   date: string;
   featuredImage: FeaturedImage;
   price: string;

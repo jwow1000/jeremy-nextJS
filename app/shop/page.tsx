@@ -1,7 +1,7 @@
 import { getProducts } from "../lib/api/fetch";
 import Image from "next/image";
 import noImage from "@/public/jwy_logo_24.svg";
-import styles from "@/app/ui/page.module.css";
+// import styles from "@/app/ui/page.module.css";
 import shopStyles from "@/app/ui/shop.module.css";
 import Link from "next/link";
 

@@ -1,30 +1,35 @@
 "use client";
+
 import { useEffect, useState } from "react";
+import { WooCart } from "../types/wooTypes";
 import { getCart, addToCart } from "@/app/lib/api/woo";
 
-export default function Cart(productId: number) {
-  const [cart, setCart] = useState<any>(null);
+interface CartProps {
+  productId: string;
+}
+export default function Cart({productId} : CartProps) {
+  const [cart, setCart] = useState<WooCart>();
 
   useEffect(() => {
     getCart().then(setCart);
   }, []);
 
   const handleAdd = async () => {
-    await addToCart(productId); // product ID
+    await addToCart( productId ); // product ID
     setCart(await getCart()); // refresh
   };
 
-  if (!cart) return <p>Loading cart...</p>;
+  if (!cart) return <p>loading cart...</p>;
 
   return (
     <div>
       <h2>Cart</h2>
-      {cart.items.map((item: any) => (
+      {cart.items.map((item) => (
         <div key={item.key}>
           {item.name} x {item.quantity}
         </div>
       ))}
-      <button onClick={handleAdd}>Add Product</button>
+      <button onClick={handleAdd}>add item</button>
     </div>
   );
 }
