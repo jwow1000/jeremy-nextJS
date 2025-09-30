@@ -1,7 +1,12 @@
 {
-  "/shop/page": "app/shop/page.js",
-  "/shop/[slug]/page": "app/shop/[slug]/page.js",
   "/_not-found/page": "app/_not-found/page.js",
+  "/[category]/bikeMap/page": "app/[category]/bikeMap/page.js",
+  "/[category]/immix/page": "app/[category]/immix/page.js",
   "/[category]/page": "app/[category]/page.js",
-  "/[category]/[post]/page": "app/[category]/[post]/page.js"
+  "/[category]/subway-2016/page": "app/[category]/subway-2016/page.js",
+  "/page": "app/page.js",
+  "/cv/page": "app/cv/page.js",
+  "/[category]/[post]/page": "app/[category]/[post]/page.js",
+  "/shop/[slug]/page": "app/shop/[slug]/page.js",
+  "/shop/page": "app/shop/page.js"
 }

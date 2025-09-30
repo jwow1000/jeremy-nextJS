@@ -415,7 +415,7 @@ export async function getProductBySlug(slug: string): Promise<Product> {
   try {
     json = JSON.parse(raw);
   } catch (err) {
-    throw new Error("Failed to parse JSON. Raw response:\n" + raw);
+    throw new Error("Failed to parse JSON. Raw response:\n" + raw + err);
   }
   return json.data.products?.nodes?.at(0) ?? null;
 

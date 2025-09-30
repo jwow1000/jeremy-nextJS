@@ -191,7 +191,7 @@ exports.id=494,exports.ids=[494],exports.modules={5335:(e,t,r)=>{Promise.resolve
             }
           }
         }
-      `}),next:{revalidate:60}});return(await e.json()).data.products.nodes}async function c(e){let t=(0,a.Ho)(e),r=await fetch(s,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({query:`
+      `}),next:{revalidate:60}});return(await e.json()).data.products.nodes}async function c(e){let t;let r=(0,a.Ho)(e),i=await fetch(s,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({query:`
         query GetProduct($slug: [String!]) {
           products(
             where: { slugIn: $slug, orderby: { field: DATE, order: DESC } }
@@ -214,7 +214,15 @@ exports.id=494,exports.ids=[494],exports.modules={5335:(e,t,r)=>{Promise.resolve
                   sourceUrl
                 }
               }
+              galleryImages {
+                nodes {
+                  altText
+                  caption
+                  sourceUrl
+                }
+              }
+              shortDescription
             }
           }
         }
-      `,variables:{slug:t}}),next:{revalidate:60}});return(await r.json()).data.products.nodes[0]||null}},8005:(e,t,r)=>{"use strict";r.d(t,{default:()=>a});let a=(0,r(5002).registerClientReference)(function(){throw Error("Attempted to call the default export of \"/Users/jerrijung/Documents/jeremy-nextJS/nextjs-dashboard/app/lib/header.tsx\" from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.")},"/Users/jerrijung/Documents/jeremy-nextJS/nextjs-dashboard/app/lib/header.tsx","default")},6638:(e,t,r)=>{"use strict";r.d(t,{Ho:()=>s,mN:()=>a});let a=e=>{console.log("the post look for the images: ",e);let t=[];for(let r=1;r<=4;r++){let a=e[`imageGallery${r}`];a&&t.push(a)}return t};function s(e){let t;switch(e){case"objects":t="things";break;case"sounds":t="sound";break;case"videos":t="video";break;case"webprojects":t="webportfolio";break;default:t=e}return t}},2716:()=>{}};
+      `,variables:{slug:r}}),next:{revalidate:60}}),o=await i.text();try{t=JSON.parse(o)}catch(e){throw Error("Failed to parse JSON. Raw response:\n"+o+e)}return t.data.products?.nodes?.at(0)??null}},8005:(e,t,r)=>{"use strict";r.d(t,{default:()=>a});let a=(0,r(5002).registerClientReference)(function(){throw Error("Attempted to call the default export of \"/Users/jerrijung/Documents/jeremy-nextJS/nextjs-dashboard/app/lib/header.tsx\" from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.")},"/Users/jerrijung/Documents/jeremy-nextJS/nextjs-dashboard/app/lib/header.tsx","default")},6638:(e,t,r)=>{"use strict";r.d(t,{Ho:()=>s,mN:()=>a});let a=e=>{console.log("the post look for the images: ",e);let t=[];for(let r=1;r<=4;r++){let a=e[`imageGallery${r}`];a&&t.push(a)}return t};function s(e){let t;switch(e){case"objects":t="things";break;case"sounds":t="sound";break;case"videos":t="video";break;case"webprojects":t="webportfolio";break;default:t=e}return t}},2716:()=>{}};
