@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack://[project]/app/globals.css"],"sourcesContent":["\nhtml,\nbody {\n  width: 100%;\n  height: auto;\n}\n\nbody {\n  color: white;\n  background: black;\n  font-family: Arial, Helvetica, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n* {\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n\na {\n  color: white;\n}\n\n\n"],"names":[],"mappings":"AACA;;;;;AAMA;;;;;;;;AAQA;;;;;;AAMA"}},
+    {"offset": {"line": 23, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

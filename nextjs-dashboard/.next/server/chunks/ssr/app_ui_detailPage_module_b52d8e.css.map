@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack://[project]/app/ui/detailPage.module.css"],"sourcesContent":[".main {\n  padding: 2rem;\n  margin-bottom: 5rem;\n  width: 100%;\n}\n.webPreviewWrapper {\n  position: relative;\n  width: 500px;\n  height: 20rem;\n  pointer-events: none;\n  margin: 4rem auto;\n}\n.webPreview {\n  width: 1000px;    \n  height: 800px;    \n  transform: scale(0.5);\n  transform-origin: top left;\n  border: none;\n}\n\n.infoWrapper {\n  width: 100%;\n\n  display: flex;\n  flex-flow: column;\n  gap: 2rem;\n}\n\n.main p {\n  max-width: 55ch;\n}\n\n.mixcloudWrapper {\n  width: 90%;\n  max-width: 20rem;\n\n  margin: 2rem auto;\n  display: flex;\n  flex-flow: column wrap;\n  gap: 4rem;\n  justify-content: center;\n  align-items: center;\n}\n\n@media (max-width: 599px) {\n  .page {\n    margin: 0;\n    padding: 1rem;\n  }\n\n  .main {\n    margin: 0;\n    padding: 0 0.5rem;\n    align-items: center;\n  }\n  .mixcloudWrapper {\n    width: 100%;\n  }\n\n\n}"],"names":[],"mappings":"AAAA;;;;;;AAKA;;;;;;;;AAOA;;;;;;;;AAQA;;;;;;;AAQA;;;;AAIA;;;;;;;;;;;AAYA;EACE;;;;;EAKA;;;;;;EAKA"}},
+    {"offset": {"line": 61, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

@@ -1,0 +1,93 @@
+/* [project]/app/ui/header.module.css [app-client] (css) */
+.header-module__AkXC2a__wrapper {
+  position: relative;
+  font-family: inherit;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+#header-module__AkXC2a__animationWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+}
+
+.header-module__AkXC2a__animationWrapper {
+  width: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.header-module__AkXC2a__animationWrapper.header-module__AkXC2a__visible {
+  opacity: 1;
+}
+
+.header-module__AkXC2a__wrapper > ul {
+  text-decoration: none;
+  list-style: none;
+}
+
+.header-module__AkXC2a__navWrapper {
+  width: 90%;
+  height: 2rem;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1;
+  gap: 1rem;
+}
+
+.header-module__AkXC2a__link {
+  display: block;
+  font-size: 1.3rem;
+  font-style: italic;
+  color: pink;
+  padding: .3rem;
+  border: 1px solid pink;
+  background-color: #32037ee6;
+}
+
+.header-module__AkXC2a__activeLink {
+  background-color: pink;
+  color: #32037ee6;
+}
+
+.header-module__AkXC2a__logoWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.header-module__AkXC2a__logo {
+  filter: invert(90%);
+  width: 100%;
+}
+
+@media (width <= 600px) {
+  .header-module__AkXC2a__link {
+    font-size: .9rem;
+  }
+
+  .header-module__AkXC2a__navWrapper {
+    width: 70%;
+    height: 4rem;
+    margin-bottom: 2rem;
+  }
+
+  .header-module__AkXC2a__logoWrapper {
+    width: 7rem;
+    left: 50%;
+    transform: translate(-50%, -18%);
+  }
+}
+
+
+/*# sourceMappingURL=app_ui_header_module_9a5c48.css.map*/
