@@ -1,0 +1,77 @@
+/* [project]/app/ui/shop.module.css [app-client] (css) */
+.shop-module__GtLAIq__main {
+  position: relative;
+  padding: 4rem 2rem 8rem;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.shop-module__GtLAIq__header {
+  font-weight: 400;
+}
+
+.shop-module__GtLAIq__productsWrapper {
+  margin-top: 4rem;
+  display: flex;
+  width: 100%;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+}
+
+.shop-module__GtLAIq__productContainer {
+  text-decoration: none;
+  width: 100%;
+  max-width: 600px;
+  padding: .5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+}
+
+.shop-module__GtLAIq__price {
+  font-size: 1.3rem;
+}
+
+.shop-module__GtLAIq__imageWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 1;
+}
+
+.shop-module__GtLAIq__galleryWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.shop-module__GtLAIq__buyButton {
+  border: .1px solid #fff;
+  border-radius: 0;
+  padding: .3rem;
+  background-color: #0000;
+  color: #fff;
+  text-decoration: none;
+}
+
+.shop-module__GtLAIq__buyButton:hover {
+  background-color: #32037ee6;
+}
+
+@media (width <= 500px) {
+  .shop-module__GtLAIq__main {
+    padding-left: .5rem;
+    padding-right: .5rem;
+  }
+}
+
+
+/*# sourceMappingURL=app_ui_shop_module_28a359.css.map*/
