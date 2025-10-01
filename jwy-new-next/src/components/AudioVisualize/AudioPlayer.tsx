@@ -8,7 +8,7 @@ interface AudioPlayerProps {
   audioSrc: string;
   title: string;
   imageSrc: string;
-  imageAlt: string;
+  imageAlt?: string;
 }
 
 const AudioPlayer: React.FC<AudioPlayerProps> = ({
@@ -102,7 +102,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
         <div className={styles.imageContainer}>
           <Image
             src={imageSrc}
-            alt={imageAlt}
+            alt={imageAlt || "no description available"}
             fill
             style={{ objectFit: "contain" }}
           ></Image>
@@ -115,7 +115,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
         />
       </div>
 
-      <audio ref={audioRef} src={audioSrc}></audio>
+      <audio ref={audioRef} crossOrigin="anonymous" >
+        <source src={audioSrc} type="audio/mpeg" />
+      </audio>
 
       <button className={styles.playPause} onClick={togglePlayPause}>
         {isPlaying ? "||" : ">"}
