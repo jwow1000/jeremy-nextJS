@@ -54,7 +54,7 @@ export default function WorksClient({ works }: { works: Work[] }) {
                 <MyImage
                   src={imageUrl!}
                   alt={work.featuredImage?.alt || "no alt text available"}
-                  objectFit="cover"
+                  objectFit="contain"
                 />
               </div>
             </Link>
