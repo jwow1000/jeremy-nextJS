@@ -12,11 +12,11 @@ export const work = defineType({
       description: 'title of work',
       type: 'string',
     }),
-    {
+    defineField({
       name: "slug",
       type: "slug",
       options: { source: "title", maxLength: 96 },
-    },
+    }),
     defineField({
       name: 'type',
       title: 'Type',
@@ -53,6 +53,12 @@ export const work = defineType({
       name: 'vidLink',
       title: 'Video Link',
       type: 'url',
+    }),
+    defineField({
+      name: 'youtubeID',
+      title: 'Youtube ID',
+      description: 'if embedding a youtube just provide the id in the url',
+      type: 'string'
     }),
     defineField({
       name: 'soundLink',

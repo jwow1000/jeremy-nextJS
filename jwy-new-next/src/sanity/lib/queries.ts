@@ -11,3 +11,14 @@ export const getWorkBySlugQuery = defineQuery(`
 export const getCVQuery = defineQuery(`
   *[_type == "cv"][0]
 `);
+
+export const getAudioFilesByProjectQuery = defineQuery(`
+  *[_type == "audio" && $project == projectTitle] {
+      title,
+      projectTitle,
+      _id,
+      featuredImage,
+      description,
+      "audioUrl": audioFile.asset->url // Project the asset's URL
+    }
+`);

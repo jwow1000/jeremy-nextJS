@@ -1,6 +1,7 @@
 import MyImage from "@/components/MyImage"
 import { urlFor } from "@/sanity/lib/image"
 import { getWorkBySlug } from "@/sanity/lib/fetch"
+import YouTubeEmbed from "@/components/Youtube"
 import MyPortableText from "@/components/MyPortableText"
 
 export default async function WorkDetail({
@@ -42,6 +43,12 @@ export default async function WorkDetail({
                 )})
               }
             </div>
+        }
+        {
+          work.youtubeID &&
+          <div className="max-w-[800px] mx-auto my-10">
+            <YouTubeEmbed videoId={work.youtubeID} />
+          </div>
         }
 
       </section>
