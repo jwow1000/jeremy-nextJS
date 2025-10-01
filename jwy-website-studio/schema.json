@@ -321,6 +321,13 @@
         },
         "optional": true
       },
+      "youtubeID": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "soundLink": {
         "type": "objectAttribute",
         "value": {

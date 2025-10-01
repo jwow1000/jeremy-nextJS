@@ -51,6 +51,7 @@ export type Work = {
   subType?: 'immix' | 'subway'
   date?: string
   vidLink?: string
+  youtubeID?: string
   soundLink?: string
   featuredImage?: {
     asset?: {

@@ -55,6 +55,12 @@ export const work = defineType({
       type: 'url',
     }),
     defineField({
+      name: 'youtubeID',
+      title: 'Youtube ID',
+      description: 'if embedding a youtube just provide the id in the url',
+      type: 'string'
+    }),
+    defineField({
       name: 'soundLink',
       title: 'Sound Link',
       type: 'url',
