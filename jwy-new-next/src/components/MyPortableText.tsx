@@ -1,4 +1,8 @@
-import { PortableText, PortableTextComponents, PortableTextMarkComponentProps } from "@portabletext/react";
+import {
+  PortableText,
+  PortableTextComponents,
+  PortableTextMarkComponentProps,
+} from "@portabletext/react";
 import type { PortableTextBlock } from "sanity";
 
 const ptComponents: PortableTextComponents = {
@@ -19,6 +23,10 @@ const ptComponents: PortableTextComponents = {
   },
 };
 
-export default function MyPortableText({ content }: { content: PortableTextBlock[] }) {
+export default function MyPortableText({
+  content,
+}: {
+  content: PortableTextBlock[];
+}) {
   return <PortableText value={content} components={ptComponents} />;
 }
