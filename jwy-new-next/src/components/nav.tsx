@@ -14,9 +14,9 @@ export default function Nav() {
 
   return (
     <nav className="
-    fixed right-4 top-4 bg-none w-[100px] h-[100px] 
-    md:right-12 md:top-12 md:w-[150px] md:h-[150px]
-    flex items-center justify-center">
+    fixed right-3 top-1 bg-none w-[100px] h-[100px] 
+    md:right-5 md:top-5 md:w-[150px] md:h-[150px]
+    flex items-center justify-center z-50">
       <button
         className="relative w-full h-full"
         onClick={handleClick}
@@ -38,13 +38,13 @@ export default function Nav() {
             onClick={handleClick}
           >
             <ul className="relative flex flex-col justify-start items-end w-auto backdrop-invert-[60%] text-foreground z-50">
-              <Link href={`/`} className="w-full text-left no-underline flex flex-col pointer-auto p-2 hover:bg-[var(--pink)]" >
+              <Link href={`/`} className="w-full text-left no-underline flex flex-col pointer-auto p-2 hover:bg-[var(--pink)] hover:text-black" >
                 home
               </Link>
-              <Link href={`/works`} className="w-full text-left no-underline flex flex-col pointer-auto p-2 hover:bg-[var(--pink)]" >
+              <Link href={`/works`} className="w-full text-left no-underline flex flex-col pointer-auto p-2 hover:bg-[var(--pink)] hover:text-black" >
                 works
               </Link>
-              <Link href={`/cv`} className="w-full text-left no-underline flex flex-col pointer-auto p-2 hover:bg-[var(--pink)]" >
+              <Link href={`/cv`} className="w-full text-left no-underline flex flex-col pointer-auto p-2 hover:bg-[var(--pink)] hover:text-black" >
                 cv
               </Link>
             </ul>

@@ -24,13 +24,13 @@ export default defineType({
   ],
   preview: {
     select: {
-      imageUrl: 'asset.url',
+      image: 'asset',
       title: 'alt',
     },
-    prepare({ imageUrl, title }) {
+    prepare({ image, title }) {
       return {
         title: title || 'Untitled image',
-        media: imageUrl,
+        media: image, // pass the asset object or the whole document
       }
     },
   },

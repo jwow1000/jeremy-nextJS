@@ -12,6 +12,11 @@ export const work = defineType({
       description: 'title of work',
       type: 'string',
     }),
+    {
+      name: "slug",
+      type: "slug",
+      options: { source: "title", maxLength: 96 },
+    },
     defineField({
       name: 'type',
       title: 'Type',

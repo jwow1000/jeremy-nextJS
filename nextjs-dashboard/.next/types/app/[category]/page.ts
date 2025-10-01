@@ -1,8 +1,8 @@
 // File: /Users/jerrijung/Documents/jeremy-nextJS/nextjs-dashboard/app/[category]/page.tsx
-import * as entry from '../../../../app/[category]/page.js'
+import * as entry from '../../../../app/[category]/page.jsx'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
-type TEntry = typeof import('../../../../app/[category]/page.js')
+type TEntry = typeof import('../../../../app/[category]/page.jsx')
 
 type SegmentParams<T extends Object = any> = T extends Record<string, any>
   ? { [K in keyof T]: T[K] extends string ? string | string[] | undefined : never }

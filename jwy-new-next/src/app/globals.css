@@ -3,7 +3,8 @@
 :root {
   --background: #efefef;
   --foreground: #171717;
-  --pink: #e99595;
+  /* --pink: #e99595; */
+  --pink: #f5c2cb;
   --font-incon: 'Inconsolata', monospace; /* fallback in case font fails to load */
 }
 

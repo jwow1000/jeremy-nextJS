@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { Inconsolata } from "next/font/google";
 import Nav from "@/components/nav";
 import "./globals.css";

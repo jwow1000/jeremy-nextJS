@@ -1,12 +1,11 @@
-import Image from "next/image";
+import { getWorks } from "@/sanity/lib/fetch";
+import WorksClient from "@/components/WorksClient";
 
-export default function Works() {
+export default async function Works() {
+  const works = await getWorks();
+  console.log("works: ", works);
+
   return (
-    <main className="flex flex-col w-full p-4 pt-12 font-normal">
-      <h1>Works</h1>
-      <div className="">
-        
-      </div>
-    </main> 
+    <WorksClient works={works}/>
   );
 }

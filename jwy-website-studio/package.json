@@ -5,6 +5,7 @@
   "main": "package.json",
   "license": "UNLICENSED",
   "scripts": {
+    "generate:types": "sanity schema extract && sanity typegen generate",
     "dev": "sanity dev",
     "start": "sanity start",
     "build": "sanity build",

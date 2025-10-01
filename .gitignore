@@ -1,0 +1,51 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Next.js
+.next/
+out/
+dist/
+
+# Sanity Studio
+.sanity/
+.sanity/runtime/
+.sanity/tmp/
+.sanity-plugin-tutorial/
+sanity.env.local
+
+# Logs
+logs
+*.log
+*.log.*
+*.pid
+*.seed
+*.pid.lock
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Build caches
+.cache/
+turbo/
+.vercel/
+
+# audio files
+*.wav
+*.wave
+*.mp3
+*.aif
+*.aiff
+*.ogg

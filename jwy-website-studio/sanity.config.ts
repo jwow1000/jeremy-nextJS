@@ -14,5 +14,6 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+    output: '../../packages/my-sanity-types/sanity.types.ts'
   },
 })
