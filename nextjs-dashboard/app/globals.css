@@ -1,0 +1,26 @@
+
+html,
+body {
+  width: 100%;
+  height: auto;
+}
+
+body {
+  color: white;
+  background: black;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: white;
+}
+
+

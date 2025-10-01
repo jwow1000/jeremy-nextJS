@@ -1,0 +1,63 @@
+/* [project]/app/ui/detailPage.module.css [app-client] (css) */
+.detailPage-module__KjLi-a__main {
+  padding: 2rem;
+  margin-bottom: 5rem;
+  width: 100%;
+}
+
+.detailPage-module__KjLi-a__webPreviewWrapper {
+  position: relative;
+  width: 500px;
+  height: 20rem;
+  pointer-events: none;
+  margin: 4rem auto;
+}
+
+.detailPage-module__KjLi-a__webPreview {
+  width: 1000px;
+  height: 800px;
+  transform: scale(.5);
+  transform-origin: 0 0;
+  border: none;
+}
+
+.detailPage-module__KjLi-a__infoWrapper {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  gap: 2rem;
+}
+
+.detailPage-module__KjLi-a__main p {
+  max-width: 55ch;
+}
+
+.detailPage-module__KjLi-a__mixcloudWrapper {
+  width: 90%;
+  max-width: 20rem;
+  margin: 2rem auto;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 4rem;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (width <= 599px) {
+  .detailPage-module__KjLi-a__page {
+    margin: 0;
+    padding: 1rem;
+  }
+
+  .detailPage-module__KjLi-a__main {
+    margin: 0;
+    padding: 0 .5rem;
+    align-items: center;
+  }
+
+  .detailPage-module__KjLi-a__mixcloudWrapper {
+    width: 100%;
+  }
+}
+
+/*# sourceMappingURL=app_ui_detailPage_module_b52d8e.css.map*/

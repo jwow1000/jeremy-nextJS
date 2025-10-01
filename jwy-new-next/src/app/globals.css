@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+:root {
+  --background: #efefef;
+  --foreground: #171717;
+  /* --pink: #e99595; */
+  --pink: #f5c2cb;
+  --font-incon: 'Inconsolata', monospace; /* fallback in case font fails to load */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font: var(--font-incon);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  width: 100vw;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-incon);
+}

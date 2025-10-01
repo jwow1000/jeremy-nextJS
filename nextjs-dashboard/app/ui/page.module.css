@@ -1,0 +1,147 @@
+.page {
+  position: relative;
+  margin: 0;
+  padding: 3rem;
+  padding-top: 3rem;
+  display: flex;
+  flex-flow: column;
+  width: 100vw;
+  overflow: visible;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.main {
+  position: relative;
+  padding: 3rem;
+  max-width: 65ch;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 1rem 0;
+  height: auto;
+}
+
+.main > p {
+  max-width: 55ch;
+}
+
+.infoWrapper {
+  margin: 2rem;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2rem;
+}
+.videoWrapper {
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 800px;
+}
+.customVidWrapper {
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 800px;
+
+}
+.logoWrapper {
+  width: 100%;
+  height: 10rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.animateLogo {
+  position: absolute;
+  top: 0;
+  opacity: 70%;
+  filter: invert(100%);
+  animation: spinY 15s linear infinite; 
+  transform-origin: center;
+}
+.stillLogo {
+  position: absolute;
+  top: 0;
+  opacity: 70%;
+  filter: invert(100%);
+}
+.customLink, .main > a {
+  color: white;
+  text-decoration: none;
+  border: 1px solid white;
+  padding: 0.3rem;
+  width: auto;
+  display: block;
+}
+.imageGalleryWrapper {
+  width: 90%;
+  height: auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin: 1rem auto 8rem auto;
+  gap: 2rem;
+}
+.imageGalleryItem {
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  object-fit: contain;
+}
+.mixcloudWrapper {
+  position: absolute;
+  top: 0;
+  right: 50%;
+  width: 20rem;
+  transform: translateX(50%);
+  display: flex;
+  flex-flow: column wrap;
+  gap: 4rem;
+  justify-content: center;
+  align-items: center;
+}
+.imageSection {
+  width: 100%;
+  position: relative;
+  height: auto;
+
+}
+.embedIframe {
+  opacity: 0.7;
+}
+.embedIframe:focus, .embedIframe:hover {
+  opacity: 1;
+}
+
+
+@keyframes spinY {
+  0% {
+    transform:  rotateZ( 0deg ) ;
+
+  }
+  50% {
+    transform: rotateZ( 3deg ) ;
+  } 
+  100% {
+    transform: rotateZ( 0deg )  ;
+  } 
+}
+
+
+
+@media (max-width: 600px) {
+  .page {
+    margin: 0;
+    padding: 1rem;
+  }
+
+  .main {
+    align-items: center;
+  }
+
+
+}
+
