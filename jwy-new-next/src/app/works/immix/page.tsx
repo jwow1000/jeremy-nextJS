@@ -1,13 +1,23 @@
-import { getAudioFilesByProject } from "@/sanity/lib/fetch"
+import { getAudioFilesByProject, getWorkBySlug } from "@/sanity/lib/fetch"
 import AudioPlayer from "@/components/AudioVisualize/AudioPlayer";
+import MyPortableText from "@/components/MyPortableText";
 import { urlFor } from "@/sanity/lib/image";
 
 export default async function Immix() {
+  // Get work information
+  const work = await getWorkBySlug('immix');
+  console.log("work: ", work)
   const audioFiles = await getAudioFilesByProject('immix');
-  console.log("immix songs", audioFiles)
+  // console.log("immix songs", audioFiles)
   return(
     <main className="relative w-full p-4 pt-12 z-0">
-      <h1 className="text-xl">Immix</h1>
+      <h1 className="text-xl">immix</h1>
+      {
+        work.text &&
+        <div className="w-full max-w-[70ch] mt-10">
+          <MyPortableText content={work.text}/>
+        </div>
+      }
       <section className="w-full mt-24">
         {
           audioFiles &&
