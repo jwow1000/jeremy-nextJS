@@ -16,6 +16,10 @@ export default function ScrollHorizontal({children, className, scrollSpeed = 2}:
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
 
+    let touchStartY = 0;
+    let touchStartX = 0;
+    let scrollStartLeft = 0;
+
     const handleWheel = (e: WheelEvent) => {
       // Check if there's vertical scroll capability
       const hasVerticalScroll = scrollContainer.scrollHeight > scrollContainer.clientHeight;
@@ -32,10 +36,36 @@ export default function ScrollHorizontal({children, className, scrollSpeed = 2}:
       scrollContainer.scrollLeft += (e.deltaY + e.deltaX) * scrollSpeed;
     };
 
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+      touchStartX = e.touches[0].clientX;
+      scrollStartLeft = scrollContainer.scrollLeft;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const touchY = e.touches[0].clientY;
+      const touchX = e.touches[0].clientX;
+      const deltaY = touchStartY - touchY;
+      const deltaX = touchStartX - touchX;
+
+      // If primarily vertical swipe, convert to horizontal
+      if (Math.abs(deltaY) > Math.abs(deltaX)) {
+        e.preventDefault();
+        scrollContainer.scrollLeft = scrollStartLeft + (deltaY * scrollSpeed);
+      } else {
+        // Natural horizontal swipe
+        scrollContainer.scrollLeft = scrollStartLeft + deltaX;
+      }
+    };
+
     scrollContainer.addEventListener('wheel', handleWheel, { passive: false });
+    scrollContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
+    scrollContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
 
     return () => {
       scrollContainer.removeEventListener('wheel', handleWheel);
+      scrollContainer.removeEventListener('touchstart', handleTouchStart);
+      scrollContainer.removeEventListener('touchmove', handleTouchMove);
     };
   }, []);
   
