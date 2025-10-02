@@ -18,6 +18,7 @@ export default function MyImage({ src, alt, objectFit='cover' }: FancyImageProps
       src={src}
       alt={alt}
       fill
+      sizes={`(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw`}
       style={{ objectFit: objectFit, objectPosition: 'center',  }}
       className={`fade-in ${loaded ? 'loaded' : ''}`}
       onLoad={() => setLoaded(true)}
