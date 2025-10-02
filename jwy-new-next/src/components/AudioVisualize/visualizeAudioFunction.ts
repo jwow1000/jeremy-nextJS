@@ -38,9 +38,9 @@ export const visualizeAudio = ({canvasRef, analyserRef}: VisualizeAudioProps) =>
       const length = previousData[i] * weighting;
 
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0.2, "#824ccea1");
-      gradient.addColorStop(0.5, "#7be26d94");
-      gradient.addColorStop(1.0, "#824cce63");
+      gradient.addColorStop(0.2, "#f5c2cb8e");
+      gradient.addColorStop(0.5, "#ffffff7b");
+      gradient.addColorStop(1.0, "#f5c2cb8e");
 
       ctx.fillStyle = gradient;
       ctx.fillRect(

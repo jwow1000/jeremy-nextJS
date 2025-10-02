@@ -30,7 +30,7 @@ export default async function Immix() {
             return (
               <div 
                 key={`immix-work-${audio.title}`}
-                className="max-w-[400px] mx-auto"
+                className="max-w-[400px] mx-auto my-8"
               >
                 <AudioPlayer 
                   audioSrc={audio.audioUrl}
