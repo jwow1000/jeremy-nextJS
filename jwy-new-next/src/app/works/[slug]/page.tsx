@@ -21,8 +21,8 @@ export default async function WorkDetail({
         work.title &&
         <h1 className="text-xl">{work.title}</h1>
       }
-      <AppLink href="/works">{`back to works <-`}</AppLink>
-      <section className="w-full mt-20">
+      <AppLink href="/works" className="my-4">{`back to works <-`}</AppLink>
+      <section className="w-full mt-10">
         {
           work.text &&
           <div className="w-full max-w-[70ch]">
@@ -31,7 +31,7 @@ export default async function WorkDetail({
         }
         {
           work.gallery &&
-            <div className="max-w-[600px] mx-auto">
+            <div className="max-w-[600px] mx-auto pt-10">
               {
                 work.gallery.images &&
                 work.gallery?.images.map((image, idx) => {
@@ -40,7 +40,7 @@ export default async function WorkDetail({
                   const imageUrl = urlFor(asset).width(800).url();
 
                   return (
-                  <div key={`gallery-${idx}`} className="relative w-100% h-100% aspect-square">
+                  <div key={`gallery-${idx}`} className="relative w-100% aspect-5/4">
                   <MyImage
                     src={imageUrl!}
                     alt={work.featuredImage?.alt || "no alt text available"}

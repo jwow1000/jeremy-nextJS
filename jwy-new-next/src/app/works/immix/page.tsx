@@ -1,6 +1,7 @@
 import { getAudioFilesByProject, getWorkBySlug } from "@/sanity/lib/fetch"
 import AudioPlayer from "@/components/AudioVisualize/AudioPlayer";
 import MyPortableText from "@/components/MyPortableText";
+import AppLink from "@/components/AppLink";
 import { urlFor } from "@/sanity/lib/image";
 
 export default async function Immix() {
@@ -12,13 +13,14 @@ export default async function Immix() {
   return(
     <main className="relative w-full p-4 pt-12 z-0">
       <h1 className="text-xl">immix</h1>
+      <AppLink href="/works" className="my-4">{`back to works <-`}</AppLink>
       {
         work.text &&
-        <div className="w-full max-w-[70ch] mt-10">
+        <div className="w-full max-w-[70ch] pt-10">
           <MyPortableText content={work.text}/>
         </div>
       }
-      <section className="w-full mt-24">
+      <section className="w-full mt-10">
         {
           audioFiles &&
           audioFiles.map((audio) => {

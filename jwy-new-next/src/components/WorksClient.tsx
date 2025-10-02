@@ -52,10 +52,10 @@ export default function WorksClient({ works }: { works: Work[] }) {
               <Link
                 key={`jwy-works-${work._id}`}
                 href={`works/${work.slug?.current}`}
-                className="relative h-full w-[50vh] md:w-[60vh] flex flex-col shrink-0 gap-1 md:justify-center pt-5 md:pt-0"
+                className="relative h-full w-[50vh] md:w-[60vh] flex flex-col shrink-0 gap-1 md:justify-center pt-5 md:pt-0 hover:text-[var(--pink)]"
               >
                 <h2>{work.title}</h2>
-                <div className="relative w-full aspect-square">
+                <div className="relative w-full aspect-square border border-[0.5px]">
                   <MyImage
                     src={imageUrl!}
                     alt={work.featuredImage?.alt || "no alt text available"}
