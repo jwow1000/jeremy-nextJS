@@ -3,7 +3,7 @@ import WorksClient from "@/components/WorksClient";
 
 export default async function Works() {
   const works = await getWorks();
-  console.log("works: ", works);
+  // console.log("works: ", works);
 
   return (
     <WorksClient works={works}/>

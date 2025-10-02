@@ -1,5 +1,6 @@
 import MyImage from "@/components/MyImage"
 import { urlFor } from "@/sanity/lib/image"
+import AppLink from "@/components/AppLink"
 import { getWorkBySlug } from "@/sanity/lib/fetch"
 import YouTubeEmbed from "@/components/Youtube"
 import MyPortableText from "@/components/MyPortableText"
@@ -17,10 +18,13 @@ export default async function WorkDetail({
   return(
     <main className="relative w-full p-4 pt-12 z-0">
       <h1 className="text-xl">{work.title}</h1>
+      <AppLink href="/works">{`back to works <-`}</AppLink>
       <section className="w-full mt-20">
         {
           work.text &&
-          <MyPortableText content={work.text}/>
+          <div className="w-full max-w-[70ch]">
+            <MyPortableText content={work.text}/>
+          </div>
         }
         {
           work.gallery &&
