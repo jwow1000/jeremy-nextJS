@@ -17,7 +17,10 @@ export default async function WorkDetail({
   
   return(
     <main className="relative w-full p-4 pt-12 z-0">
-      <h1 className="text-xl">{work.title}</h1>
+      {
+        work.title &&
+        <h1 className="text-xl">{work.title}</h1>
+      }
       <AppLink href="/works">{`back to works <-`}</AppLink>
       <section className="w-full mt-20">
         {
