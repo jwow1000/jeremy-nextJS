@@ -26,7 +26,6 @@ export default function WorksClient({ works }: { works: Work[] }) {
     <main className="relative w-full p-4 pt-12 z-0">
       <h1 className="text-xl">Works</h1>
       <div className="flex gap-4 mt-14 sm:my-4">
-        
         {categories.map((cat) => (
           <MyButton
             key={cat.value}
@@ -36,6 +35,10 @@ export default function WorksClient({ works }: { works: Work[] }) {
             {cat.name}
           </MyButton>
         ))}
+      </div>
+      <div className="w-full flex justify-between max-w-[430px]">
+        <span>{`<-`}</span>
+        <span>{`->`}</span>
       </div>
       <div className="w-full h-[calc(100vh-10rem)]">
         <ScrollHorizontal className="h-full gap-10 pt-1" scrollSpeed={3}>
@@ -49,7 +52,7 @@ export default function WorksClient({ works }: { works: Work[] }) {
               <Link
                 key={`jwy-works-${work._id}`}
                 href={`works/${work.slug?.current}`}
-                className="relative h-full w-[60vh] flex flex-col shrink-0 gap-1 justify-center"
+                className="relative h-full w-[50vh] md:w-[60vh] flex flex-col shrink-0 gap-1 md:justify-center pt-5 md:pt-0"
               >
                 <h2>{work.title}</h2>
                 <div className="relative w-full aspect-square">
