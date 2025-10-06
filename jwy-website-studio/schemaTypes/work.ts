@@ -62,9 +62,15 @@ export const work = defineType({
       type: 'string'
     }),
     defineField({
-      name: 'soundLink',
-      title: 'Sound Link',
-      type: 'url',
+      name: 'soundLinks',
+      title: 'Sound Links',
+      type: 'array',
+      of:[
+        {
+          name: 'link',
+          type: 'url'
+        }
+      ]
     }),
     defineField({
       name: 'featuredImage',

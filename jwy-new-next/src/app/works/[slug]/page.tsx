@@ -54,10 +54,15 @@ export default async function WorkDetail({
             </div>
         }
         {
-          work.soundLink &&
-          <div className="w-full max-w-[70ch] mx-auto rounded-none">
-            <SoundEmbed url={work.soundLink}/>
-          </div>
+          work.soundLinks &&
+            work.soundLinks.map((link) => (
+              <div 
+                key={`pspaces-mix-${link}`}
+                className="w-full max-w-[70ch] mx-auto rounded-none mb-6 border-[0.5px] p-3"
+              >
+                <SoundEmbed url={link}/>
+              </div>
+            )) 
         }
         {
           work.youtubeID &&

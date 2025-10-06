@@ -88,7 +88,7 @@ export type Work = {
   date?: string
   vidLink?: string
   youtubeID?: string
-  soundLink?: string
+  soundLinks?: Array<string>
   featuredImage?: {
     asset?: {
       _ref: string

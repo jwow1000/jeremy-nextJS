@@ -21,6 +21,17 @@ const ptComponents: PortableTextComponents = {
       );
     },
   },
+  block: {
+    normal: ({children}) => (
+      <p className="text-[0.8rem] sm:text-[1rem] mb-6 leading-relaxed">{children}</p>
+    ),
+    h3: ({ children }) => (
+      <h3 className="text-xl sm:text-2xl font-normal my-4">{children}</h3>
+    ),
+    h5: ({ children }) => (
+      <h5 className="text-[1rem] sm:text-[1.2rem] font-normal my-2">~{children}</h5>
+    ),
+  }
 };
 
 export default function MyPortableText({
