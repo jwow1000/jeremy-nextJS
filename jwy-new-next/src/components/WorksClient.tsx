@@ -19,7 +19,7 @@ export default function WorksClient({ works }: { works: Work[] }) {
   const [filter, setFilter] = useState<string | null>(null);
 
   const filteredWorks = filter
-    ? works.filter((work) => work.type === filter)
+    ? works.filter((work) => work.type?.includes(filter))
     : works;
 
   return (

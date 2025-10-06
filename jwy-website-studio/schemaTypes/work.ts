@@ -20,15 +20,16 @@ export const work = defineType({
     defineField({
       name: 'type',
       title: 'Type',
-      description: 'work type',
-      type: 'string',
+      description: 'Work type',
+      type: 'array',
+      of: [{ type: 'string' }],
       options: {
         list: [
-          {title: "Object", value: "object"},
-          {title: "Video", value: "video"},
-          {title: "Sound", value: "sound"},
-          {title: "Web Project", value: "webProject"},
-        ]
+          { title: "Object", value: "object" },
+          { title: "Video", value: "video" },
+          { title: "Sound", value: "sound" },
+          { title: "Web Project", value: "webProject" },
+        ],
       }
     }),
     defineField({

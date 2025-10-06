@@ -470,25 +470,10 @@
       "type": {
         "type": "objectAttribute",
         "value": {
-          "type": "union",
-          "of": [
-            {
-              "type": "string",
-              "value": "object"
-            },
-            {
-              "type": "string",
-              "value": "video"
-            },
-            {
-              "type": "string",
-              "value": "sound"
-            },
-            {
-              "type": "string",
-              "value": "webProject"
-            }
-          ]
+          "type": "array",
+          "of": {
+            "type": "string"
+          }
         },
         "optional": true
       },

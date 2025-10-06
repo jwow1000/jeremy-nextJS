@@ -83,7 +83,7 @@ export type Work = {
   _rev: string
   title?: string
   slug?: Slug
-  type?: 'object' | 'video' | 'sound' | 'webProject'
+  type?: Array<string>
   subType?: 'immix' | 'subway'
   date?: string
   vidLink?: string

@@ -2,6 +2,7 @@ import MyImage from "@/components/MyImage"
 import { urlFor } from "@/sanity/lib/image"
 import AppLink from "@/components/AppLink"
 import { getWorkBySlug } from "@/sanity/lib/fetch"
+import SoundEmbed from "@/components/SoundEmbed"
 import YouTubeEmbed from "@/components/Youtube"
 import MyPortableText from "@/components/MyPortableText"
 
@@ -29,6 +30,7 @@ export default async function WorkDetail({
             <MyPortableText content={work.text}/>
           </div>
         }
+       
         {
           work.gallery &&
             <div className="max-w-[600px] mx-auto pt-10">
@@ -50,6 +52,12 @@ export default async function WorkDetail({
                 )})
               }
             </div>
+        }
+        {
+          work.soundLink &&
+          <div className="w-full max-w-[70ch] mx-auto rounded-none">
+            <SoundEmbed url={work.soundLink}/>
+          </div>
         }
         {
           work.youtubeID &&
