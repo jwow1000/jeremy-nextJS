@@ -9,14 +9,15 @@ export default async function WebDesign() {
   return (
     <main className="relative w-full p-4 pt-12 z-0 ">
       <h1 className="text-lg md:text-[45px]">Web Design + Development</h1>
-      <p className="mt-16 text-lg max-w-[60ch]">
-        I offer professional web design and development services using the
-        latest tech stacks and cutting edge UI/UX design
+      <p className="mt-16 text-lg max-w-[68ch]">
+        {`I offer professional web design and development services using the
+        latest tech stacks and cutting edge UI/UX design with a focus on accessibility, open-source tools, and search engine optimisation`}
+        
       </p>
-      <p className="my-8 italic">
-        {`Some tools we use: Next.js, Sanity.io, Tailwind CSS, Wordpress, Three.js, D3.js, WooCommerce, Vercel, Bare-Bones Deployment(NearlyFreeSpeech)`}
+      <p className="my-8 italic max-w-[68ch]">
+        {`Example of some tools: Next.js, Sanity.io, Tailwind CSS, Wordpress.org, Three.js, D3.js, WooCommerce, Vercel, Bare-Bones Deployment(NearlyFreeSpeech)`}
       </p>
-      <div className="relative w-full max-w-[1200px] mx-auto flex flex-col justify-center">
+      <div className="relative w-full max-w-[1200px] mx-auto flex flex-col justify-center mt-16">
         {works &&
           works.map((work, idx) => {
             // Calculate which side this item should be on

@@ -25,7 +25,7 @@ export default function CustomImage({
   return (
     <div 
       className={`
-          realtive w-full h-auto 
+          relative w-full h-auto 
           ${className || ""}
         `}
     >

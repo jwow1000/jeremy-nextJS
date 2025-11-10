@@ -17,7 +17,7 @@ export default function AppLink({
   return (
     <Link
       href={href}
-      className={`text-left border border-[0.5px] p-1 w-fit hover:bg-white-500/100 hover:text-[var(--pink)] ${className ? className : ""}`}
+      className={`text-left border border-[0.5px] p-1 hover:bg-white-500/100 hover:text-[var(--pink)] ${className ? className : ""}`}
       {...(newWindow ? { target: "_blank", rel: "noopener noreferrer" } : {})}
     >
       {children}
