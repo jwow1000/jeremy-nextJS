@@ -1,5 +1,4 @@
 import MyImage from "@/components/MyImage"
-import { urlFor } from "@/sanity/lib/image"
 import AppLink from "@/components/AppLink"
 import { getWorkBySlug } from "@/sanity/lib/fetch"
 import SoundEmbed from "@/components/SoundEmbed"
@@ -20,9 +19,17 @@ export default async function WorkDetail({
     <main className="relative w-full p-4 pt-12 z-0">
       {
         work.title &&
-        <h1 className="text-xl">{work.title}</h1>
+        <h1 className="text-xl mb-4">{work.title}</h1>
       }
-      <AppLink href="/works" className="my-4">{`back to works <-`}</AppLink>
+      <div className="flex w-full flex-row gap-8">
+        {
+          work.type?.includes("webProject") &&
+          <AppLink href="/web-design">{`back to web design <-`}</AppLink>
+          
+        }
+        <AppLink href="/works">{`back to all works <-`}</AppLink>
+
+      </div>
       <section className="w-full mt-10">
         {
           work.text &&
@@ -33,23 +40,18 @@ export default async function WorkDetail({
        
         {
           work.gallery &&
-            <div className="max-w-[600px] mx-auto pt-10">
+            <div className="relative w-full h-auto mx-auto pt-4 flex flex-col gap-4 md:flex-row">
               {
                 work.gallery.images &&
-                work.gallery?.images.map((image, idx) => {
-                  const asset = image.asset;
-                  if (!asset?._ref) return null; // skip if no asset
-                  const imageUrl = urlFor(asset).width(800).url();
-
-                  return (
-                  <div key={`gallery-${idx}`} className="relative w-100% aspect-5/4">
-                  <MyImage
-                    src={imageUrl!}
-                    alt={work.featuredImage?.alt || "no alt text available"}
-                    objectFit="contain"
-                  />
-                </div>
-                )})
+                work.gallery?.images.map((image, idx) => (
+                  <div key={`gallery-${idx}`} className="relative w-full aspect-[4/3]">
+                    <MyImage
+                      src={image}
+                      alt={work.featuredImage?.alt || "no alt text available"}
+                      objectFit="contain"
+                    />
+                  </div>
+                ))
               }
             </div>
         }

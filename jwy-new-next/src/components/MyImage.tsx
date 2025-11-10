@@ -1,27 +1,49 @@
-'use client'
-import { useState } from 'react';
-import Image, { StaticImageData } from 'next/image';
+"use client";
+import { useState } from "react";
+import Image, { StaticImageData } from "next/image";
+import { urlFor } from "@/sanity/lib/image";
+import { CustomImage as CustomImageType} from "../../../jwy-website-studio/sanity.types";
 
-type ObjectFitOption = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
+type ObjectFitOption = "contain" | "cover" | "fill" | "none" | "scale-down";
 
 type FancyImageProps = {
-  src: string | StaticImageData;
+  src: string | StaticImageData | CustomImageType;
   alt: string;
-  objectFit?: ObjectFitOption; 
-}
+  objectFit?: ObjectFitOption;
+  className?: string;
+};
 
-export default function MyImage({ src, alt, objectFit='cover' }: FancyImageProps) {
+export default function CustomImage({
+  src,
+  alt,
+  objectFit = "cover",
+  className,
+}: FancyImageProps) {
   const [loaded, setLoaded] = useState(false);
-
+  const url = urlFor(src).url();
+  
   return (
-    <Image
-      src={src}
-      alt={alt}
-      fill
-      sizes={`(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw`}
-      style={{ objectFit: objectFit, objectPosition: 'center',  }}
-      className={`fade-in ${loaded ? 'loaded' : ''}`}
-      onLoad={() => setLoaded(true)}
-    />
+    <div 
+      className={`
+          realtive w-full h-auto 
+          ${className || ""}
+        `}
+    >
+      <Image
+        src={url}
+        alt={alt}
+        fill
+        placeholder="blur"
+        blurDataURL={urlFor(src).width(24).height(24).blur(10).url()}
+        style={{ objectFit }}
+        onLoad={() => setLoaded(true)}
+        className={`
+          transition-opacity duration-1000 ease-in-out
+          ${loaded ? "opacity-100" : "opacity-0 "}
+          ${className || ""}
+        `}
+      />
+    </div>
   );
 }
+

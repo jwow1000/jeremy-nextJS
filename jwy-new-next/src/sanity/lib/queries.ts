@@ -4,6 +4,10 @@ export const getWorksQuery = defineQuery(`
   *[_type == "work"] | order(date desc)
 `);
 
+export const getWebWorksQuery = defineQuery(`
+  *[_type == "work" && "webProject" in type] | order(date desc)
+`);
+
 export const getWorkBySlugQuery = defineQuery(`
   *[_type == "work" && $slug == slug.current][0]
 `);
