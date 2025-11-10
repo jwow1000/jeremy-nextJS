@@ -25,9 +25,9 @@ export default function CustomImage({
   return (
     <div 
       className={`
-          relative w-full h-full 
-          ${className || ""}
-        `}
+        relative w-full h-full 
+        ${className || ""}
+      `}
     >
       <Image
         src={url}
