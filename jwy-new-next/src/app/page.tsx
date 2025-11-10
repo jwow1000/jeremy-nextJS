@@ -1,10 +1,9 @@
 import AppLink from "@/components/AppLink";
-import { getRandomWork } from "@/sanity/lib/fetch";
-import MyImage from "@/components/MyImage";
-import Link from "next/link";
+import { getWorks } from "@/sanity/lib/fetch";
+import ClientHome from "./ClientHome";
 
 export default async function Home() {
-  const work = await getRandomWork();
+  const works = await getWorks();
 
   return (
     <main className="flex flex-col w-full p-4 pt-12">
@@ -20,18 +19,7 @@ export default async function Home() {
           </div>
 
         </section>
-        <section className="w-2/3 h-full flex items-center">
-          <Link href={`works/${work.slug?.current}`} className="realtive w-full my-auto flex-col">
-            <h2 className="mx-auto w-98">{work.title}</h2>
-            {
-              work.featuredImage &&
-              <div className="relative w-98 h-98 mx-auto">
-                <MyImage src={work.featuredImage} alt={work.featuredImage.alt || "no alt text"}/> 
-              </div>
-            }
-          </Link>
-        </section>
-
+        <ClientHome works={works}/> 
       </div>
     </main> 
   );
