@@ -4,9 +4,10 @@ import * as d3 from "d3";
 
 interface Props {
   trig: boolean;
+  className?: string;
 }
 
-export default function RandomLine({ trig }: Props) {
+export default function RandomLine({ trig, className }: Props) {
   const ref = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export default function RandomLine({ trig }: Props) {
       .enter()
       .append("path")
       .attr("fill", "none")
-      .attr("stroke", "pink")
+      .attr("class", "stroke-inherit")
       .attr("stroke-width", 1)
       .attr("d", lineGenerator(points) || "");
 
@@ -43,7 +44,7 @@ export default function RandomLine({ trig }: Props) {
   return (
     <svg
       ref={ref}
-      className="w-full h-full"
+      className={`w-full h-full ${className}`}
       viewBox="0 0 100 100"
       // preserveAspectRatio="none"
     ></svg>

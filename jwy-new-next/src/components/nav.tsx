@@ -19,10 +19,10 @@ export default function Nav() {
     md:right-5 md:top-5 md:w-[150px] md:h-[150px]
     flex items-center justify-center z-50">
       <button
-        className="relative w-full h-full"
+        className="relative w-full h-full cursor-pointer"
         onClick={handleClick}
       >
-        <RandomLine trig={lineReDraw}/>
+        <RandomLine trig={lineReDraw} className="stroke-[var(--nav-string)]"/>
         <menu className="absolute bottom-0 right-0 text-pink text-xs">
           {
             displayMenu ?
