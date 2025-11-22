@@ -28,10 +28,11 @@ export default async function WebDesign() {
                 {/* Render the work item */}
                 <Link
                   className={`
-                    w-2/3 max-w-[600px] border-white 
+                    w-full md:w-2/3 max-w-[600px] border-white 
                     p-2 flex justify-around items-center
                     ${isLeft ? "ml-0 mr-auto" : "ml-auto mr-0"}
-                    hover:outline-[var(--nav-string)] hover:outline-[1px]
+                    outline-[var(--nav-string)] outline-[1px]
+                    md:hover:outline-[var(--nav-string)] md:hover:outline-[1px]
                     focus:outline-[var(--nav-string)] focus:outline-[1px]
                   `}
                   href={`works/${work.slug?.current}`}

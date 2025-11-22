@@ -40,7 +40,7 @@ export default async function WorkDetail({
        
         {
           work.gallery &&
-            <div className="relative w-full h-auto mx-auto pt-4 flex flex-col gap-4 md:flex-row">
+            <div className="relative w-full h-auto mx-auto pt-4 flex flex-col gap-4 md:flex-col px-0 md:px-6">
               {
                 work.gallery.images &&
                 work.gallery?.images.map((image, idx) => (
