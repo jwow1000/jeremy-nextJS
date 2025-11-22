@@ -26,3 +26,7 @@ export const getAudioFilesByProjectQuery = defineQuery(`
       "audioUrl": audioFile.asset->url // Project the asset's URL
     }
 `);
+
+export const getLatestPostsQuery = defineQuery(`
+  *[_type == "work"] | order(date desc) [0...$amt]
+`);

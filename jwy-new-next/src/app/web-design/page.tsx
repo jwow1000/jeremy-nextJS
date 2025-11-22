@@ -46,7 +46,7 @@ export default async function WebDesign() {
                       <MyImage
                         src={work.featuredImage}
                         alt={work.featuredImage?.alt || "no alt text available"}
-                        objectFit="cover"
+                        objectFit="contain"
                       />
                     )}
                   </div>

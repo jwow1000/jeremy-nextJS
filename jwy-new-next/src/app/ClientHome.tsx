@@ -3,31 +3,40 @@
 import { Work } from "../../../jwy-website-studio/sanity.types"
 import Link from "next/link";
 import MyImage from "@/components/MyImage";
-import { useEffect, useState } from "react";
 
 interface ClientHomeParams {
   works: Work[];
 }
-export default function ClientHome({works}: ClientHomeParams) {
-  const [work, setWork] = useState<Work>();
 
-  useEffect(() => {
-    const randIdx = Math.floor(Math.random() * works.length);
-    setWork(works[randIdx]);
-  }, [])
+export default function ClientHome({works}: ClientHomeParams) {
+  
+
 
   return (
-    work &&
-    <section className="w-full md:w-2/3 h-full flex items-center">
-      <Link href={`works/${work.slug?.current}`} className="realtive w-full mx-auto flex-col">
-        <h2 className="mx-auto w-98">{work.title}</h2>
-        {
-          work.featuredImage &&
-          <div className="relative w-full md:w-98 h-98 mx-auto">
-            <MyImage src={work.featuredImage} alt={work.featuredImage.alt || "no alt text"}/> 
-          </div>
-        }
-      </Link>
+    <section className="w-full flex md:w-3/4 flex-row flex-wrap p-0 md:pr-16 justify-around items-around">
+    {
+      works &&
+      works.map((work) => (
+          <Link 
+            href={`works/${work.slug?.current}`} 
+            className="relative w-32 h-32 md:w-48 h-48"
+            key={`jwy-work-${work.title}`}
+          >
+            {/* <h2 className="mx-auto w-full">{work.title}</h2> */}
+            {
+              work.featuredImage &&
+                <MyImage 
+                  src={work.featuredImage} 
+                  alt={work.featuredImage.alt || "no alt text"}
+                  objectFit="contain"
+                  className="w-full h-full"
+                /> 
+            }
+          </Link>
+  
+      ))
+
+    }
     </section>
   )
 }

@@ -1,5 +1,5 @@
 import client from "@/sanity/lib/client";
-import { getWorksQuery, getWorkBySlugQuery, getCVQuery, getAudioFilesByProjectQuery, getWebWorksQuery } from "@/sanity/lib/queries"
+import { getWorksQuery, getWorkBySlugQuery, getCVQuery, getAudioFilesByProjectQuery, getWebWorksQuery, getLatestPostsQuery } from "@/sanity/lib/queries"
 import {Work, Cv, Audio, CustomImage} from "@/../../jwy-website-studio/sanity.types";
 
 interface AudioFileQuery {
@@ -31,3 +31,6 @@ export async function getAudioFilesByProject(project: string) {
   return await client.fetch<AudioFileQuery[]>(getAudioFilesByProjectQuery, { project });
 }
 
+export async function getLatestPosts(amt: number) {
+  return await client.fetch<Work[]>(getLatestPostsQuery, {amt});
+}
