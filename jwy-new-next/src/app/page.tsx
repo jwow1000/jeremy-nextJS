@@ -15,6 +15,7 @@ export default async function Home() {
             <AppLink href={`/works`} className="w-32">works</AppLink>
             <AppLink href={`/cv`} className="w-32">cv</AppLink>
             <AppLink href={`/web-design`} className="w-32">web design</AppLink>
+            <AppLink href={`/blog`} className="w-32">blog</AppLink>
             <AppLink href={`https://github.com/jwow1000`} newWindow={true} className="w-32">github</AppLink>
           </div>
 

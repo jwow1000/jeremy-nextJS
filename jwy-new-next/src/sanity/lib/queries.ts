@@ -30,3 +30,34 @@ export const getAudioFilesByProjectQuery = defineQuery(`
 export const getLatestPostsQuery = defineQuery(`
   *[_type == "work"] | order(date desc) [0...$amt]
 `);
+
+const blogPostItems = `
+  title,
+  _id,
+  _type,
+  _createdAt,
+  _updatedAt,
+  _rev,
+  slug,
+  date,
+  featuredImage,
+  tags[]->{
+    _id,
+    name,
+    slug
+  },
+  gallery,
+  body
+`
+
+export const getLatestBlogPostsQuery = defineQuery(`
+  *[_type == "blogPost"] | order(date desc) [0...$amt] {
+    ${blogPostItems}
+  }
+`);
+
+export const getBlogPostBySlugQuery = defineQuery(`
+  *[_type == "blogPost" && $slug == slug.current][0] {
+    ${blogPostItems}
+  }
+`); 

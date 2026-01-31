@@ -1,6 +1,7 @@
 import client from "@/sanity/lib/client";
-import { getWorksQuery, getWorkBySlugQuery, getCVQuery, getAudioFilesByProjectQuery, getWebWorksQuery, getLatestPostsQuery } from "@/sanity/lib/queries"
-import {Work, Cv, Audio, CustomImage} from "@/../../jwy-website-studio/sanity.types";
+import { getWorksQuery, getWorkBySlugQuery, getCVQuery, getAudioFilesByProjectQuery, getWebWorksQuery, getLatestPostsQuery, getLatestBlogPostsQuery, getBlogPostBySlugQuery} from "@/sanity/lib/queries"
+import {Work, Cv, Audio, CustomImage, BlogPost} from "@/../../jwy-website-studio/sanity.types";
+import { BlogPostWithTags } from "./types/customTypes";
 
 interface AudioFileQuery {
   title: string;
@@ -33,4 +34,12 @@ export async function getAudioFilesByProject(project: string) {
 
 export async function getLatestPosts(amt: number) {
   return await client.fetch<Work[]>(getLatestPostsQuery, {amt});
+}
+
+export async function getLatestBlogPosts(amt: number) {
+  return await client.fetch<BlogPostWithTags[]>(getLatestBlogPostsQuery, {amt});
+}
+
+export async function getBlogPostBySlug(slug: string) {
+  return await client.fetch<BlogPostWithTags>(getBlogPostBySlugQuery, {slug});
 }

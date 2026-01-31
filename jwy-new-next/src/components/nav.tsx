@@ -48,6 +48,9 @@ export default function Nav() {
               <Link href={`/web-design`} className="w-full text-left no-underline flex flex-col pointer-auto p-2 hover:bg-[var(--pink)] hover:text-black" >
                 web design
               </Link>
+              <Link href={`/blog`} className="w-full text-left no-underline flex flex-col pointer-auto p-2 hover:bg-[var(--pink)] hover:text-black" >
+                blog
+              </Link>
               <Link href={`/cv`} className="w-full text-left no-underline flex flex-col pointer-auto p-2 hover:bg-[var(--pink)] hover:text-black" >
                 cv
               </Link>
