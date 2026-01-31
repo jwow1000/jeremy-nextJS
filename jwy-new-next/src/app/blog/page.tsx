@@ -11,7 +11,7 @@ export default async function Blog() {
       {blogPosts &&
         blogPosts.map((blog, idx) => {
           return (
-            <div key={blog.slug?.current}>
+            <div key={blog.slug?.current} className="text-[var(--nav-string)]">
               <h2 className="font-bold py-1">{`#${idx + 1} ${blog.title}`}</h2>
               <Link
                 className={`
