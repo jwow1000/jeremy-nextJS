@@ -19,7 +19,7 @@ export default async function TagDetail({
     <main className="relative w-full p-4 z-0">
       <div className="flex flex-row gap-8 underline text-[var(--nav-string)]">
         <Link className="hover:text-white" href={'/blog'}>{`<- All Blog Posts`}</Link>
-        <Link className="hover:text-white" href={'/tag'}>{`<- Browse all tags`}</Link>
+        <Link className="hover:text-white" href={'/blog/tag'}>{`<- Browse all tags`}</Link>
       </div>
       {
         tag.name &&
