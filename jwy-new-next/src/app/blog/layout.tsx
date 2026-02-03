@@ -1,4 +1,5 @@
 import BlogLogo from "@/components/BlogLogo"
+import Link from "next/link"
 
 export default function BlogLayout({
   children,
@@ -11,9 +12,9 @@ export default function BlogLayout({
       md:hover:outline-[var(--nav-string)] md:hover:outline-[1px]
       focus:outline-[var(--nav-string)] focus:outline-[1px]">
         <h1 className="hidden">Blog</h1>
-        <div className="block md:hidden fixed top-4 left-4 w-[60px] h-[60px]">
+        <Link href="/blog" className="block md:hidden fixed top-4 left-4 w-[60px] h-[60px]">
           <BlogLogo className="text-[var(--nav-string)]" />
-        </div>
+        </Link>
         <div className="hidden md:block fixed w-[20px] md:w-[100px] h-full left-0 top-0 fill-pink flex flex-col gap-4">
           <BlogLogo className="text-[var(--nav-string)]" />
           <BlogLogo className="text-[var(--nav-string)]" />

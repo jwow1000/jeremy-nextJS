@@ -1,7 +1,6 @@
 import { getLatestBlogPosts } from "@/sanity/lib/fetch";
 import Link from "next/link";
 import MyImage from "@/components/MyImage";
-import BlogLogo from "@/components/BlogLogo";
 
 export default async function Blog() {
   const blogPosts = await getLatestBlogPosts(40);
@@ -18,8 +17,8 @@ export default async function Blog() {
                   w-[200px] h-[200px] 
                   flex justify-center items-center
                   outline-[var(--nav-string)] outline-[1px]
-                  md:hover:outline-[var(--nav-string)] md:hover:outline-[1px]
-                  focus:outline-[var(--nav-string)] focus:outline-[1px]
+                  md:hover:outline-white md:hover:outline-[1px]
+                  focus:outline-white focus:outline-[1px]
                 `}
                 href={`blog/${blog.slug?.current}`}
               >
@@ -36,10 +35,11 @@ export default async function Blog() {
               {blog.tags && (
                 <p className="p-0">
                   {blog.tags.map((tag) => (
-                    <strong
+                    <Link
                       key={tag._id}
-                      className="text-xs"
-                    >{`#${tag?.name} `}</strong>
+                      href={`blog/tag/${tag.slug?.current}`}
+                      className="text-xs hover:text-white"
+                    >{`#${tag?.name} `}</Link>
                   ))}
                 </p>
               )}

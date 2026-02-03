@@ -61,3 +61,16 @@ export const getBlogPostBySlugQuery = defineQuery(`
     ${blogPostItems}
   }
 `); 
+
+export const getTagBySlugQuery = defineQuery(`
+  *[_type == "tag" && $slug == slug.current][0] 
+`);
+
+export const getBlogPostsByTagQuery = defineQuery(`
+  *[_type == "blogPost" && $tagSlug in tags[]->slug.current] | order(date desc) 
+ `);
+
+export const getTagsQuery = defineQuery(`
+  *[_type == "tag"] | order(date desc) 
+ `);
+
