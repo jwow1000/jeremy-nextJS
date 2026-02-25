@@ -25,7 +25,7 @@ export default function MyImage({
   const url = urlFor(src).url();
   console.log("caption?", caption);
   return (
-    <div className="flex flex-col justify-center w-full">
+    <div className="flex flex-col justify-center items-center w-full">
       <Image
         src={url}
         alt={alt}
