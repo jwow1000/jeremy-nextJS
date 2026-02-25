@@ -16,7 +16,7 @@ export default async function WorkDetail({
   console.log("work: ", work)
   
   return(
-    <main className="relative w-full p-4 pt-12 z-0">
+    <main className="relative w-full p-4 pt-12 pb-24 z-0">
       {
         work.title &&
         <h1 className="text-xl mb-4">{work.title}</h1>
@@ -40,7 +40,7 @@ export default async function WorkDetail({
        
         {
           work.gallery &&
-            <div className="relative w-full h-auto mx-auto pt-4 flex flex-col gap-4 md:flex-col px-0 md:px-6">
+            <div className="relative w-full h-auto mx-auto pt-4 flex flex-col gap-12 md:flex-col px-0 md:px-6">
               {
                 work.gallery.images &&
                 work.gallery?.images.map((image, idx) => (
@@ -48,6 +48,7 @@ export default async function WorkDetail({
                     <MyImage
                       src={image}
                       alt={work.featuredImage?.alt || "no alt text available"}
+                      caption={image.caption}
                       objectFit="contain"
                     />
                   </div>

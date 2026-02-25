@@ -53,13 +53,13 @@ export default function WorksClient({ works }: { works: Work[] }) {
                 className="relative h-full w-[40vh] md:w-[60vh] flex flex-col shrink-0 gap-1 md:justify-center pt-5 md:pt-0 hover:text-[var(--hilite)]"
               >
                 <h2>{work.title}</h2>
-                <div className="relative w-full aspect-square border border-[0.5px]">
+                <div className="relative w-full aspect-square border border-[0.5px] flex justify-center overflow-hidden">
                   {
                     work.featuredImage &&
                     <MyImage
                       src={work.featuredImage}
                       alt={work.featuredImage?.alt || "no alt text available"}
-                      objectFit="contain"
+                      objectFit="fill"
                     />
                   }
                 </div>

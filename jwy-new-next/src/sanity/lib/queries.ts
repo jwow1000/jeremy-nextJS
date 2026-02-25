@@ -1,15 +1,31 @@
 import {defineQuery} from "next-sanity";
 
+const worksItems = `
+  {
+  ...,
+    gallery{
+      ...,
+      images[]{
+        _key,
+        caption,
+        alt,
+        asset->
+      }
+    }
+  }  
+`
 export const getWorksQuery = defineQuery(`
-  *[_type == "work"] | order(date desc)
+  *[_type == "work"] | order(date desc) ${worksItems}
 `);
 
 export const getWebWorksQuery = defineQuery(`
   *[_type == "work" && "webProject" in type] | order(date desc)
+  ${worksItems}
 `);
 
 export const getWorkBySlugQuery = defineQuery(`
   *[_type == "work" && $slug == slug.current][0]
+  ${worksItems}
 `);
 
 export const getCVQuery = defineQuery(`
