@@ -11,6 +11,7 @@ type FancyImageProps = {
   alt: string;
   caption?: string;
   objectFit?: ObjectFitOption;
+  /** Applied to the outer wrapper div. Use this to control size (e.g. "w-full h-64"). */
   className?: string;
 };
 
@@ -23,29 +24,23 @@ export default function MyImage({
 }: FancyImageProps) {
   const [loaded, setLoaded] = useState(false);
   const url = urlFor(src).url();
-  console.log("caption?", caption);
+
   return (
-    <div className="flex flex-col justify-center items-center w-full">
+    <figure className={`relative w-full h-full ${className || ""}`}>
       <Image
         src={url}
         alt={alt}
-        width={1200}
-        height={1200}
+        fill
         style={{ objectFit }}
         onLoad={() => setLoaded(true)}
-        className={`
-          transition-opacity duration-1000 ease-in-out
-          ${loaded ? "opacity-100" : "opacity-0 "}
-          ${className || ""}
-        `}
+        className={`transition-opacity duration-1000 ease-in-out ${loaded ? "opacity-100" : "opacity-0"}`}
       />
-      {
-        caption &&
-        <div>
-          <p>{caption}</p>
-        </div>
-      }
-    </div>
+      {caption && (
+        <figcaption className="absolute bottom-0 left-0 right-0 text-center text-sm px-2 py-1 bg-black/40 text-white">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
   );
 }
 
