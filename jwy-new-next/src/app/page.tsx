@@ -10,7 +10,7 @@ export default async function Home() {
       <h1>Jeremy Wiles-Young</h1>
       <div className="flex flex-col md:flex-row mt-28 gap-0 h-[calc(100vh-200px)]">
         <section className="w-full md:w-1/4">
-          <p>artist and web developer based in NYC</p>
+          <p>artist, av systems engineer, and web developer based in NYC</p>
           <div className="flex flex-row-wrap md:flex-col gap-2 md:gap-4 py-10 w-full md:w-32">
             <AppLink href={`/works`} className="w-32">works</AppLink>
             <AppLink href={`/cv`} className="w-32">cv</AppLink>
