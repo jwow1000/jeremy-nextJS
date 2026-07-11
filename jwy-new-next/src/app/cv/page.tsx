@@ -35,20 +35,28 @@ export default async function Cv() {
                   entry.date,
                 ].filter(Boolean).join(' · ')
 
+                const placetime = [
+                  [entry.venue, entry.location].filter(Boolean).join(', '),
+                  entry.date,
+                ].filter(Boolean).join(' · ')
+
                 return (
                   <div key={entry._id} className="mt-3">
-                    <span className="font-bold">&lsquo;{entry.title}&rsquo;</span>
-                    {meta && <span className="text-base"> · {meta}</span>}
-                    {entry.link && (
-                      <a
-                        href={entry.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="ml-2 underline underline-offset-2 hover:text-[var(--hilite)]"
-                      >
-                        LINK
-                      </a>
-                    )}
+                    <p>
+                      <span className="font-bold">&lsquo;{entry.title}&rsquo;</span>
+                      {entry.artist && <span> · {entry.artist}</span>}
+                      {entry.link && (
+                        <a
+                          href={entry.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="ml-2 underline underline-offset-2 hover:text-[var(--hilite)]"
+                        >
+                          LINK
+                        </a>
+                      )}
+                    </p>
+                    {placetime && <p className="text-base">{placetime}</p>}
                     {entry.role && <p className="text-base italic">{entry.role}</p>}
                   </div>
                 )
