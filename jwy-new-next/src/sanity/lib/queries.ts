@@ -29,7 +29,17 @@ export const getWorkBySlugQuery = defineQuery(`
 `);
 
 export const getCVQuery = defineQuery(`
-  *[_type == "cv"][0]
+  *[_type == "cvEntry"] | order(category asc, order asc) {
+    _id,
+    category,
+    title,
+    artist,
+    date,
+    venue,
+    location,
+    role,
+    link
+  }
 `);
 
 export const getAudioFilesByProjectQuery = defineQuery(`
