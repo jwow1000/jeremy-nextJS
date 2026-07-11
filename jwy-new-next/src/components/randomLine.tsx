@@ -7,6 +7,9 @@ interface Props {
   className?: string;
 }
 
+// Persists the last drawn path across remounts (e.g. mobile browser memory pressure)
+let storedPath: string | null = null;
+
 export default function RandomLine({ trig, className }: Props) {
   const ref = useRef<SVGSVGElement | null>(null);
 
@@ -16,30 +19,31 @@ export default function RandomLine({ trig, className }: Props) {
     const svg = d3.select(ref.current);
     const lineGenerator = d3.line();
 
-    // Generate new random points
     const points: [number, number][] = Array.from({ length: 12 }, () => [
       Math.random() * 100,
       Math.random() * 100,
     ]);
+    const newPathD = lineGenerator(points) || "";
 
-    const path = svg.selectAll("path").data([points]);
+    let pathEl = svg.selectAll<SVGPathElement, unknown>("path");
 
-    // Update existing path with transition
-    path
+    if (pathEl.empty()) {
+      // On first mount: start at new position immediately.
+      // On remount: start from last known position so transition picks up from there.
+      pathEl = svg.append("path")
+        .attr("fill", "none")
+        .attr("class", "stroke-inherit")
+        .attr("stroke-width", 1)
+        .attr("d", storedPath ?? newPathD) as typeof pathEl;
+    }
+
+    pathEl
       .transition()
-      .duration(1000) // 1-second smooth transition
-      .attr("d", lineGenerator(points) || "");
+      .duration(storedPath ? 1000 : 0)
+      .attr("d", newPathD);
 
-    // Append path if it doesn't exist yet
-    path
-      .enter()
-      .append("path")
-      .attr("fill", "none")
-      .attr("class", "stroke-inherit")
-      .attr("stroke-width", 1)
-      .attr("d", lineGenerator(points) || "");
-
-  }, [trig]); // Re-run when `trig` changes
+    storedPath = newPathD;
+  }, [trig]);
 
   return (
     <svg
