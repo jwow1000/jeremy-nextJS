@@ -8,7 +8,7 @@ export default async function Blog() {
   return (
     <main className="relative w-full p-4 flex flex-row justify-start gap-12">
       {blogPosts &&
-        blogPosts.map((blog, idx) => {
+        blogPosts.map((blog) => {
           return (
             <div key={blog.slug?.current} className="text-[var(--nav-string)]">
               <h2 className="font-bold py-1">{`${blog.date}`}</h2>

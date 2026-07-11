@@ -1,6 +1,6 @@
 import client from "@/sanity/lib/client";
 import { getWorksQuery, getWorkBySlugQuery, getCVQuery, getAudioFilesByProjectQuery, getWebWorksQuery, getLatestPostsQuery, getLatestBlogPostsQuery, getBlogPostBySlugQuery, getTagBySlugQuery, getBlogPostsByTagQuery, getTagsQuery} from "@/sanity/lib/queries"
-import {Work, Audio, CustomImage, BlogPost, Tag} from "@/../../jwy-website-studio/sanity.types";
+import {Work, CustomImage, Tag} from "@/../../jwy-website-studio/sanity.types";
 import { BlogPostWithTags, CvEntry } from "./types/customTypes";
 
 interface AudioFileQuery {

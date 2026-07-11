@@ -67,6 +67,7 @@ export default function ScrollHorizontal({children, className, scrollSpeed = 2}:
       scrollContainer.removeEventListener('touchstart', handleTouchStart);
       scrollContainer.removeEventListener('touchmove', handleTouchMove);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   return (
