@@ -29,12 +29,6 @@ export default async function Cv() {
                 {CATEGORY_LABELS[cat]}
               </h3>
               {section.map((entry) => {
-                const meta = [
-                  entry.artist,
-                  [entry.venue, entry.location].filter(Boolean).join(', '),
-                  entry.date,
-                ].filter(Boolean).join(' · ')
-
                 const placetime = [
                   [entry.venue, entry.location].filter(Boolean).join(', '),
                   entry.date,

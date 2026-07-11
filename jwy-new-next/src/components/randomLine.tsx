@@ -25,19 +25,19 @@ export default function RandomLine({ trig, className }: Props) {
     ]);
     const newPathD = lineGenerator(points) || "";
 
-    let pathEl = svg.selectAll<SVGPathElement, unknown>("path");
+    const existing = svg.selectAll<SVGPathElement, unknown>("path");
 
-    if (pathEl.empty()) {
+    if (existing.empty()) {
       // On first mount: start at new position immediately.
       // On remount: start from last known position so transition picks up from there.
-      pathEl = svg.append("path")
+      svg.append("path")
         .attr("fill", "none")
         .attr("class", "stroke-inherit")
         .attr("stroke-width", 1)
-        .attr("d", storedPath ?? newPathD) as typeof pathEl;
+        .attr("d", storedPath ?? newPathD);
     }
 
-    pathEl
+    svg.selectAll<SVGPathElement, unknown>("path")
       .transition()
       .duration(storedPath ? 1000 : 0)
       .attr("d", newPathD);
