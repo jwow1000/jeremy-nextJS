@@ -6,16 +6,16 @@ export default async function Blog() {
   const blogPosts = await getLatestBlogPosts(40);
 
   return (
-    <main className="relative w-full p-4 flex flex-row justify-start gap-12">
+    <main className="relative w-full p-4 flex flex-col gap-4 md:gap-12">
       {blogPosts &&
         blogPosts.map((blog) => {
           return (
-            <div key={blog.slug?.current} className="text-[var(--nav-string)]">
+            <div key={blog.slug?.current} className="text-[var(--nav-string)] min-w-0 max-w-[400px]">
               <h2 className="font-bold py-1">{`${blog.date}`}</h2>
               <h2 className="font-bold py-1">{`${blog.title}`}</h2>
               <Link
                 className={`
-                  w-[200px] h-[200px] 
+                  w-full aspect-square
                   flex justify-center items-center
                   outline-[var(--nav-string)] outline-[1px]
                   md:hover:outline-white md:hover:outline-[1px]

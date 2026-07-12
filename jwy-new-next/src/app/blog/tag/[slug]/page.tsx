@@ -34,15 +34,15 @@ export default async function TagDetail({
       
       <section className="w-full mt-10">
         <p>{`#${tag.name} posts `}</p>
-        <div className="flex flex-row align-start">
+        <div className="flex flex-col gap-4 md:gap-12">
           {
             posts &&
             posts.map((post, idx) => (
-              <div key={post.slug?.current} className="text-[var(--nav-string)]">
+              <div key={post.slug?.current} className="text-[var(--nav-string)] min-w-0 max-w-[400px]">
               <h2 className="font-bold py-1">{`#${idx + 1} ${post.title}`}</h2>
               <Link
                 className={`
-                  w-[200px] h-[200px] 
+                  w-full aspect-square
                   flex justify-center items-center
                   outline-[var(--nav-string)] outline-[1px]
                   md:hover:outline-white md:hover:outline-[1px]
