@@ -1,7 +1,6 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
-// import { visualizeAudio } from "./visualizeAudioFunction";
-import { visualize3DBlob } from "./visualize3DBlobFunction";
+import { visualizeAudio } from "./visualizeAudioFunction";
 import Image from "next/image";
 import styles from "./audioPlayer.module.css";
 
@@ -43,7 +42,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   }, []);
 
   useEffect(() => {
-    visualize3DBlob({ canvasRef, analyserRef });
+    visualizeAudio({ canvasRef, analyserRef });
   }, []);
   const togglePlayPause = async () => {
     const audio = audioRef.current;
@@ -111,8 +110,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
         </div>
         <canvas
           ref={canvasRef}
-          width={200}
-          height={100}
+          width={300}
+          height={300}
           className={styles.canvas}
         />
       </div>

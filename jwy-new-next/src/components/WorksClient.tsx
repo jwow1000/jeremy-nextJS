@@ -11,7 +11,6 @@ const categories = [
   {"name": "objects", "value": "object"},
   {"name":"sounds", "value": "sound"},
   {"name":"videos", "value": "video"},
-  {"name":"webprojects", "value":"webProject"},
 ]
 
 export default function WorksClient({ works }: { works: Work[] }) {

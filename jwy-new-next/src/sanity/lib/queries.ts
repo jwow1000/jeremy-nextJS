@@ -15,7 +15,7 @@ const worksItems = `
   }  
 `
 export const getWorksQuery = defineQuery(`
-  *[_type == "work"] | order(date desc) ${worksItems}
+  *[_type == "work" && !("webProject" in type)] | order(date desc) ${worksItems}
 `);
 
 export const getWebWorksQuery = defineQuery(`
@@ -54,7 +54,7 @@ export const getAudioFilesByProjectQuery = defineQuery(`
 `);
 
 export const getLatestPostsQuery = defineQuery(`
-  *[_type == "work"] | order(date desc) [0...$amt]
+  *[_type == "work" && !("webProject" in type)] | order(date desc) [0...$amt]
 `);
 
 const blogPostItems = `
