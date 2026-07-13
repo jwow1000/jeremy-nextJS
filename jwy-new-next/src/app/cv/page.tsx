@@ -36,15 +36,17 @@ export default async function Cv() {
 
                 return (
                   <div key={entry._id} className="mt-3">
-                    <p>
-                      <span className="font-bold">&lsquo;{entry.title}&rsquo;</span>
-                      {entry.artist && <span> · {entry.artist}</span>}
+                    <p className="flex items-baseline justify-between gap-2">
+                      <span>
+                        <span className="font-bold">{entry.title}</span>
+                        {entry.artist && <span> · {entry.artist}</span>}
+                      </span>
                       {entry.link && (
                         <a
                           href={entry.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="ml-2 underline underline-offset-2 hover:text-[var(--hilite)]"
+                          className="shrink-0 underline underline-offset-2 hover:text-[var(--hilite)]"
                         >
                           LINK
                         </a>
