@@ -1,8 +1,10 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
-import { visualizeAudio } from "./visualizeAudioFunction";
+import { computePeaks, renderWaveform } from "./waveform";
 import Image from "next/image";
 import styles from "./audioPlayer.module.css";
+
+const NUM_WAVEFORM_POINTS = 100;
 
 interface AudioPlayerProps {
   audioSrc: string;
@@ -20,7 +22,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const analyserRef = useRef<AnalyserNode | null>(null);
+  const peaksRef = useRef<Float32Array | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(1);
@@ -42,34 +44,26 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   }, []);
 
   useEffect(() => {
-    visualizeAudio({ canvasRef, analyserRef });
+    let cancelled = false;
+
+    computePeaks(audioSrc, NUM_WAVEFORM_POINTS).then((peaks) => {
+      if (!cancelled) peaksRef.current = peaks;
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [audioSrc]);
+
+  useEffect(() => {
+    renderWaveform({ canvasRef, audioRef, peaksRef });
   }, []);
-  const togglePlayPause = async () => {
+
+  const togglePlayPause = () => {
     const audio = audioRef.current;
-    const canvas = canvasRef.current;
-    if (!audio || !canvas) return;
+    if (!audio) return;
 
-    // If not playing, start audio + setup AudioContext
     if (!isPlaying) {
-      // Create context if not already created
-      if (!analyserRef.current) {
-        const audioContext = new AudioContext();
-
-        // Resume the context if it's suspended (for mobile Safari)
-        if (audioContext.state === "suspended") {
-          await audioContext.resume();
-        }
-
-        const source = audioContext.createMediaElementSource(audio);
-        const analyser = audioContext.createAnalyser();
-
-        analyser.fftSize = 256;
-        source.connect(analyser);
-        analyser.connect(audioContext.destination);
-
-        analyserRef.current = analyser;
-      }
-
       audio.play();
       setIsPlaying(true);
     } else {
@@ -98,57 +92,65 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
 
   return (
     <div className={styles.audioPlayer}>
-      <div className={styles.title}>{title}</div>
       <div className={styles.playerImageContainer}>
         <div className={styles.imageContainer}>
           <Image
             src={imageSrc}
             alt={imageAlt || "no description available"}
             fill
-            style={{ objectFit: "contain" }}
+            style={{ objectFit: "cover" }}
           ></Image>
         </div>
-        <canvas
-          ref={canvasRef}
-          width={300}
-          height={300}
-          className={styles.canvas}
-        />
       </div>
 
       <audio ref={audioRef} crossOrigin="anonymous" >
         <source src={audioSrc} type="audio/mpeg" />
       </audio>
 
-      <button className={styles.playPause} onClick={togglePlayPause}>
-        {isPlaying ? "||" : ">"}
-      </button>
-      <label htmlFor="trackScrub" className={styles.labels}>
-        Track
-      </label>
-      <input
-        id="trackScrub"
-        ref={progressRef}
-        type="range"
-        min="0"
-        max="100"
-        value={progress}
-        onChange={handleProgressChange}
-        className={styles.progressBar}
-      />
-      <label htmlFor="volume" className={styles.labels}>
-        Volume
-      </label>
-      <input
-        id="volume"
-        type="range"
-        min="0"
-        max="1"
-        step="0.01"
-        value={volume}
-        onChange={handleVolumeChange}
-        className={styles.volumeControl}
-      />
+      <div className={styles.overlay}>
+        <div className={styles.title}>{title}</div>
+
+        <div>
+          <div className={styles.controlsRow}>
+            <button className={styles.playPause} onClick={togglePlayPause}>
+              {isPlaying ? "||" : ">"}
+            </button>
+            <div className={styles.progressBarWrapper}>
+              <canvas
+                ref={canvasRef}
+                width={300}
+                height={40}
+                className={styles.canvas}
+              />
+              <input
+                id="trackScrub"
+                ref={progressRef}
+                type="range"
+                min="0"
+                max="100"
+                value={progress}
+                onChange={handleProgressChange}
+                className={`${styles.rangeInput} ${styles.progressBar}`}
+              />
+            </div>
+          </div>
+          <div className={styles.volumeRow}>
+            <label htmlFor="volume" className={styles.labels}>
+              Volume
+            </label>
+            <input
+              id="volume"
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={volume}
+              onChange={handleVolumeChange}
+              className={`${styles.rangeInput} ${styles.volumeControl}`}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

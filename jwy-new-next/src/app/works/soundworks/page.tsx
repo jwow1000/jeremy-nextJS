@@ -4,18 +4,16 @@ import MyPortableText from "@/components/MyPortableText";
 import AppLink from "@/components/AppLink";
 import { urlFor } from "@/sanity/lib/image";
 
-export default async function Immix() {
+export default async function Soundworks() {
   // Get work information
-  const work = await getWorkBySlug('immix');
-  console.log("work: ", work)
+  const work = await getWorkBySlug('soundworks');
   const audioFiles = await getAudioFilesByProject('immix');
-  // console.log("immix songs", audioFiles)
   return(
     <main className="relative w-full p-4 pt-12 z-0">
-      <h1 className="text-xl">immix</h1>
+      <h1 className="text-xl">{work?.title || "soundworks"}</h1>
       <AppLink href="/works" className="my-4">{`back to works <-`}</AppLink>
       {
-        work.text &&
+        work?.text &&
         <div className="w-full max-w-[70ch] pt-10">
           <MyPortableText content={work.text}/>
         </div>
@@ -28,9 +26,9 @@ export default async function Immix() {
             if (!asset?._ref) return null; // skip if no asset
             const imageUrl = urlFor(asset).width(800).url();
             return (
-              <div 
-                key={`immix-work-${audio.title}`}
-                className="max-w-[400px] mx-auto my-8"
+              <div
+                key={`soundworks-${audio._id}`}
+                className="max-w-2xl mx-auto my-6"
               >
                 <AudioPlayer 
                   audioSrc={audio.audioUrl}

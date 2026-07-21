@@ -1,108 +1,156 @@
 .audioPlayer {
   position: relative;
-  border: 1px solid white;
-  padding: 0.5rem;
+  border: 1px solid black;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: 160px;
   overflow: hidden;
-  display: flex;
-  flex-flow: column;
-  justify-content: left;
-  align-items: left;
-  gap: 0.5rem;
-}
-.canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(133, 196, 252, 0);
-  mix-blend-mode: difference;
+  isolation: isolate;
 }
 .playerImageContainer {
-  position: relative;
-  width: 100%;
-  flex: 1 1 auto;
-  min-height: 0;
-  z-index: -1;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 .imageContainer {
   position: absolute;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  inset: 0;
 }
 .image {
   width: 100%;
   height: 100%;
 }
-.animationWrapper {
+.progressBarWrapper {
+  position: relative;
+  flex: 1 1 auto;
+  height: 2.5rem;
+  background: white;
+}
+.canvas {
   position: absolute;
-  display: flex;
-  justify-content: center;
+  inset: 0;
   width: 100%;
   height: 100%;
+  z-index: 0;
+  background-color: transparent;
+  pointer-events: none;
+}
+.overlay {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  pointer-events: none;
+}
+.overlay > * {
+  pointer-events: auto;
+}
+.title {
+  display: inline-block;
+  width: fit-content;
+  background: white;
+  border: 1px solid black;
+  padding: 0.15rem 0.4rem;
+}
+.controlsRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+.volumeRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  width: fit-content;
 }
 .playPause {
-  border: 1px solid white;
+  border: 1px solid black;
+  background: white;
   padding: 0.3rem;
-  width: 3rem;
-  font-size: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.title {
-  padding: 0.5rem;
+  flex-shrink: 0;
 }
 .labels {
-  width: 90%;
-  margin: 0;
+  background: white;
+  border: 1px solid black;
+  padding: 0.1rem 0.3rem;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  margin: 1px 1px 1px 0;
 }
 
-.audioPlayer > input[type="range"] {
-  -webkit-appearance: none; /* Remove default styling (Safari, Chrome) */
+.rangeInput {
+  -webkit-appearance: none;
   appearance: none;
-  width: 100%;
   height: 15px;
   margin: 0;
-  background: none; 
-  border-radius: none;
-  border: 1px solid white;
+  padding: 0 1px;
+  background: white;
+  border-radius: 0;
+  border: 1px solid black;
   outline: none;
   transition: background 0.3s;
+  box-sizing: border-box;
 }
-.audioPlayer > input[type="range"]:hover {
-  background: #824cce; /* Lighter track on hover */
+.rangeInput:hover {
+  background: #824cce;
+}
+.volumeControl {
+  width: 6rem;
+}
+.progressBar {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 2.5rem;
+  background: transparent;
+}
+.progressBar:hover {
+  background: transparent;
 }
 
 /* Custom thumb (the draggable circle) */
-.audioPlayer > input[type="range"]::-webkit-slider-thumb {
+.rangeInput::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 5px;
   height: 10px;
-  background: none; /* Thumb color */
-  border-radius:0%;
-  border: 1px solid white;
+  background: black;
+  border-radius: 0%;
+  border: 1px solid black;
   cursor: pointer;
   transition: transform 0.2s;
 }
 
-.audioPlayer > input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.2); /* Make the thumb larger on hover */
+.rangeInput::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
 }
 
-.audioPlayer > input[type="range"]::-moz-range-thumb {
+.rangeInput::-moz-range-thumb {
   width: 10px;
   height: 10px;
-  background: white; /* Thumb color */
+  background: black;
   border-radius: 0%;
-  border: 1px solid white;
+  border: 1px solid black;
   cursor: pointer;
+}
+
+.progressBar::-webkit-slider-thumb {
+  width: 1px;
+  height: 2rem;
+  border: none;
+}
+.progressBar::-moz-range-thumb {
+  width: 1px;
+  height: 2rem;
+  border: none;
 }

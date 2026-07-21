@@ -5,7 +5,7 @@
   --foreground: #171717;
   --pink: #bc979e;
   --nav-string:#171717;
-  --hilite: rgb(136, 255, 0);
+  --hilite: var(--pink);
   --font-incon: 'Inconsolata', monospace; /* fallback in case font fails to load */
 }
 
@@ -13,16 +13,6 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font: var(--font-incon);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --pink: #f5c2cb;
-    --nav-string: #d899a5;
-    --hilite: #f5c2cb;
-  }
 }
 
 body {

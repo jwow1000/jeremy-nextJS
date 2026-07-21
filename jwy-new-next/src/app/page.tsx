@@ -1,15 +1,15 @@
 import AppLink from "@/components/AppLink";
-import { getLatestPosts } from "@/sanity/lib/fetch";
+import { getWorks } from "@/sanity/lib/fetch";
 import ClientHome from "./ClientHome";
 
 export default async function Home() {
-  const works = await getLatestPosts(8);
+  const works = await getWorks();
 
   return (
-    <main className="flex flex-col w-full p-4 pt-12">
+    <main className="flex flex-col w-full min-h-dvh p-4 pt-12">
       <h1>Jeremy Wiles-Young</h1>
-      <div className="flex flex-col md:flex-row mt-28 gap-0 h-[calc(100vh-200px)]">
-        <section className="w-full md:w-1/4">
+      <div className="relative w-full flex-1 mt-14 md:mt-28">
+        <section className="w-full md:w-1/4 md:absolute md:top-0 md:left-0">
           <p>artist, av systems engineer, and web developer based in NYC</p>
           <div className="flex flex-row-wrap md:flex-col gap-2 md:gap-4 py-10 w-full md:w-32">
             <AppLink href={`/works`} className="w-32">works</AppLink>
@@ -18,10 +18,11 @@ export default async function Home() {
             <AppLink href={`/blog`} className="w-32">blog</AppLink>
             <AppLink href={`https://github.com/jwow1000`} newWindow={true} className="w-32">github</AppLink>
           </div>
-
         </section>
-        <ClientHome works={works}/> 
+        <div className="w-full h-full flex justify-center items-center">
+          <ClientHome works={works}/>
+        </div>
       </div>
-    </main> 
+    </main>
   );
 }
