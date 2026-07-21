@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
-import { computePeaks, renderWaveform } from "./waveform";
+import { computePeaks, renderWaveform, renderMeter } from "./waveform";
 import Image from "next/image";
 import styles from "./audioPlayer.module.css";
 
@@ -23,6 +23,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   const progressRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const peaksRef = useRef<Float32Array | null>(null);
+  const meterFillRef = useRef<HTMLDivElement | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(1);
@@ -57,13 +59,33 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
 
   useEffect(() => {
     renderWaveform({ canvasRef, audioRef, peaksRef });
+    renderMeter({ meterFillRef, analyserRef });
   }, []);
 
-  const togglePlayPause = () => {
+  const togglePlayPause = async () => {
     const audio = audioRef.current;
     if (!audio) return;
 
     if (!isPlaying) {
+      // Live level meter needs the audio routed through an AnalyserNode —
+      // set that up once, on first play.
+      if (!analyserRef.current) {
+        const audioContext = new AudioContext();
+
+        if (audioContext.state === "suspended") {
+          await audioContext.resume();
+        }
+
+        const source = audioContext.createMediaElementSource(audio);
+        const analyser = audioContext.createAnalyser();
+
+        analyser.fftSize = 512;
+        source.connect(analyser);
+        analyser.connect(audioContext.destination);
+
+        analyserRef.current = analyser;
+      }
+
       audio.play();
       setIsPlaying(true);
     } else {
@@ -148,6 +170,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
               onChange={handleVolumeChange}
               className={`${styles.rangeInput} ${styles.volumeControl}`}
             />
+            <div className={styles.meter}>
+              <div ref={meterFillRef} className={styles.meterFill} />
+            </div>
           </div>
         </div>
       </div>

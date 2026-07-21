@@ -65,7 +65,25 @@
   align-items: center;
   justify-content: flex-start;
   gap: 0.5rem;
-  width: fit-content;
+  width: 100%;
+}
+.meter {
+  position: relative;
+  width: 6rem;
+  height: 15px;
+  margin-left: auto;
+  border: 1px solid black;
+  background: white;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.meterFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: #da67fa;
 }
 .playPause {
   border: 1px solid black;
@@ -147,10 +165,12 @@
 .progressBar::-webkit-slider-thumb {
   width: 1px;
   height: 2rem;
+  background: transparent;
   border: none;
 }
 .progressBar::-moz-range-thumb {
   width: 1px;
   height: 2rem;
+  background: transparent;
   border: none;
 }

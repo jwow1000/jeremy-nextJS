@@ -76,3 +76,51 @@ export const renderWaveform = ({ canvasRef, audioRef, peaksRef }: RenderWaveform
 
   renderFrame();
 };
+
+interface RenderMeterProps {
+  meterFillRef: React.RefObject<HTMLDivElement | null>;
+  analyserRef: React.RefObject<AnalyserNode | null>;
+}
+
+const METER_MIN_DB = -50;
+const METER_SMOOTHING = 0.6;
+
+// Live RMS level meter (in dB) read straight off the analyser's
+// time-domain data — updates the fill width directly via a ref so it
+// doesn't force a React re-render on every animation frame.
+export const renderMeter = ({ meterFillRef, analyserRef }: RenderMeterProps) => {
+  let buffer: Uint8Array<ArrayBuffer> | null = null;
+  let smoothedLevel = 0;
+
+  const renderFrame = () => {
+    const meterFill = meterFillRef.current;
+    const analyser = analyserRef.current;
+
+    if (meterFill) {
+      if (analyser) {
+        if (!buffer || buffer.length !== analyser.fftSize) {
+          buffer = new Uint8Array(analyser.fftSize);
+        }
+        analyser.getByteTimeDomainData(buffer);
+
+        let sumSquares = 0;
+        for (let i = 0; i < buffer.length; i++) {
+          const normalized = (buffer[i] - 128) / 128;
+          sumSquares += normalized * normalized;
+        }
+        const rms = Math.sqrt(sumSquares / buffer.length);
+        const db = rms > 0 ? 20 * Math.log10(rms) : METER_MIN_DB;
+        const level = Math.min(Math.max((db - METER_MIN_DB) / -METER_MIN_DB, 0), 1);
+        smoothedLevel = smoothedLevel * METER_SMOOTHING + level * (1 - METER_SMOOTHING);
+        meterFill.style.width = `${smoothedLevel * 100}%`;
+      } else {
+        smoothedLevel = 0;
+        meterFill.style.width = "0%";
+      }
+    }
+
+    requestAnimationFrame(renderFrame);
+  };
+
+  renderFrame();
+};
